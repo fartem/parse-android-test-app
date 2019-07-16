@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#03a9f4</color>
+    <color name="colorPrimaryDark">#0288d1</color>
+    <color name="colorAccent">#ff4081</color>
+
+    <!-- Launcher -->
+    <color name="ic_launcher_background">#FF4081</color>
+
+    <!-- Text -->
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#757575</color>
+
+    <!-- Main fab buttons -->
+    <color name="colorMainFabRestore">#f44336</color>
+    <color name="colorMainFabSync">#4CAF50</color>
+    <color name="colorMainFabAddNote">#03A9F4</color>
 </resources>
