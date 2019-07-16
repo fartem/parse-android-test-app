@@ -12,6 +12,7 @@
     <color name="colorSecondaryText">#757575</color>
 
     <!-- Main fab buttons -->
+    <color name="colorMainFabMenuPressed">#B9993B5B</color>
     <color name="colorMainFabRestore">#f44336</color>
     <color name="colorMainFabSync">#4CAF50</color>
     <color name="colorMainFabAddNote">#03A9F4</color>

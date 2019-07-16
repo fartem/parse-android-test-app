@@ -23,6 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
                 fab:fab_moreButtonBackgroundColor="@color/colorAccent"
+                fab:fab_moreButtonRippleColor="@color/colorMainFabMenuPressed"
                 fab:fab_moreButtonPlusIcon="@drawable/ic_add">
 
             <jahirfiquitiva.libs.fabsmenu.TitleFAB
