@@ -1,17 +1,21 @@
 package com.smlnskgmail.jaman.randomnotes
 
 import android.app.Application
-import com.smlnskgmail.jaman.randomnotes.db.DatabaseInitializer
+import com.smlnskgmail.jaman.randomnotes.db.DatabaseFactory
+import com.smlnskgmail.jaman.randomnotes.prefs.PrefsHelper
 
 class Application : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        DatabaseInitializer.set(this)
+        DatabaseFactory.set(this)
+        if (PrefsHelper.isFirstLaunch(this)) {
+            PrefsHelper.setFirstLaunchStatus(this, false)
+        }
     }
 
     override fun onTerminate() {
-        DatabaseInitializer.terminate()
+        DatabaseFactory.terminate()
         super.onTerminate()
     }
 

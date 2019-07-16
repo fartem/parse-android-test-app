@@ -2,14 +2,20 @@ package com.smlnskgmail.jaman.randomnotes.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import com.smlnskgmail.jaman.randomnotes.R;
 import com.smlnskgmail.jaman.randomnotes.entities.Note;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
+
+    private static final String LOG_TAG = "RNDB";
 
     private static final String DATABASE_NAME = "rn.db";
 
@@ -21,8 +27,11 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             Note.class
     };
 
+    private Context context;
+
     DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION_CURRENT);
+        this.context = context;
     }
 
     @Override
@@ -30,10 +39,18 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         for (Class clazz: DATABASE_CLASSES) {
             try {
                 TableUtils.createTable(connectionSource, clazz);
+                createDefaultNote();
             } catch (SQLException e) {
-                e.printStackTrace();
+                Log.e(LOG_TAG, "Failed create database tables", e);
             }
         }
+    }
+
+    private void createDefaultNote() {
+        Note note = new Note();
+        note.setTitle(context.getString(R.string.default_note_title));
+        note.setSubtitle(context.getString(R.string.default_note_subtitle));
+        note.save();
     }
 
     @Override
@@ -41,6 +58,31 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
                           int oldVersion, int newVersion) {
         if (oldVersion < DATABASE_VERSION_1) {
             // Do something
+        }
+    }
+
+    public List<Note> getAllNotes() {
+        try {
+            return getDao(Note.class).queryForAll();
+        } catch (SQLException e) {
+            Log.e(LOG_TAG, "Failed get all notes\n", e);
+        }
+        return new ArrayList<>();
+    }
+
+    public void saveNote(Note note) {
+        try {
+            getDao(Note.class).createOrUpdate(note);
+        } catch (SQLException e) {
+            Log.e(LOG_TAG, "Failed save note:\n" + note.toString(), e);
+        }
+    }
+
+    public void deleteNote(Note note) {
+        try {
+            getDao(Note.class).delete(note);
+        } catch (SQLException e) {
+            Log.e(LOG_TAG, "Failed delete note:\n" + note.toString(), e);
         }
     }
 

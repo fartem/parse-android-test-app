@@ -1,6 +1,5 @@
 package com.smlnskgmail.jaman.randomnotes.entities
 
-import com.smlnskgmail.jaman.randomnotes.entities.Note
 import org.junit.Assert
 import org.junit.Test
 

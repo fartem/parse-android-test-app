@@ -6,15 +6,27 @@ import androidx.recyclerview.widget.RecyclerView
 import com.smlnskgmail.jaman.randomnotes.R
 import com.smlnskgmail.jaman.randomnotes.entities.Note
 
-class NotesAdapter(private val notes: List<Note>) : RecyclerView.Adapter<NotesHolder>() {
+class NotesAdapter(private val notes: MutableList<Note>) : RecyclerView.Adapter<NotesHolder>(),
+    NoteDeleteListener {
 
     override fun onBindViewHolder(holder: NotesHolder, position: Int) {
-        holder.bind(notes[position])
+        val note = notes[position]
+        note.positionInList = position
+        holder.bind(note)
+    }
+
+    fun validateLastNote() {
+        notifyItemInserted(itemCount - 1)
+    }
+
+    override fun onNoteDelete(position: Int) {
+        notes.removeAt(position)
+        notifyItemRemoved(position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
             = NotesHolder(LayoutInflater.from(parent.context)
-        .inflate(R.layout.item_note, parent, false))
+        .inflate(R.layout.item_note, parent, false), this)
 
     override fun getItemCount() = notes.size
 

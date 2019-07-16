@@ -3,7 +3,7 @@ package com.smlnskgmail.jaman.randomnotes.db;
 import android.content.Context;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 
-public class DatabaseInitializer {
+public class DatabaseFactory {
 
     private static DatabaseHelper databaseHelper;
 

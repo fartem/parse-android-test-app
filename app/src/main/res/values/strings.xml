@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Random Notes</string>
+
+    <!-- Default note -->
+    <string name="default_note_title">Default note</string>
+    <string name="default_note_subtitle">This is subtitle</string>
 </resources>

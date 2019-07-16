@@ -19,6 +19,7 @@
             fab:fabs_menu_clickableOverlay="true">
 
         <jahirfiquitiva.libs.fabsmenu.FABsMenu
+                android:id="@+id/main_fab_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
@@ -50,7 +51,7 @@
                     android:layout_height="wrap_content"
                     fab:fab_title="Add note"
                     fab:backgroundTint="@color/colorMainFabAddNote"
-                    fab:srcCompat="@drawable/ic_note"
+                    fab:srcCompat="@drawable/ic_note_add"
                     fab:fabSize="mini"/>
 
         </jahirfiquitiva.libs.fabsmenu.FABsMenu>
