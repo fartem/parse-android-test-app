@@ -1,0 +1,20 @@
+#
+# generated on 2019/07/16 11:17:46
+#
+# --table-start--
+dataClass=com.smlnskgmail.jaman.randomnotes.entities.Note
+tableName=note
+# --table-fields-start--
+# --field-start--
+fieldName=title
+# --field-end--
+# --field-start--
+fieldName=subtitle
+# --field-end--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
