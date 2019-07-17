@@ -1,7 +1,8 @@
-package com.smlnskgmail.jaman.randomnotes.db;
+package com.smlnskgmail.jaman.randomnotes.db.support;
 
 import android.content.Context;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.smlnskgmail.jaman.randomnotes.db.DatabaseHelper;
 
 public class DatabaseFactory {
 

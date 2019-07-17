@@ -21,7 +21,7 @@ class NotesAdapter(private val notes: MutableList<Note>) : RecyclerView.Adapter<
 
     override fun onNoteDelete(position: Int) {
         notes.removeAt(position)
-        notifyItemRemoved(position)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)

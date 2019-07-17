@@ -7,6 +7,7 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.smlnskgmail.jaman.randomnotes.R;
+import com.smlnskgmail.jaman.randomnotes.db.support.DatabaseMigration;
 import com.smlnskgmail.jaman.randomnotes.entities.Note;
 
 import java.sql.SQLException;
@@ -20,8 +21,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private static final String DATABASE_NAME = "rn.db";
 
     private static final int DATABASE_VERSION_1 = 1;
+    private static final int DATABASE_VERSION_2 = 2;
 
-    private static final int DATABASE_VERSION_CURRENT = DATABASE_VERSION_1;
+    private static final int DATABASE_VERSION_CURRENT = DATABASE_VERSION_2;
 
     public static final Class[] DATABASE_CLASSES = new Class[]{
             Note.class
@@ -29,7 +31,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private Context context;
 
-    DatabaseHelper(Context context) {
+    public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION_CURRENT);
         this.context = context;
     }
@@ -56,8 +58,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource,
                           int oldVersion, int newVersion) {
-        if (oldVersion < DATABASE_VERSION_1) {
-            // Do something
+        if (oldVersion < DATABASE_VERSION_2) {
+            DatabaseMigration.addSyncStatusToNotes(this);
         }
     }
 
