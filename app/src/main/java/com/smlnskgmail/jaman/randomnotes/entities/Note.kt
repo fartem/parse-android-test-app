@@ -2,6 +2,7 @@ package com.smlnskgmail.jaman.randomnotes.entities
 
 import com.j256.ormlite.field.DatabaseField
 import com.parse.ParseObject
+import com.parse.ParseUser
 import com.smlnskgmail.jaman.randomnotes.db.support.DatabaseFactory
 
 class Note(
