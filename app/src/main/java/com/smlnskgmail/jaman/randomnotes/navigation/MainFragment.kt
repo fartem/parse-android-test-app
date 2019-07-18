@@ -41,6 +41,7 @@ class MainFragment : BaseFragment(), AddNoteListener {
 
     private fun restoreNotes() {
         val user = ParseUser.getCurrentUser()
+        Note.deleteAllNotes()
         if (user != null) {
             val parseQuery: ParseQuery<ParseObject> = ParseQuery.getQuery(Note.TABLE_NOTE)
             val parseToSave = mutableListOf<ParseObject>()
@@ -71,7 +72,8 @@ class MainFragment : BaseFragment(), AddNoteListener {
             val objectsToSave = mutableListOf<ParseObject>()
             for (note in notes) {
                 if (note.parseObjectId == null) {
-                    objectsToSave.add(note.getParseObject())
+                    val parseNote = note.getParseObject(false, user)
+                    objectsToSave.add(parseNote)
                 }
             }
             ParseObject.saveAllInBackground(objectsToSave)

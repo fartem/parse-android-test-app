@@ -72,6 +72,14 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return new ArrayList<>();
     }
 
+    public void deleteAllNotes() {
+        try {
+            getDao(Note.class).deleteBuilder().delete();
+        } catch (SQLException e) {
+            Log.e(LOG_TAG, "Failed delete all notes\n", e);
+        }
+    }
+
     public void saveNote(Note note) {
         try {
             getDao(Note.class).createOrUpdate(note);

@@ -17,8 +17,8 @@ class Application : Application() {
     }
 
     private fun initializeParse() {
-        val applicationId = "LFpLIWo7tzOz0XUZtlX1xVN2NHfgpV9tFWetn5Sd"
-        val serverAddress = "http://192.168.10.181:1337/parse/"
+        val applicationId = ""
+        val serverAddress = ""
         val clientKey = "12321"
 
         val parseConfig = Parse.Configuration.Builder(this)
