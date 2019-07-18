@@ -65,6 +65,12 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:text="@string/message_not_account"/>
 
+        <com.facebook.login.widget.LoginButton
+                android:id="@+id/facebook_login"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="24dp"/>
+
     </LinearLayout>
 
 </FrameLayout>
