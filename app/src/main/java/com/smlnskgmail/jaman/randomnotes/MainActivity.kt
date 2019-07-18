@@ -1,90 +1,55 @@
 package com.smlnskgmail.jaman.randomnotes
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import com.parse.ParseObject
-import com.parse.ParseQuery
-import com.smlnskgmail.jaman.randomnotes.components.bottomsheets.addnote.AddNoteBottomSheet
-import com.smlnskgmail.jaman.randomnotes.components.bottomsheets.addnote.AddNoteListener
-import com.smlnskgmail.jaman.randomnotes.components.noteslist.NotesAdapter
-import com.smlnskgmail.jaman.randomnotes.entities.Note
-import kotlinx.android.synthetic.main.activity_main.*
+import com.smlnskgmail.jaman.randomnotes.navigation.BaseFragment
+import com.smlnskgmail.jaman.randomnotes.navigation.LoginFragment
+import com.smlnskgmail.jaman.randomnotes.navigation.MainFragment
 
-class MainActivity : AppCompatActivity(), AddNoteListener {
+class MainActivity : AppCompatActivity() {
 
-    private val dataNotes: MutableList<Note> = mutableListOf()
+    private var loginMenu: MenuItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initializeNotes()
-        initializeFabMenu()
+        showFragment(MainFragment())
     }
 
-    private fun initializeNotes() {
-        dataNotes.addAll(Note.getAllNotes())
-        notes.adapter = NotesAdapter(dataNotes)
-    }
-
-    private fun initializeFabMenu() {
-        restore_notes.setOnClickListener {
-            main_fab_menu.collapse()
-            restoreNotes()
-        }
-        sync_notes.setOnClickListener {
-            main_fab_menu.collapse()
-            syncNotes()
-        }
-        add_note.setOnClickListener {
-            main_fab_menu.collapse()
-            addNoteAction()
-        }
-    }
-
-    private fun restoreNotes() {
-        val parseQuery: ParseQuery<ParseObject> = ParseQuery.getQuery("note")
-        val parseToSave = mutableListOf<ParseObject>()
-        parseQuery.findInBackground { objects, e ->
-            for (parseData in objects) {
-                val id = parseData.getLong("id")
-                var note = dataNotes.lastOrNull {
-                    it.id == id
-                }
-                if (note == null) {
-                    note = Note()
-                }
-                parseToSave.add(note.restoreFromParseObject(parseData))
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_login_action -> {
+                showFragment(LoginFragment(), true)
             }
-            ParseObject.saveAllInBackground(parseToSave)
-            refreshNotes()
         }
+        return super.onOptionsItemSelected(item)
     }
 
-    private fun syncNotes() {
-        val notes = Note.getAllNotes()
-        val objectsToSave = mutableListOf<ParseObject>()
-        for (note in notes) {
-            objectsToSave.add(note.getParseObject())
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_auth, menu)
+        loginMenu = menu!!.findItem(R.id.menu_login_action)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    private fun showFragment(baseFragment: BaseFragment, hideMenu: Boolean = false) {
+        validateMenu(hideMenu)
+        setTitleToToolbar(baseFragment.getTitleResId())
+        supportFragmentManager.beginTransaction()
+            .add(R.id.main_container, baseFragment)
+            .addToBackStack(baseFragment::class.java.name)
+            .commit()
+    }
+
+    private fun setTitleToToolbar(resId: Int) {
+        setTitle(resId)
+    }
+
+    private fun validateMenu(hide: Boolean) {
+        if (loginMenu != null) {
+            loginMenu!!.isVisible = !hide
         }
-        ParseObject.saveAllInBackground(objectsToSave)
-    }
-
-    private fun addNoteAction() {
-        val addNoteBottomSheet = AddNoteBottomSheet()
-        addNoteBottomSheet.addNoteCreationCallback(this)
-        addNoteBottomSheet.show(supportFragmentManager,
-            addNoteBottomSheet.javaClass.name)
-    }
-
-    private fun refreshNotes() {
-        dataNotes.clear()
-        dataNotes.addAll(Note.getAllNotes())
-        notes.adapter!!.notifyDataSetChanged()
-    }
-
-    override fun onAddNote(note: Note) {
-        dataNotes.add(note)
-        (notes.adapter as NotesAdapter).validateLastNote()
     }
 
 }

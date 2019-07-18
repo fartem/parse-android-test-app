@@ -2,7 +2,6 @@ package com.smlnskgmail.jaman.randomnotes.entities
 
 import com.j256.ormlite.field.DatabaseField
 import com.parse.ParseObject
-import com.parse.ParseUser
 import com.smlnskgmail.jaman.randomnotes.db.support.DatabaseFactory
 
 class Note(
@@ -43,18 +42,16 @@ class Note(
         }
         title = parseObject.getString(COLUMN_TITLE)
         subtitle = parseObject.getString(COLUMN_SUBTITLE)
-        save()
-        parseObject.put(COLUMN_ID, id)
         return parseObject
     }
 
     companion object {
 
-        private const val TABLE_NOTE = "note"
+        const val TABLE_NOTE = "note"
 
-        private const val COLUMN_ID = "id"
-        private const val COLUMN_TITLE = "title"
-        private const val COLUMN_SUBTITLE = "subtitle"
+        const val COLUMN_ID = "id"
+        const val COLUMN_TITLE = "title"
+        const val COLUMN_SUBTITLE = "subtitle"
 
         fun getAllNotes() = DatabaseFactory.get().allNotes
 
