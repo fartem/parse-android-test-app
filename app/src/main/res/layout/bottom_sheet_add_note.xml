@@ -9,14 +9,14 @@
             android:id="@+id/edit_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Title"/>
+            android:hint="@string/hint_title"/>
 
     <EditText
             android:id="@+id/edit_subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:hint="Subtitle"/>
+            android:hint="@string/hint_subtitle"/>
 
     <Button
             android:id="@+id/add_note"
@@ -26,6 +26,6 @@
             android:layout_marginTop="16dp"
             android:layout_gravity="end"
             android:textColor="@color/colorAccent"
-            android:text="Add"/>
+            android:text="@string/action_add"/>
 
 </LinearLayout>

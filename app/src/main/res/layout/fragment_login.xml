@@ -20,14 +20,14 @@
                 android:textSize="26sp"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="italic"
-                android:text="Random Notes"/>
+                android:text="@string/app_name"/>
 
         <EditText
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:hint="Username"/>
+                android:hint="@string/hint_username"/>
 
         <EditText
                 android:id="@+id/email"
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:visibility="gone"
-                android:hint="Email"
+                android:hint="@string/hint_email"
                 tools:visibility="visible"/>
 
         <EditText
@@ -43,7 +43,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="Password"/>
+                android:inputType="textPassword"
+                android:hint="@string/hint_password"/>
 
         <Button
                 android:id="@+id/login_action"
@@ -52,7 +53,7 @@
                 android:layout_marginTop="32dp"
                 android:background="@color/colorAccent"
                 android:textColor="#FFF"
-                android:text="Login"/>
+                android:text="@string/action_login"/>
 
         <TextView
                 android:id="@+id/register_account"
@@ -62,7 +63,7 @@
                 android:layout_marginTop="24dp"
                 android:textSize="16sp"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="Not account yet? Create one"/>
+                android:text="@string/message_not_account"/>
 
     </LinearLayout>
 

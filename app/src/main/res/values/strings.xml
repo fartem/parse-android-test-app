@@ -1,4 +1,5 @@
 <resources>
+    <!-- App -->
     <string name="app_name">Random Notes</string>
 
     <!-- Default note -->
@@ -8,4 +9,23 @@
     <!-- Titles -->
     <string name="title_main_fragment">Main</string>
     <string name="title_login_fragment">Auth</string>
+
+    <!-- Hints -->
+    <string name="hint_subtitle">Subtitle</string>
+    <string name="hint_title">Title</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+
+    <!-- Actions -->
+    <string name="action_add">Add</string>
+    <string name="action_restore">Restore</string>
+    <string name="action_sync">Sync</string>
+    <string name="action_add_note">Add note</string>
+    <string name="action_login">Login</string>
+    <string name="action_sign_up">Sign up</string>
+
+    <!-- Messages -->
+    <string name="message_not_account">Not account yet? Create one</string>
+    <string name="message_have_account">I have an account</string>
 </resources>

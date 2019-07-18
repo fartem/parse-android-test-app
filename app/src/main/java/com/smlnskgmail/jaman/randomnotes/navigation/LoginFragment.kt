@@ -2,6 +2,7 @@ package com.smlnskgmail.jaman.randomnotes.navigation
 
 import android.view.View
 import com.parse.ParseUser
+import com.smlnskgmail.jaman.randomnotes.MainActivity
 import com.smlnskgmail.jaman.randomnotes.R
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -12,25 +13,34 @@ class LoginFragment : BaseFragment() {
     override fun initialize() {
         register_account.setOnClickListener {
             if (loginMode) {
-                login_action.text = "Sing up"
-                register_account.text = "I have an account"
+                login_action.text = getString(R.string.action_sign_up)
+                register_account.text = getString(R.string.message_have_account)
                 email.visibility = View.VISIBLE
             } else {
-                login_action.text = "Login"
-                register_account.text = "Not account yet? Create one"
+                login_action.text = getString(R.string.action_login)
+                register_account.text = getString(R.string.message_not_account)
                 email.visibility = View.GONE
             }
             loginMode = !loginMode
         }
         login_action.setOnClickListener {
             if (loginMode) {
-                ParseUser.logIn(username.text.toString(), password.text.toString())
+                ParseUser.logInInBackground(username.text.toString(), password.text.toString()
+                ) { user, e ->
+                    if (user != null) {
+                        (activity as MainActivity).loginComplete(this)
+                    } else {
+
+                    }
+                }
             } else {
                 val parseUser = ParseUser()
                 parseUser.username = username.text.toString()
                 parseUser.email = email.text.toString()
                 parseUser.setPassword(password.text.toString())
-                parseUser.signUpInBackground()
+                parseUser.signUpInBackground {
+
+                }
             }
         }
     }

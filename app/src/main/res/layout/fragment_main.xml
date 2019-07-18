@@ -32,7 +32,7 @@
                     android:id="@+id/restore_notes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    fab:fab_title="Restore"
+                    fab:fab_title="@string/action_restore"
                     fab:backgroundTint="@color/colorMainFabRestore"
                     fab:srcCompat="@drawable/ic_restore"
                     fab:fabSize="mini"/>
@@ -41,7 +41,7 @@
                     android:id="@+id/sync_notes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    fab:fab_title="Sync"
+                    fab:fab_title="@string/action_sync"
                     fab:backgroundTint="@color/colorMainFabSync"
                     fab:srcCompat="@drawable/ic_sync"
                     fab:fabSize="mini"/>
@@ -50,7 +50,7 @@
                     android:id="@+id/add_note"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    fab:fab_title="Add note"
+                    fab:fab_title="@string/action_add_note"
                     fab:backgroundTint="@color/colorMainFabAddNote"
                     fab:srcCompat="@drawable/ic_note_add"
                     fab:fabSize="mini"/>

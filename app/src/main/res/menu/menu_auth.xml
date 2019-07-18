@@ -4,7 +4,7 @@
 
     <item
             android:id="@+id/menu_login_action"
-            android:title="Auth"
+            android:title=""
             android:icon="@drawable/ic_login"
             app:showAsAction="always"/>
 
