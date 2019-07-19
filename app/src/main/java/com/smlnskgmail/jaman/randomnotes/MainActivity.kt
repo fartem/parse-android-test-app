@@ -90,10 +90,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun loginComplete(baseFragment: BaseFragment) {
-        loginMenu?.icon = ContextCompat.getDrawable(this, R.drawable.ic_logout)
-        supportFragmentManager.beginTransaction().remove(baseFragment).commit()
-        validateMenu(false)
+    fun loginComplete() {
+        val mainFragment: MainFragment = (supportFragmentManager
+            .findFragmentByTag(MainFragment::class.java.name) ?: MainFragment()) as MainFragment
+        showBaseFragment(mainFragment)
     }
 
     override fun onDestroy() {

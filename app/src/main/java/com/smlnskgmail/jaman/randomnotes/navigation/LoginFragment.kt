@@ -29,7 +29,7 @@ class LoginFragment : BaseFragment() {
             if (loginMode) {
                 ParseUser.logInInBackground(username.text.toString(), password.text.toString()) { user, e ->
                     if (user != null) {
-                        (activity as MainActivity).loginComplete(this)
+                        (activity as MainActivity).loginComplete()
                     } else {
 
                     }
@@ -40,7 +40,7 @@ class LoginFragment : BaseFragment() {
                 parseUser.email = email.text.toString()
                 parseUser.setPassword(password.text.toString())
                 parseUser.signUpInBackground {
-                    (activity as MainActivity).loginComplete(this)
+                    (activity as MainActivity).loginComplete()
                 }
             }
         }
@@ -49,7 +49,7 @@ class LoginFragment : BaseFragment() {
             ParseFacebookUtils.logInWithReadPermissionsInBackground(this,
                 listOf("public_profile", "email")) { user, _ ->
                 if (user != null) {
-                    (activity as MainActivity).loginComplete(this)
+                    (activity as MainActivity).loginComplete()
                 }
             }
         }

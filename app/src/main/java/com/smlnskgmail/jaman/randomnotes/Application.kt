@@ -27,7 +27,6 @@ class Application : Application() {
             .server(serverAddress)
             .build()
         Parse.initialize(parseConfig)
-//        FacebookUtils.showKey(this)
     }
 
     override fun onTerminate() {
