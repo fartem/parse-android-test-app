@@ -1,8 +1,6 @@
 package com.smlnskgmail.jaman.randomnotes.navigation
 
-import com.parse.ParseObject
-import com.parse.ParseQuery
-import com.parse.ParseUser
+import com.parse.*
 import com.smlnskgmail.jaman.randomnotes.R
 import com.smlnskgmail.jaman.randomnotes.components.bottomsheets.addnote.AddNoteBottomSheet
 import com.smlnskgmail.jaman.randomnotes.components.bottomsheets.addnote.AddNoteListener
@@ -71,10 +69,7 @@ class MainFragment : BaseFragment(), AddNoteListener {
             val notes = Note.getAllNotes()
             val objectsToSave = mutableListOf<ParseObject>()
             for (note in notes) {
-                if (note.parseObjectId == null) {
-                    val parseNote = note.getParseObject(false, user)
-                    objectsToSave.add(parseNote)
-                }
+                objectsToSave.add(note.getParseObject(false, user))
             }
             ParseObject.saveAllInBackground(objectsToSave)
         }

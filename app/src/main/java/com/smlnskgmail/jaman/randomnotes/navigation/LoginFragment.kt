@@ -31,7 +31,7 @@ class LoginFragment : BaseFragment() {
                     if (user != null) {
                         (activity as MainActivity).loginComplete()
                     } else {
-
+                        e.printStackTrace()
                     }
                 }
             } else {
@@ -47,8 +47,8 @@ class LoginFragment : BaseFragment() {
         facebook_login.setOnClickListener {
             ParseFacebookUtils.initialize(context)
             ParseFacebookUtils.logInWithReadPermissionsInBackground(this,
-                listOf("public_profile", "email")) { user, _ ->
-                if (user != null) {
+                listOf("public_profile", "email")) { _, e ->
+                if (e == null) {
                     (activity as MainActivity).loginComplete()
                 }
             }

@@ -61,7 +61,7 @@ class Note(
 
         const val TABLE_NOTE = "note"
 
-        const val COLUMN_ID = "id"
+        const val COLUMN_ID = "note_id"
         const val COLUMN_TITLE = "title"
         const val COLUMN_SUBTITLE = "subtitle"
 
