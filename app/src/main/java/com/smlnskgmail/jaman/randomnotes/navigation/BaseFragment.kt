@@ -16,6 +16,8 @@ abstract class BaseFragment : Fragment() {
 
     abstract fun getTitleResId(): Int
 
+    abstract fun showToolbarMenu(): Boolean
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?)
             = inflater.inflate(getLayoutResId(), container, false)

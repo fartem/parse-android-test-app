@@ -100,6 +100,8 @@ class MainFragment : BaseFragment(), AddNoteListener {
 
     override fun getTitleResId() = R.string.title_main_fragment
 
+    override fun showToolbarMenu() = true
+
     override fun getLayoutResId() = R.layout.fragment_main
 
 }

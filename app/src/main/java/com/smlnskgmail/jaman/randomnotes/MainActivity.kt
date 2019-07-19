@@ -5,6 +5,8 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.parse.ParseUser
 import com.smlnskgmail.jaman.randomnotes.navigation.BaseFragment
 import com.smlnskgmail.jaman.randomnotes.navigation.LoginFragment
@@ -15,10 +17,23 @@ class MainActivity : AppCompatActivity() {
 
     private var loginMenu: MenuItem? = null
 
+    private val fragmentBackStackListener = FragmentManager.OnBackStackChangedListener {
+        val currentFragment = getCurrentFragment()
+        if (currentFragment is BaseFragment) {
+            setTitleToToolbar(currentFragment.getTitleResId())
+            validateMenu(currentFragment.showToolbarMenu())
+        }
+    }
+
+    private fun getCurrentFragment(): Fragment? {
+        return supportFragmentManager.findFragmentById(R.id.container)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        showFragment(MainFragment())
+        supportFragmentManager.addOnBackStackChangedListener(fragmentBackStackListener)
+        showBaseFragment(MainFragment(), false)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -31,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 } else {
-                    showFragment(LoginFragment(), true)
+                    showBaseFragment(LoginFragment())
                 }
             }
         }
@@ -54,22 +69,24 @@ class MainActivity : AppCompatActivity() {
         loginMenu!!.icon = ContextCompat.getDrawable(this, icon)
     }
 
-    private fun showFragment(baseFragment: BaseFragment, hideMenu: Boolean = false) {
-        validateMenu(hideMenu)
+    private fun showBaseFragment(baseFragment: BaseFragment, inBackStack: Boolean= true) {
+        validateMenu(baseFragment.showToolbarMenu())
         setTitleToToolbar(baseFragment.getTitleResId())
-        supportFragmentManager.beginTransaction()
-            .add(R.id.main_container, baseFragment)
-            .addToBackStack(baseFragment::class.java.name)
-            .commit()
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.add(R.id.container, baseFragment)
+        if (inBackStack) {
+            fragmentTransaction.addToBackStack(baseFragment::class.java.name)
+        }
+        fragmentTransaction.commit()
     }
 
     private fun setTitleToToolbar(resId: Int) {
         setTitle(resId)
     }
 
-    private fun validateMenu(hide: Boolean) {
+    private fun validateMenu(show: Boolean) {
         if (loginMenu != null) {
-            loginMenu!!.isVisible = !hide
+            loginMenu!!.isVisible = show
         }
     }
 
@@ -77,6 +94,11 @@ class MainActivity : AppCompatActivity() {
         loginMenu?.icon = ContextCompat.getDrawable(this, R.drawable.ic_logout)
         supportFragmentManager.beginTransaction().remove(baseFragment).commit()
         validateMenu(false)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        supportFragmentManager.removeOnBackStackChangedListener(fragmentBackStackListener)
     }
 
 }

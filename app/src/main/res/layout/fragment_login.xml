@@ -60,8 +60,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="24dp"
-                android:textSize="16sp"
+                android:layout_marginTop="16dp"
+                android:textSize="14sp"
                 android:textColor="@color/colorPrimaryDark"
                 android:text="@string/message_not_account"/>
 

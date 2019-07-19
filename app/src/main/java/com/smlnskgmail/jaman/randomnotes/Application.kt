@@ -2,7 +2,6 @@ package com.smlnskgmail.jaman.randomnotes
 
 import android.app.Application
 import com.parse.Parse
-import com.parse.facebook.ParseFacebookUtils
 import com.smlnskgmail.jaman.randomnotes.db.support.DatabaseFactory
 import com.smlnskgmail.jaman.randomnotes.prefs.PrefsHelper
 
@@ -28,7 +27,7 @@ class Application : Application() {
             .server(serverAddress)
             .build()
         Parse.initialize(parseConfig)
-        ParseFacebookUtils.initialize(this)
+//        FacebookUtils.showKey(this)
     }
 
     override fun onTerminate() {

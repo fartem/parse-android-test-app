@@ -1,7 +1,9 @@
 package com.smlnskgmail.jaman.randomnotes.navigation
 
+import android.content.Intent
 import android.view.View
 import com.parse.ParseUser
+import com.parse.facebook.ParseFacebookUtils
 import com.smlnskgmail.jaman.randomnotes.MainActivity
 import com.smlnskgmail.jaman.randomnotes.R
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -25,8 +27,7 @@ class LoginFragment : BaseFragment() {
         }
         login_action.setOnClickListener {
             if (loginMode) {
-                ParseUser.logInInBackground(username.text.toString(), password.text.toString()
-                ) { user, e ->
+                ParseUser.logInInBackground(username.text.toString(), password.text.toString()) { user, e ->
                     if (user != null) {
                         (activity as MainActivity).loginComplete(this)
                     } else {
@@ -39,13 +40,29 @@ class LoginFragment : BaseFragment() {
                 parseUser.email = email.text.toString()
                 parseUser.setPassword(password.text.toString())
                 parseUser.signUpInBackground {
-
+                    (activity as MainActivity).loginComplete(this)
+                }
+            }
+        }
+        facebook_login.setOnClickListener {
+            ParseFacebookUtils.initialize(context)
+            ParseFacebookUtils.logInWithReadPermissionsInBackground(this,
+                listOf("public_profile", "email")) { user, _ ->
+                if (user != null) {
+                    (activity as MainActivity).loginComplete(this)
                 }
             }
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        ParseFacebookUtils.onActivityResult(requestCode, resultCode, data)
+    }
+
     override fun getTitleResId() = R.string.title_login_fragment
+
+    override fun showToolbarMenu() = false
 
     override fun getLayoutResId() = R.layout.fragment_login
 
