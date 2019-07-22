@@ -10,13 +10,35 @@ Test Android application as client-side for [Parse test server](https://github.c
 - sing up from application with email or Facebook account;
 - sing in to server with email or Facebook.
 
-## 2.Database
+## 2. Parse initialization
+
+```kotlin
+private fun initializeParse() {
+    val applicationId = "APP_ID"
+    val serverAddress = "SERVER_ADDRESS"
+    val clientKey = "CLIENT_KEY"
+
+    val parseConfig = Parse.Configuration.Builder(this)
+        .applicationId(applicationId)
+        .clientKey(clientKey)
+        .server(serverAddress)
+        .build()
+    Parse.initialize(parseConfig)
+    ParseFacebookUtils.initialize(this)
+}
+```
+
+- __APP_ID:__ Parse app id;
+- __SERVER_ADDRESS:__ Parse address in your network (__example:__ http://192.168.0.9:1337/parse);
+- __CLIENT_KEY:__ Parse client key;
+
+## 3.Database
 
 ORMLite. More on [official site](http://ormlite.com/)
 
-## 3. Data structure
+## 4. Data structure
 
-### 3.1 Entity
+### 4.1 Entity
 
 ```kotlin
 abstract class Entity(
@@ -27,7 +49,7 @@ abstract class Entity(
 )
 ```
 
-### 3.2 Note
+### 4.2 Note
 
 ```kotlin
 class Note(
@@ -50,35 +72,117 @@ class Note(
 }
 ```
 
-### 3.2.1 Save note
+### 4.2.1 Save note
+
+Save note with method call from object:
 
 ```kotlin
+fun save() {
+    DatabaseFactory.get().saveNote(this)
+}
 ```
 
-### 3.2.2 Delete note
+Example:
+```kotlin
+    val newNote = Note(title, subtitle)
+    newNote.save()
+    
+```
+
+### 4.2.2 Delete note
+
+Delete note with method call from object:
 
 ```kotlin
+fun delete() {
+    DatabaseFactory.get().deleteNote(this)
+}
 ```
 
-### 3.2.3 Get all notes from database
+Example:
+```kotlin
+    val note = notes[notes.size - 1]
+    note.delete()
+```
+
+### 4.2.3 Get all notes from database
+
+Get all notes from Note class companion object:
 
 ```kotlin
+    fun getAllNotes() = DatabaseFactory.get().allNotes
 ```
 
-### 3.2.4 Delete all notes from database
+Example:
+```kotlin
+    val notes = Note.getAllNotes()
+```
+
+### 4.2.4 Delete all notes from database
+
+Delete all notes from Note class companion object:
 
 ```kotlin
+fun deleteAllNotes() {
+    DatabaseFactory.get().deleteAllNotes()
+}
 ```
 
-## 4. Facebook install
+Example:
+```kotlin
+    Note.deleteAllNotes()
+```
+
+### 4.2.5 Get ParseObject for note
+
+```kotlin
+fun getParseObject(globalAccess: Boolean = true, user: ParseUser? = null): ParseObject {
+    ...
+}
+```
+
+Example:
+```kotlin
+val parseNote = newNote.getParseObject(false, authUser)
+```
+
+### 4.2.6 Initialize note from ParseObject
+
+```kotlin
+fun restoreFromParseObject(parseObject: ParseObject): ParseObject {
+    ...
+}
+```
+
+Example:
+```kotlin
+for (obj in parseObjects) {
+    val note = Note()
+    note.restoreFromParseObject(obj)
+    ...
+}
+```
+
+## 5. Facebook install
+
+### 5.1 Resources
 
 - [Official Guide](https://developers.facebook.com/docs/facebook-login/android)
 - [Get hash with openssl from Windows](https://github.com/magus/react-native-facebook-login/issues/297#issuecomment-433816732)
 
-## 5. Permissions
+#### 5.2 Usage
+
+In `preferences.xml`:
+
+```xml
+<string name="facebook_app_id">[APP_ID]</string>
+<string name="fb_login_protocol_scheme">fb[APP_ID]</string>
+```
+
+## 6. Permissions
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET"/>
 ```
 
-
+## 7. About
