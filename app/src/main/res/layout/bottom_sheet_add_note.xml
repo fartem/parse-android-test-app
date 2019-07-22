@@ -3,29 +3,24 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="vertical"
-              android:padding="16dp">
+              android:padding="@dimen/padding_default">
 
     <EditText
             android:id="@+id/edit_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/AppEditText"
             android:hint="@string/hint_title"/>
 
     <EditText
             android:id="@+id/edit_subtitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            style="@style/AppEditText"
+            android:layout_marginTop="@dimen/margin_default"
             android:hint="@string/hint_subtitle"/>
 
     <Button
             android:id="@+id/save_note"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            style="@style/AppButton"
+            android:layout_marginTop="@dimen/margin_default"
             android:layout_gravity="end"
-            android:textColor="@color/colorAccent"
             android:text="@string/action_add"/>
 
 </LinearLayout>

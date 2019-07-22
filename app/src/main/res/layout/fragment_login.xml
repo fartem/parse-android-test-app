@@ -3,8 +3,8 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_height="match_parent"
              android:layout_width="match_parent"
-             android:padding="32dp"
-             android:background="#FFF">
+             android:padding="@dimen/padding_large"
+             android:background="@color/colorWhite">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -15,34 +15,31 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="32dp"
+                android:padding="@dimen/padding_large"
                 android:layout_gravity="center"
-                android:textSize="26sp"
+                android:textSize="@dimen/text_size_title"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="italic"
                 android:text="@string/app_name"/>
 
         <EditText
                 android:id="@+id/username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                style="@style/AppEditText"
+                android:layout_marginTop="@dimen/margin_large"
                 android:hint="@string/hint_username"/>
 
         <EditText
                 android:id="@+id/email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                style="@style/AppEditText"
+                android:layout_marginTop="@dimen/margin_default"
                 android:visibility="gone"
                 android:hint="@string/hint_email"
                 tools:visibility="visible"/>
 
         <EditText
                 android:id="@+id/password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                style="@style/AppEditText"
+                android:layout_marginTop="@dimen/margin_default"
                 android:inputType="textPassword"
                 android:hint="@string/hint_password"/>
 
@@ -50,9 +47,9 @@
                 android:id="@+id/login_action"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="@dimen/margin_large"
                 android:background="@color/colorAccent"
-                android:textColor="#FFF"
+                android:textColor="@color/colorWhite"
                 android:text="@string/action_login"/>
 
         <TextView
@@ -60,16 +57,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:textSize="14sp"
+                android:layout_marginTop="@dimen/margin_default"
+                android:textSize="@dimen/text_size_default"
                 android:textColor="@color/colorPrimaryDark"
                 android:text="@string/message_not_account"/>
 
         <com.facebook.login.widget.LoginButton
                 android:id="@+id/facebook_login"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="24dp"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"/>
 
     </LinearLayout>
 

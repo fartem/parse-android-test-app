@@ -16,4 +16,8 @@
     <color name="colorMainFabRestore">#f44336</color>
     <color name="colorMainFabSync">#4CAF50</color>
     <color name="colorMainFabAddNote">#03A9F4</color>
+
+    <!-- Custom -->
+    <color name="colorWhite">#FFF</color>
+    <color name="backgroundFab">#4d000000</color>
 </resources>

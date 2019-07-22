@@ -19,7 +19,6 @@ abstract class BaseNoteTest {
     @Test
     abstract fun runTest()
 
-
     fun getTestNote() = testNote
 
     fun delay(additional: Int = 1) {
