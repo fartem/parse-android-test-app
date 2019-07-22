@@ -6,6 +6,7 @@ import com.parse.ParseUser
 import com.parse.facebook.ParseFacebookUtils
 import com.smlnskgmail.jaman.randomnotes.MainActivity
 import com.smlnskgmail.jaman.randomnotes.R
+import com.smlnskgmail.jaman.randomnotes.utils.UIUtils
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : BaseFragment() {
@@ -30,8 +31,8 @@ class LoginFragment : BaseFragment() {
                 ParseUser.logInInBackground(username.text.toString(), password.text.toString()) { user, e ->
                     if (user != null) {
                         (activity as MainActivity).loginComplete()
-                    } else {
-                        e.printStackTrace()
+                    } else if (e != null) {
+                        signInError(e)
                     }
                 }
             } else {
@@ -40,7 +41,11 @@ class LoginFragment : BaseFragment() {
                 parseUser.email = email.text.toString()
                 parseUser.setPassword(password.text.toString())
                 parseUser.signUpInBackground {
-                    (activity as MainActivity).loginComplete()
+                    if (it == null) {
+                        (activity as MainActivity).loginComplete()
+                    } else {
+                        signInError(it)
+                    }
                 }
             }
         }
@@ -50,9 +55,16 @@ class LoginFragment : BaseFragment() {
                 listOf("public_profile", "email")) { _, e ->
                 if (e == null) {
                     (activity as MainActivity).loginComplete()
+                } else {
+                    signInError(e)
                 }
             }
         }
+    }
+
+    private fun signInError(e: Exception) {
+        UIUtils.toast(context!!, getString(R.string.error_sign_up))
+        log(e)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

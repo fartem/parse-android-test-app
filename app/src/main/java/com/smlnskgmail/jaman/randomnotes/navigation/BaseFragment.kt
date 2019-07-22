@@ -1,12 +1,19 @@
 package com.smlnskgmail.jaman.randomnotes.navigation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
 abstract class BaseFragment : Fragment() {
+
+    companion object {
+
+        private const val TAG = "RN"
+
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initialize()
@@ -23,5 +30,9 @@ abstract class BaseFragment : Fragment() {
             = inflater.inflate(getLayoutResId(), container, false)
 
     abstract fun getLayoutResId(): Int
+
+    fun log(e: Exception) {
+        Log.e(TAG, javaClass.name, e)
+    }
 
 }

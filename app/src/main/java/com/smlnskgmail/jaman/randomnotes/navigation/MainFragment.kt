@@ -1,11 +1,14 @@
 package com.smlnskgmail.jaman.randomnotes.navigation
 
-import com.parse.*
+import com.parse.ParseObject
+import com.parse.ParseQuery
+import com.parse.ParseUser
 import com.smlnskgmail.jaman.randomnotes.R
 import com.smlnskgmail.jaman.randomnotes.components.bottomsheets.addnote.AddNoteBottomSheet
 import com.smlnskgmail.jaman.randomnotes.components.bottomsheets.addnote.AddNoteListener
 import com.smlnskgmail.jaman.randomnotes.components.noteslist.NotesAdapter
 import com.smlnskgmail.jaman.randomnotes.entities.Note
+import com.smlnskgmail.jaman.randomnotes.utils.UIUtils
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : BaseFragment(), AddNoteListener {
@@ -24,54 +27,73 @@ class MainFragment : BaseFragment(), AddNoteListener {
 
     private fun initializeFabMenu() {
         restore_notes.setOnClickListener {
-            main_fab_menu.collapse()
-            restoreNotes()
+            collapseMenuAndRun {
+                restoreNotes()
+            }
         }
         sync_notes.setOnClickListener {
-            main_fab_menu.collapse()
-            syncNotes()
+            collapseMenuAndRun {
+                syncNotes()
+            }
         }
         add_note.setOnClickListener {
-            main_fab_menu.collapse()
-            addNoteAction()
+            collapseMenuAndRun {
+                addNoteAction()
+            }
         }
     }
 
+    private fun collapseMenuAndRun(action: () -> Unit) {
+        main_fab_menu.collapse()
+        action()
+    }
+
     private fun restoreNotes() {
-        val user = ParseUser.getCurrentUser()
-        Note.deleteAllNotes()
-        if (user != null) {
+        actionWithNotes { user ->
             val parseQuery: ParseQuery<ParseObject> = ParseQuery.getQuery(Note.TABLE_NOTE)
             val parseToSave = mutableListOf<ParseObject>()
             parseQuery.findInBackground { objects, e ->
-                for (parseData in objects) {
-                    val id = parseData.getLong(Note.COLUMN_ID)
-                    var note = dataNotes.lastOrNull {
-                        it.id == id
+                if (objects.isNotEmpty()) {
+                    Note.deleteAllNotes()
+                    for (parseData in objects) {
+                        val id = parseData.getLong(Note.COLUMN_ID)
+                        var note = dataNotes.lastOrNull {
+                            it.id == id
+                        }
+                        if (note == null) {
+                            note = Note()
+                        }
+                        val parseNote = note.restoreFromParseObject(parseData)
+                        note.save()
+                        parseNote.put(Note.COLUMN_ID, note.id)
+                        parseToSave.add(parseNote)
                     }
-                    if (note == null) {
-                        note = Note()
-                    }
-                    val parseNote = note.restoreFromParseObject(parseData)
-                    note.save()
-                    parseNote.put(Note.COLUMN_ID, note.id)
-                    parseToSave.add(parseNote)
+                    ParseObject.saveAllInBackground(parseToSave)
+                    refreshNotes()
+                } else if (e != null) {
+                    UIUtils.toast(context!!, "")
                 }
-                ParseObject.saveAllInBackground(parseToSave)
-                refreshNotes()
             }
         }
     }
 
     private fun syncNotes() {
-        val user = ParseUser.getCurrentUser()
-        if (user != null) {
+        actionWithNotes {user ->
             val notes = Note.getAllNotes()
             val objectsToSave = mutableListOf<ParseObject>()
             for (note in notes) {
                 objectsToSave.add(note.getParseObject(false, user))
             }
             ParseObject.saveAllInBackground(objectsToSave)
+        }
+    }
+
+    private fun actionWithNotes(action: (user: ParseUser) -> Unit) {
+        val user = ParseUser.getCurrentUser()
+        if (user != null) {
+            action(user)
+        } else {
+            UIUtils.toast(context!!, getString(R.string.message_sign_in))
         }
     }
 
