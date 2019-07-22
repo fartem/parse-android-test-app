@@ -57,6 +57,48 @@ class Note(
         return parseObject
     }
 
+    fun contentEquals(note: Note): Boolean {
+        return note.title == title && note.subtitle == subtitle
+    }
+
+    override fun toString(): String {
+        return "id: $id\n" +
+                "subtitle\n" +
+                "parseObjectId: $parseObjectId\n" +
+                "Title: $title\n" +
+                "Subtitle: $subtitle"
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
+            return true
+        }
+        if (javaClass != other?.javaClass) {
+            return false
+        }
+
+        other as Note
+
+        if (title != other.title) {
+            return false
+        }
+        if (subtitle != other.subtitle) {
+            return false
+        }
+        if (positionInList != other.positionInList) {
+            return false
+        }
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = title?.hashCode() ?: 0
+        result = 31 * result + (subtitle?.hashCode() ?: 0)
+        result = 31 * result + positionInList
+        return result
+    }
+
     companion object {
 
         const val TABLE_NOTE = "note"

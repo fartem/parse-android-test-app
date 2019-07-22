@@ -10,7 +10,7 @@ class AddNoteBottomSheet : BaseBottomSheet() {
     private var addNoteListener: AddNoteListener? = null
 
     override fun initialize() {
-        add_note.setOnClickListener {
+        save_note.setOnClickListener {
             val note = Note()
             note.title = edit_title.text.toString()
             note.subtitle = edit_subtitle.text.toString()

@@ -19,7 +19,7 @@
             android:hint="@string/hint_subtitle"/>
 
     <Button
-            android:id="@+id/add_note"
+            android:id="@+id/save_note"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

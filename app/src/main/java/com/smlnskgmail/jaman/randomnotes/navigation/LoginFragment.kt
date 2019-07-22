@@ -50,12 +50,11 @@ class LoginFragment : BaseFragment() {
             }
         }
         facebook_login.setOnClickListener {
-            ParseFacebookUtils.initialize(context)
             ParseFacebookUtils.logInWithReadPermissionsInBackground(this,
-                listOf("public_profile", "email")) { _, e ->
-                if (e == null) {
+                listOf("public_profile", "email")) { user, e ->
+                if (user != null) {
                     (activity as MainActivity).loginComplete()
-                } else {
+                } else if (e != null) {
                     signInError(e)
                 }
             }

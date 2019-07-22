@@ -1,6 +1,6 @@
 package com.smlnskgmail.jaman.randomnotes.entities
 
-import org.junit.Assert
+import junit.framework.Assert.assertEquals
 import org.junit.Test
 
 class EntityFieldsTest {
@@ -9,7 +9,7 @@ class EntityFieldsTest {
     fun runTest() {
         val entity = object : Entity() {}
 
-        Assert.assertEquals(entity.id, -1)
+        assertEquals(entity.id, -1)
     }
 
 }

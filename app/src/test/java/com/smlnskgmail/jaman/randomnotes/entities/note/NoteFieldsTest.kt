@@ -1,7 +1,8 @@
 package com.smlnskgmail.jaman.randomnotes.entities.note
 
 import com.smlnskgmail.jaman.randomnotes.entities.Note
-import org.junit.Assert
+import junit.framework.Assert.assertEquals
+import junit.framework.Assert.assertNull
 import org.junit.Test
 
 class NoteFieldsTest {
@@ -10,10 +11,10 @@ class NoteFieldsTest {
     fun runTest() {
         val note = Note()
 
-        Assert.assertEquals(note.id, -1)
-        Assert.assertNull(note.title)
-        Assert.assertNull(note.subtitle)
-        Assert.assertNull(note.parseObjectId)
+        assertEquals(note.id, -1)
+        assertNull(note.title)
+        assertNull(note.subtitle)
+        assertNull(note.parseObjectId)
 
         val id = 1L
         val title = "This is a title!"
@@ -25,10 +26,10 @@ class NoteFieldsTest {
         note.subtitle = subtitle
         note.parseObjectId = parseObjectId
 
-        Assert.assertEquals(note.id, id)
-        Assert.assertEquals(note.title, title)
-        Assert.assertEquals(note.subtitle, subtitle)
-        Assert.assertEquals(note.parseObjectId, parseObjectId)
+        assertEquals(note.id, id)
+        assertEquals(note.title, title)
+        assertEquals(note.subtitle, subtitle)
+        assertEquals(note.parseObjectId, parseObjectId)
     }
 
 }

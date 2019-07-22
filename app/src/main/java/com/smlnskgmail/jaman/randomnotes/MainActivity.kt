@@ -7,7 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.facebook.AccessToken
+import com.facebook.login.LoginManager
 import com.parse.ParseUser
+import com.parse.facebook.ParseFacebookUtils
 import com.smlnskgmail.jaman.randomnotes.navigation.BaseFragment
 import com.smlnskgmail.jaman.randomnotes.navigation.LoginFragment
 import com.smlnskgmail.jaman.randomnotes.navigation.MainFragment
@@ -40,6 +43,13 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.menu_login_action -> {
                 if (ParseUtils.isAuthorized()) {
+                    val parseUser = ParseUser.getCurrentUser()
+                    if (ParseFacebookUtils.isLinked(parseUser)) {
+                        AccessToken.setCurrentAccessToken(null)
+                        if (LoginManager.getInstance() != null) {
+                            LoginManager.getInstance().logOut()
+                        }
+                    }
                     ParseUser.logOutInBackground {
                         if (it == null) {
                             validateLoginIcon()

@@ -2,7 +2,9 @@ package com.smlnskgmail.jaman.randomnotes.entities.note.parse
 
 import com.parse.ParseObject
 import com.smlnskgmail.jaman.randomnotes.entities.Note
-import org.junit.Assert
+import junit.framework.Assert.assertEquals
+import junit.framework.Assert.assertNotNull
+import org.junit.Assert.assertNotEquals
 import org.junit.Test
 
 class NoteFromParseObjectTest {
@@ -11,10 +13,10 @@ class NoteFromParseObjectTest {
     fun runTest() {
         val note = Utils.getTestNote()
 
-        Assert.assertNotNull(note.parseObjectId)
-        Assert.assertNotEquals(note.id, -1)
-        Assert.assertNotNull(note.title)
-        Assert.assertNotNull(note.subtitle)
+        assertNotNull(note.parseObjectId)
+        assertNotEquals(note.id, -1)
+        assertNotNull(note.title)
+        assertNotNull(note.subtitle)
 
         val parseNote = ParseObject(Note.TABLE_NOTE)
         parseNote.objectId = note.parseObjectId
@@ -25,10 +27,10 @@ class NoteFromParseObjectTest {
         val noteFromParseObject = Note()
         noteFromParseObject.restoreFromParseObject(parseNote)
 
-        Assert.assertEquals(note.parseObjectId, noteFromParseObject.parseObjectId)
-        Assert.assertEquals(noteFromParseObject.id, -1)
-        Assert.assertEquals(note.title, noteFromParseObject.title)
-        Assert.assertEquals(note.subtitle, noteFromParseObject.subtitle)
+        assertEquals(note.parseObjectId, noteFromParseObject.parseObjectId)
+        assertEquals(noteFromParseObject.id, -1)
+        assertEquals(note.title, noteFromParseObject.title)
+        assertEquals(note.subtitle, noteFromParseObject.subtitle)
     }
 
 }
