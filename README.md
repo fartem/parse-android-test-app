@@ -7,7 +7,7 @@ Test Android application for [Parse test server](https://github.com/fartem/parse
 - managing simple entity (Note);
 - sync data with server;
 - restore data from server;
-- sign up from application with email or Facebook account;
+- sign up from application with email address or Facebook account;
 - sign in to server with email or Facebook.
 
 ## 2. Parse initialization
