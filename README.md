@@ -1,14 +1,14 @@
 # parse-android-test-app
 
-Test Android application as client-side for [Parse test server](https://github.com/fartem/parse-test-server)
+Test Android application for [Parse test server](https://github.com/fartem/parse-test-server)
 
 ## 1. Features
 
 - managing simple entity (Note);
 - sync data with server;
 - restore data from server;
-- sing up from application with email or Facebook account;
-- sing in to server with email or Facebook.
+- sign up from application with email or Facebook account;
+- sign in to server with email or Facebook.
 
 ## 2. Parse initialization
 
@@ -34,7 +34,7 @@ private fun initializeParse() {
 
 ## 3.Database
 
-ORMLite. More on [official site](http://ormlite.com/)
+ORMLite. More on [official site](http://ormlite.com/).
 
 ## 4. Data structure
 
@@ -74,8 +74,7 @@ class Note(
 
 ### 4.2.1 Save note
 
-Save note with method call from object:
-
+From Note class method:
 ```kotlin
 fun save() {
     DatabaseFactory.get().saveNote(this)
@@ -91,8 +90,7 @@ Example:
 
 ### 4.2.2 Delete note
 
-Delete note with method call from object:
-
+From Note class method:
 ```kotlin
 fun delete() {
     DatabaseFactory.get().deleteNote(this)
@@ -107,8 +105,7 @@ Example:
 
 ### 4.2.3 Get all notes from database
 
-Get all notes from Note class companion object:
-
+From Note class method:
 ```kotlin
     fun getAllNotes() = DatabaseFactory.get().allNotes
 ```
@@ -120,8 +117,7 @@ Example:
 
 ### 4.2.4 Delete all notes from database
 
-Delete all notes from Note class companion object:
-
+From Note class method:
 ```kotlin
 fun deleteAllNotes() {
     DatabaseFactory.get().deleteAllNotes()
@@ -135,6 +131,7 @@ Example:
 
 ### 4.2.5 Get ParseObject for note
 
+From Note class method:
 ```kotlin
 fun getParseObject(globalAccess: Boolean = true, user: ParseUser? = null): ParseObject {
     ...
@@ -148,6 +145,7 @@ val parseNote = newNote.getParseObject(false, authUser)
 
 ### 4.2.6 Initialize note from ParseObject
 
+From Note class method:
 ```kotlin
 fun restoreFromParseObject(parseObject: ParseObject): ParseObject {
     ...
@@ -170,7 +168,7 @@ for (obj in parseObjects) {
 - [Official Guide](https://developers.facebook.com/docs/facebook-login/android)
 - [Get hash with openssl from Windows](https://github.com/magus/react-native-facebook-login/issues/297#issuecomment-433816732)
 
-#### 5.2 Usage
+### 5.2 Usage
 
 In `preferences.xml`:
 
@@ -185,4 +183,12 @@ In `preferences.xml`:
 <uses-permission android:name="android.permission.INTERNET"/>
 ```
 
-## 7. About
+## 7. Screenshots
+
+<br/>
+<p align="center">
+  <img src="media/screenshot_01.jpg" width="150" />
+  <img src="media/screenshot_02.jpg" width="150" />
+  <img src="media/screenshot_03.jpg" width="150" />
+  <img src="media/screenshot_04.jpg" width="150" />
+</p>
