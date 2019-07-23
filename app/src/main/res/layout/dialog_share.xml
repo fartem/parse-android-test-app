@@ -8,6 +8,8 @@
             android:id="@+id/dialog_share_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="24dp"
             android:textSize="20sp"
             android:textColor="#000"
             android:text="@string/common_share"/>
@@ -15,11 +17,17 @@
     <EditText
             android:id="@+id/dialog_share_email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"/>
 
     <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_gravity="end">
 
         <Button
