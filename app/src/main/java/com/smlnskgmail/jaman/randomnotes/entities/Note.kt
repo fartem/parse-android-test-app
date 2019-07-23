@@ -1,9 +1,7 @@
 package com.smlnskgmail.jaman.randomnotes.entities
 
 import com.j256.ormlite.field.DatabaseField
-import com.parse.ParseACL
 import com.parse.ParseObject
-import com.parse.ParseUser
 import com.smlnskgmail.jaman.randomnotes.db.support.DatabaseFactory
 
 class Note(
@@ -29,22 +27,12 @@ class Note(
         DatabaseFactory.get().deleteNote(this)
     }
 
-    fun getParseObject(globalAccess: Boolean = true, user: ParseUser? = null): ParseObject {
+    fun getParseObject(): ParseObject {
         val parseObject = ParseObject(TABLE_NOTE)
         parseObject.objectId = parseObjectId
         parseObject.put(COLUMN_ID, id)
         parseObject.put(COLUMN_TITLE, title!!)
         parseObject.put(COLUMN_SUBTITLE, subtitle!!)
-        if (!globalAccess) {
-            if (user == null) {
-                throw RuntimeException("User must not be null!")
-            }
-            parseObject.acl = ParseACL()
-            parseObject.acl!!.publicReadAccess = false
-            parseObject.acl!!.publicWriteAccess = false
-            parseObject.acl!!.setReadAccess(user, true)
-            parseObject.acl!!.setWriteAccess(user, true)
-        }
         return parseObject
     }
 

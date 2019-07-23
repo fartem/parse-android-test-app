@@ -63,6 +63,9 @@ class MainFragment : BaseFragment(), AddNoteListener {
                         if (note == null) {
                             note = Note()
                         }
+                        if (note.parseObjectId == null) {
+                            note.parseObjectId = parseData.objectId
+                        }
                         val parseNote = note.restoreFromParseObject(parseData)
                         note.save()
                         parseNote.put(Note.COLUMN_ID, note.id)
@@ -78,13 +81,25 @@ class MainFragment : BaseFragment(), AddNoteListener {
     }
 
     private fun syncNotes() {
-        actionWithNotes {user ->
+        actionWithNotes { user ->
             val notes = Note.getAllNotes()
             val objectsToSave = mutableListOf<ParseObject>()
             for (note in notes) {
-                objectsToSave.add(note.getParseObject(false, user))
+                objectsToSave.add(note.getParseObject())
             }
-            ParseObject.saveAllInBackground(objectsToSave)
+            ParseObject.saveAllInBackground(objectsToSave) {
+                if (it == null) {
+                    for (savedNote in objectsToSave) {
+                        val note = notes.firstOrNull { noteInList ->
+                            noteInList.id == savedNote.get(Note.COLUMN_ID)
+                        }
+                        if (note != null) {
+                            note.parseObjectId = savedNote.objectId
+                            note.save()
+                        }
+                    }
+                }
+            }
         }
     }
 

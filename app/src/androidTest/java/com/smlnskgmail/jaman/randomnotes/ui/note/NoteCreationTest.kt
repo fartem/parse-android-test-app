@@ -11,7 +11,6 @@ import com.smlnskgmail.jaman.randomnotes.entities.Note
 import com.smlnskgmail.jaman.randomnotes.ui.utils.ChildClick
 import org.junit.Assert
 import org.junit.Assert.assertTrue
-import org.junit.Before
 import org.junit.Test
 
 class NoteCreationTest : BaseNoteTest() {
