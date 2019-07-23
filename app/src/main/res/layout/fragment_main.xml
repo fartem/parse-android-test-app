@@ -28,6 +28,14 @@
                 fab:fab_moreButtonPlusIcon="@drawable/ic_add">
 
             <jahirfiquitiva.libs.fabsmenu.TitleFAB
+                    android:id="@+id/share_access"
+                    style="@style/AppFAB"
+                    fab:fab_title="@string/action_share"
+                    fab:backgroundTint="@color/colorMainFabShare"
+                    fab:srcCompat="@drawable/ic_share"
+                    fab:fabSize="mini" app:fab_title="@string/common_share"/>
+
+            <jahirfiquitiva.libs.fabsmenu.TitleFAB
                     android:id="@+id/restore_notes"
                     style="@style/AppFAB"
                     fab:fab_title="@string/action_restore"

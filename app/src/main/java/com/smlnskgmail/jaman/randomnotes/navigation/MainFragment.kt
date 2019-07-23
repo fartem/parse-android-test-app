@@ -6,6 +6,7 @@ import com.parse.ParseUser
 import com.smlnskgmail.jaman.randomnotes.R
 import com.smlnskgmail.jaman.randomnotes.components.bottomsheets.addnote.AddNoteBottomSheet
 import com.smlnskgmail.jaman.randomnotes.components.bottomsheets.addnote.AddNoteListener
+import com.smlnskgmail.jaman.randomnotes.components.dialogs.ShareDialog
 import com.smlnskgmail.jaman.randomnotes.components.noteslist.NotesAdapter
 import com.smlnskgmail.jaman.randomnotes.entities.Note
 import com.smlnskgmail.jaman.randomnotes.utils.UIUtils
@@ -26,6 +27,11 @@ class MainFragment : BaseFragment(), AddNoteListener {
     }
 
     private fun initializeFabMenu() {
+        share_access.setOnClickListener {
+            collapseMenuAndRun {
+                share()
+            }
+        }
         restore_notes.setOnClickListener {
             collapseMenuAndRun {
                 restoreNotes()
@@ -48,8 +54,15 @@ class MainFragment : BaseFragment(), AddNoteListener {
         action()
     }
 
+    private fun share() {
+        actionWithNotes {
+            val shareDialog = ShareDialog(context!!)
+            shareDialog.show()
+        }
+    }
+
     private fun restoreNotes() {
-        actionWithNotes { user ->
+        actionWithNotes {
             val parseQuery: ParseQuery<ParseObject> = ParseQuery.getQuery(Note.TABLE_NOTE)
             val parseToSave = mutableListOf<ParseObject>()
             parseQuery.findInBackground { objects, e ->
@@ -81,7 +94,7 @@ class MainFragment : BaseFragment(), AddNoteListener {
     }
 
     private fun syncNotes() {
-        actionWithNotes { user ->
+        actionWithNotes {
             val notes = Note.getAllNotes()
             val objectsToSave = mutableListOf<ParseObject>()
             for (note in notes) {
@@ -103,10 +116,9 @@ class MainFragment : BaseFragment(), AddNoteListener {
         }
     }
 
-    private fun actionWithNotes(action: (user: ParseUser) -> Unit) {
-        val user = ParseUser.getCurrentUser()
-        if (user != null) {
-            action(user)
+    private fun actionWithNotes(action: () -> Unit) {
+        if (ParseUser.getCurrentUser() != null) {
+            action()
         } else {
             UIUtils.toast(context!!, getString(R.string.message_sign_in))
         }

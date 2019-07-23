@@ -25,6 +25,9 @@
     <string name="action_login">Login</string>
     <string name="action_sign_up">Sign up</string>
 
+    <!-- Commons -->
+    <string name="common_share">Share</string>
+
     <!-- Messages -->
     <string name="message_not_account">Not account yet? Create one</string>
     <string name="message_have_account">I have an account</string>
