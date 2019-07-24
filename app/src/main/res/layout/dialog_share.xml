@@ -6,44 +6,38 @@
 
     <TextView
             android:id="@+id/dialog_share_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="24dp"
-            android:textSize="20sp"
-            android:textColor="#000"
+            style="@style/AppText"
+            android:layout_marginTop="@dimen/margin_custom_1"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:textSize="@dimen/text_size_title"
+            android:textColor="@color/colorPrimaryText"
             android:text="@string/common_share"/>
 
     <EditText
             android:id="@+id/dialog_share_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"/>
+            style="@style/AppEditText"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium"/>
 
     <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="@dimen/margin_custom_2"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_small"
             android:layout_gravity="end">
 
         <Button
                 android:id="@+id/dialog_share_cancel"
                 style="@style/AppButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="Cancel"/>
+                android:layout_marginEnd="@dimen/margin_small"
+                android:text="@string/common_cancel"/>
 
         <Button
                 android:id="@+id/dialog_share_action"
                 style="@style/AppButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Send"/>
+                android:text="@string/action_send"/>
 
     </LinearLayout>
 

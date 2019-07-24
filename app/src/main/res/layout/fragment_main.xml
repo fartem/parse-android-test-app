@@ -33,7 +33,7 @@
                     style="@style/AppText"
                     android:layout_marginTop="@dimen/margin_default"
                     android:textColor="@color/colorUnselectedItem"
-                    android:textSize="@dimen/text_size_medium"
+                    android:textSize="@dimen/text_size_title"
                     android:text="@string/message_empty_notes_list"/>
 
         </LinearLayout>
