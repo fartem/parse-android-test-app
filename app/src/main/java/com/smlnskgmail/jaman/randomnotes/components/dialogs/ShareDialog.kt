@@ -13,6 +13,7 @@ class ShareDialog(context: Context) : BaseDialog(context) {
             cancel()
         }
         dialog_share_action.setOnClickListener {
+            cancel()
             share()
         }
     }
@@ -21,8 +22,12 @@ class ShareDialog(context: Context) : BaseDialog(context) {
         val shareData = hashMapOf<String, String>()
         shareData["email"] = dialog_share_email.text.toString()
         ParseCloud.callFunctionInBackground("invite", shareData,
-            FunctionCallback<Void> { `object`, e ->
+            FunctionCallback<Boolean> { success, e ->
+                if (success) {
 
+                } else {
+
+                }
             }
         )
     }

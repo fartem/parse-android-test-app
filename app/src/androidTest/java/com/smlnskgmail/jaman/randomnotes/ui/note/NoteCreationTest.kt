@@ -54,7 +54,7 @@ class NoteCreationTest : BaseNoteTest() {
     }
 
     private fun deleteNote() {
-        onView(withId(R.id.notes))
+        onView(withId(R.id.notes_list))
             .perform(
                 RecyclerViewActions.actionOnItemAtPosition<NotesHolder>(
                     testNotePosition,

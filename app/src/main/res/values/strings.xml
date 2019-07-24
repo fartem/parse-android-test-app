@@ -32,6 +32,7 @@
     <string name="message_not_account">Not account yet? Create one</string>
     <string name="message_have_account">I have an account</string>
     <string name="message_sign_in">Please sign in to app and try again!</string>
+    <string name="message_empty_notes_list">Notes list is empty!</string>
 
     <!-- Errors -->
     <string name="error_sign_in">Sign in error! See more in logs.</string>

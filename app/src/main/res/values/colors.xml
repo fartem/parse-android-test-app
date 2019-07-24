@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Default -->
     <color name="colorPrimary">#03a9f4</color>
     <color name="colorPrimaryDark">#0288d1</color>
     <color name="colorAccent">#ff4081</color>
@@ -20,5 +21,6 @@
 
     <!-- Custom -->
     <color name="colorWhite">#FFF</color>
-    <color name="backgroundFab">#4d000000</color>
+    <color name="colorBackgroundFab">#4d000000</color>
+    <color name="colorUnselectedItem">#40000000</color>
 </resources>

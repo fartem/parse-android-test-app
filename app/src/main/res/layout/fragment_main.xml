@@ -6,16 +6,45 @@
              android:layout_height="match_parent"
              android:background="@color/colorWhite">
 
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/notes"
-            style="@style/AppRecyclerView"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <com.smlnskgmail.jaman.randomnotes.components.ui.AdaptiveRecyclerView
+                android:id="@+id/notes_list"
+                style="@style/AppRecyclerView"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+        <LinearLayout
+                android:id="@+id/notes_list_empty_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+            <ImageView
+                    android:layout_width="@dimen/size_empty_image"
+                    android:layout_height="@dimen/size_empty_image"
+                    android:layout_gravity="center"
+                    android:tint="@color/colorUnselectedItem"
+                    android:src="@drawable/ic_note_add"/>
+
+            <TextView
+                    style="@style/AppText"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:textColor="@color/colorUnselectedItem"
+                    android:textSize="@dimen/text_size_medium"
+                    android:text="@string/message_empty_notes_list"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
 
     <jahirfiquitiva.libs.fabsmenu.FABsMenuLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="bottom|end"
-            fab:fabs_menu_overlayColor="@color/backgroundFab"
+            fab:fabs_menu_overlayColor="@color/colorBackgroundFab"
             fab:fabs_menu_clickableOverlay="true">
 
         <jahirfiquitiva.libs.fabsmenu.FABsMenu
@@ -30,10 +59,10 @@
             <jahirfiquitiva.libs.fabsmenu.TitleFAB
                     android:id="@+id/share_access"
                     style="@style/AppFAB"
-                    fab:fab_title="@string/action_share"
+                    fab:fab_title="@string/common_share"
                     fab:backgroundTint="@color/colorMainFabShare"
                     fab:srcCompat="@drawable/ic_share"
-                    fab:fabSize="mini" app:fab_title="@string/common_share"/>
+                    fab:fabSize="mini"/>
 
             <jahirfiquitiva.libs.fabsmenu.TitleFAB
                     android:id="@+id/restore_notes"

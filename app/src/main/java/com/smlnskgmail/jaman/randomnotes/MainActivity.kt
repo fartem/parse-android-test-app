@@ -101,10 +101,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun loginComplete() {
+        showMainFragment()
+        validateLoginIcon()
+    }
+
+    fun loginError() {
+        showMainFragment()
+    }
+
+    private fun showMainFragment() {
         val mainFragment: MainFragment = (supportFragmentManager
             .findFragmentByTag(MainFragment::class.java.name) ?: MainFragment()) as MainFragment
         showBaseFragment(mainFragment)
-        validateLoginIcon()
     }
 
     override fun onDestroy() {

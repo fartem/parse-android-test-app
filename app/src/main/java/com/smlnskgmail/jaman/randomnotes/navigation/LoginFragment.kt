@@ -2,12 +2,16 @@ package com.smlnskgmail.jaman.randomnotes.navigation
 
 import android.content.Intent
 import android.view.View
+import com.facebook.AccessToken
+import com.facebook.GraphRequest
 import com.parse.ParseUser
 import com.parse.facebook.ParseFacebookUtils
 import com.smlnskgmail.jaman.randomnotes.MainActivity
 import com.smlnskgmail.jaman.randomnotes.R
+import com.smlnskgmail.jaman.randomnotes.navigation.BaseFragment
 import com.smlnskgmail.jaman.randomnotes.utils.UIUtils
 import kotlinx.android.synthetic.main.fragment_login.*
+import android.os.Bundle
 
 class LoginFragment : BaseFragment() {
 
@@ -53,7 +57,25 @@ class LoginFragment : BaseFragment() {
             ParseFacebookUtils.logInWithReadPermissionsInBackground(this,
                 listOf("public_profile", "email")) { user, e ->
                 if (user != null) {
-                    (activity as MainActivity).loginComplete()
+                    if (user.email == null) {
+                        val graphRequest = GraphRequest.newMeRequest(AccessToken
+                            .getCurrentAccessToken()) { data, response ->
+                            if (data != null) {
+                                user.email = data.getString("email")
+                                user.saveInBackground {
+                                    if (it == null) {
+                                        (activity as MainActivity).loginComplete()
+                                    }
+                                }
+                            } else {
+                                (activity as MainActivity).loginError()
+                            }
+                        }
+                        val parameters = Bundle()
+                        parameters.putString("fields", "email")
+                        graphRequest.parameters = parameters
+                        graphRequest.executeAsync()
+                    }
                 } else if (e != null) {
                     signInError(e)
                 }
