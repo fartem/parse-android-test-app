@@ -12,6 +12,8 @@ Test Android application for [Parse test server](https://github.com/fartem/parse
 
 ## 2. Parse initialization
 
+### 2.1 Application class
+
 ```kotlin
 private fun initializeParse() {
     val applicationId = "APP_ID"
@@ -28,9 +30,13 @@ private fun initializeParse() {
 }
 ```
 
-- __APP_ID:__ Parse app id;
-- __SERVER_ADDRESS:__ Parse address in your network (__example:__ http://192.168.0.9:1337/parse);
-- __CLIENT_KEY:__ Parse client key;
+### 2.2 Requiring parameters
+
+| Name  | Description |
+| ------------- | ------------- |
+| APP_ID  | Parse server app id;  |
+| SERVER_ADDRESS  | Address of Parse server in your network  |
+| CLIENT_KEY  | Parse server client key  |
 
 ## 3.Database
 
@@ -105,26 +111,26 @@ Example:
 
 ### 4.2.3 Get all notes from database
 
-From Note class method:
+__From Note class method:__
 ```kotlin
     fun getAllNotes() = DatabaseFactory.get().allNotes
 ```
 
-Example:
+__Example:__
 ```kotlin
     val notes = Note.getAllNotes()
 ```
 
 ### 4.2.4 Delete all notes from database
 
-From Note class method:
+__From Note class method:__
 ```kotlin
 fun deleteAllNotes() {
     DatabaseFactory.get().deleteAllNotes()
 }
 ```
 
-Example:
+__Example:__
 ```kotlin
     Note.deleteAllNotes()
 ```
@@ -138,21 +144,21 @@ fun getParseObject(globalAccess: Boolean = true, user: ParseUser? = null): Parse
 }
 ```
 
-Example:
+__Example:__
 ```kotlin
 val parseNote = newNote.getParseObject(false, authUser)
 ```
 
 ### 4.2.6 Initialize note from ParseObject
 
-From Note class method:
+__From Note class method:__
 ```kotlin
 fun restoreFromParseObject(parseObject: ParseObject): ParseObject {
     ...
 }
 ```
 
-Example:
+__Example:__
 ```kotlin
 for (obj in parseObjects) {
     val note = Note()
@@ -170,7 +176,7 @@ for (obj in parseObjects) {
 
 ### 5.2 Usage
 
-In `preferences.xml`:
+In `preferences.xml` replace for your values:
 
 ```xml
 <string name="facebook_app_id">[APP_ID]</string>
@@ -187,8 +193,8 @@ In `preferences.xml`:
 
 <br/>
 <p align="center">
-  <img src="media/screenshot_01.jpg" width="150" />
-  <img src="media/screenshot_02.jpg" width="150" />
-  <img src="media/screenshot_03.jpg" width="150" />
-  <img src="media/screenshot_04.jpg" width="150" />
+  <img src="media/screenshot_01.png" width="150" />
+  <img src="media/screenshot_02.png" width="150" />
+  <img src="media/screenshot_03.png" width="150" />
+  <img src="media/screenshot_04.png" width="150" />
 </p>
