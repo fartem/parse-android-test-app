@@ -191,8 +191,8 @@ In `preferences.xml` replace for your values:
 
 ## 7. Screenshots
 <p align="center">
-  <img src="media/screenshot_01.png" width="430" />
-  <img src="media/screenshot_02.png" width="430" />
-  <img src="media/screenshot_03.png" width="430" />
-  <img src="media/screenshot_04.png" width="430" />
+  <img src="media/screenshot_01.png" width="200" />
+  <img src="media/screenshot_02.png" width="200" />
+  <img src="media/screenshot_03.png" width="200" />
+  <img src="media/screenshot_04.png" width="200" />
 </p>
