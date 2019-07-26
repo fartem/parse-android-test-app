@@ -1,6 +1,6 @@
 # parse-android-test-app
 
-Test Android application for [Parse test server](https://github.com/fartem/parse-test-server)
+Test Android application for [Parse test server](https://github.com/fartem/parse-test-server).
 
 ## 1. Features
 
@@ -46,6 +46,8 @@ ORMLite. More on [official site](http://ormlite.com/).
 
 ### 4.1 Entity
 
+Base class for all database entities.
+
 ```kotlin
 abstract class Entity(
 
@@ -80,14 +82,14 @@ class Note(
 
 ### 4.2.1 Save note
 
-From Note class method:
+__From Note class method:__
 ```kotlin
 fun save() {
     DatabaseFactory.get().saveNote(this)
 }
 ```
 
-Example:
+__Example:__
 ```kotlin
     val newNote = Note(title, subtitle)
     newNote.save()
@@ -96,14 +98,14 @@ Example:
 
 ### 4.2.2 Delete note
 
-From Note class method:
+__From Note class method:__
 ```kotlin
 fun delete() {
     DatabaseFactory.get().deleteNote(this)
 }
 ```
 
-Example:
+__Example:__
 ```kotlin
     val note = notes[notes.size - 1]
     note.delete()
@@ -137,7 +139,7 @@ __Example:__
 
 ### 4.2.5 Get ParseObject for note
 
-From Note class method:
+__From Note class method:__
 ```kotlin
 fun getParseObject(globalAccess: Boolean = true, user: ParseUser? = null): ParseObject {
     ...
@@ -172,11 +174,11 @@ for (obj in parseObjects) {
 ### 5.1 Resources
 
 - [Official Guide](https://developers.facebook.com/docs/facebook-login/android)
-- [Get hash with openssl from Windows](https://github.com/magus/react-native-facebook-login/issues/297#issuecomment-433816732)
+- [Get hash with openssl in Windows](https://github.com/magus/react-native-facebook-login/issues/297#issuecomment-433816732)
 
 ### 5.2 Usage
 
-In `preferences.xml` replace for your values:
+In `preferences.xml` replace this values:
 
 ```xml
 <string name="facebook_app_id">[APP_ID]</string>
