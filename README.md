@@ -2,13 +2,22 @@
 
 Test Android application for [Parse test server](https://github.com/fartem/parse-test-server).
 
-## 1. Features
+## 1. Information
+
+### 1.1 Features
+
+__Fully working communication with Parse test server:__
 
 - managing simple entity (Note);
 - sync data with server;
 - restore data from server;
 - sign up from application with email address or Facebook account;
 - sign in to server with email or Facebook.
+
+### 1.2 Not handling exceptions
+
+- Internet connection unavailable status;
+- Parse Server connection unavailable status.
 
 ## 2. Parse initialization
 
@@ -34,15 +43,17 @@ private fun initializeParse() {
 
 | Name  | Description |
 | ------------- | ------------- |
-| APP_ID  | Parse server app id  |
-| SERVER_ADDRESS  | Address of Parse server in your network  |
-| CLIENT_KEY  | Parse server client key  |
+| APP_ID | Parse server app id |
+| SERVER_ADDRESS | Address of Parse server in your network |
+| CLIENT_KEY | Parse server client key |
 
 ## 3.Database
 
 ORMLite. More on [official site](http://ormlite.com/).
 
 ## 4. Data structure
+
+This section contains full list of entities using in app.
 
 ### 4.1 Entity
 
@@ -178,7 +189,7 @@ for (obj in parseObjects) {
 
 ### 5.2 Usage
 
-In `preferences.xml` replace this values:
+In `preferences.xml` replace this values to own analogues:
 
 ```xml
 <string name="facebook_app_id">[APP_ID]</string>
