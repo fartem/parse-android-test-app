@@ -7,7 +7,7 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.smlnskgmail.jaman.randomnotes.R;
-import com.smlnskgmail.jaman.randomnotes.db.support.DatabaseMigration;
+import com.smlnskgmail.jaman.randomnotes.db.factory.DatabaseMigration;
 import com.smlnskgmail.jaman.randomnotes.entities.Note;
 
 import java.sql.SQLException;
@@ -70,14 +70,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             Log.e(LOG_TAG, "Failed get all notes\n", e);
         }
         return new ArrayList<>();
-    }
-
-    public void deleteAllNotes() {
-        try {
-            getDao(Note.class).deleteBuilder().delete();
-        } catch (SQLException e) {
-            Log.e(LOG_TAG, "Failed delete all notes\n", e);
-        }
     }
 
     public void saveNote(Note note) {

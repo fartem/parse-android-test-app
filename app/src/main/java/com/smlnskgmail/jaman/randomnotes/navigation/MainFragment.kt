@@ -1,12 +1,7 @@
 package com.smlnskgmail.jaman.randomnotes.navigation
 
 import androidx.core.content.ContextCompat
-import com.facebook.AccessToken
-import com.facebook.login.LoginManager
-import com.parse.ParseObject
-import com.parse.ParseQuery
 import com.parse.ParseUser
-import com.parse.facebook.ParseFacebookUtils
 import com.smlnskgmail.jaman.randomnotes.MainActivity
 import com.smlnskgmail.jaman.randomnotes.R
 import com.smlnskgmail.jaman.randomnotes.components.bottomsheets.addnote.AddNoteBottomSheet
@@ -14,27 +9,28 @@ import com.smlnskgmail.jaman.randomnotes.components.bottomsheets.addnote.AddNote
 import com.smlnskgmail.jaman.randomnotes.components.dialogs.invite.InviteCallback
 import com.smlnskgmail.jaman.randomnotes.components.dialogs.invite.InviteDialog
 import com.smlnskgmail.jaman.randomnotes.components.noteslist.NotesAdapter
+import com.smlnskgmail.jaman.randomnotes.components.ui.LongToast
 import com.smlnskgmail.jaman.randomnotes.entities.Note
-import com.smlnskgmail.jaman.randomnotes.parse.ParseUtils
-import com.smlnskgmail.jaman.randomnotes.utils.UIUtils
+import com.smlnskgmail.jaman.randomnotes.parse.ParseApi
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : BaseFragment(), AddNoteListener, InviteCallback {
 
-    private val dataNotes: MutableList<Note> = mutableListOf()
+    private val notes: MutableList<Note> = mutableListOf()
 
-    override fun initialize() {
-        initializeNotes()
-        initializeFabMenu()
+    override fun onViewCreated() {
+        super.onViewCreated()
+        addNotesToList()
+        setupFabMenu()
     }
 
-    private fun initializeNotes() {
-        dataNotes.addAll(Note.getAllNotes())
+    private fun addNotesToList() {
+        notes.addAll(Note.getAllNotes())
         notes_list.setEmptyView(notes_list_empty_view)
-        notes_list.adapter = NotesAdapter(dataNotes)
+        notes_list.adapter = NotesAdapter(notes)
     }
 
-    private fun initializeFabMenu() {
+    private fun setupFabMenu() {
         share_access.setOnClickListener {
             actionWithNotes {
                 share()
@@ -42,12 +38,20 @@ class MainFragment : BaseFragment(), AddNoteListener, InviteCallback {
         }
         restore_notes.setOnClickListener {
             actionWithNotes {
-                restore()
+                ParseApi.restoreAllNotes(notes) {
+                    if (it == null) {
+                        refreshNotes()
+                    } else {
+                        LongToast.show(context!!, getString(R.string.error_cannot_restore_notes))
+                    }
+                }
             }
         }
         sync_notes.setOnClickListener {
             actionWithNotes {
-                sync()
+                ParseApi.saveAllNotes(notes) {
+                    LongToast.show(context!!, getString(R.string.error_cannot_sync_notes))
+                }
             }
         }
         add_note.setOnClickListener {
@@ -61,57 +65,6 @@ class MainFragment : BaseFragment(), AddNoteListener, InviteCallback {
         val inviteDialog = InviteDialog(context!!)
         inviteDialog.setInviteCallback(this)
         inviteDialog.show()
-    }
-
-    private fun restore() {
-        val parseQuery: ParseQuery<ParseObject> = ParseQuery.getQuery(Note.TABLE_NOTE)
-        val parseToSave = mutableListOf<ParseObject>()
-        parseQuery.findInBackground { objects, e ->
-            if (objects.isNotEmpty()) {
-                Note.deleteAllNotes()
-                for (parseData in objects) {
-                    val id = parseData.getLong(Note.COLUMN_ID)
-                    var note = dataNotes.lastOrNull {
-                        it.id == id
-                    }
-                    if (note == null) {
-                        note = Note()
-                    }
-                    if (note.parseObjectId == null) {
-                        note.parseObjectId = parseData.objectId
-                    }
-                    val parseNote = note.restoreFromParseObject(parseData)
-                    note.save()
-                    parseNote.put(Note.COLUMN_ID, note.id)
-                    parseToSave.add(parseNote)
-                }
-                ParseObject.saveAllInBackground(parseToSave) {
-                    if (it == null) {
-                        refreshNotes()
-                    }
-                }
-            }
-        }
-    }
-
-    private fun sync() {
-        val objectsToSave = mutableListOf<ParseObject>()
-        for (note in dataNotes) {
-            objectsToSave.add(note.getParseObject())
-        }
-        ParseObject.saveAllInBackground(objectsToSave) {
-            if (it == null) {
-                for (savedNote in objectsToSave) {
-                    val note = dataNotes.firstOrNull { noteInList ->
-                        noteInList.id == savedNote.get(Note.COLUMN_ID)
-                    }
-                    if (note != null) {
-                        note.parseObjectId = savedNote.objectId
-                        note.save()
-                    }
-                }
-            }
-        }
     }
 
     private fun addNote() {
@@ -131,42 +84,35 @@ class MainFragment : BaseFragment(), AddNoteListener, InviteCallback {
             if (ParseUser.getCurrentUser() != null) {
                 action()
             } else {
-                UIUtils.toast(context!!, getString(R.string.message_sign_in))
+                LongToast.show(context!!, getString(R.string.message_sign_in))
             }
         }
     }
 
     private fun refreshNotes() {
-        dataNotes.clear()
-        dataNotes.addAll(Note.getAllNotes())
+        notes.clear()
+        notes.addAll(Note.getAllNotes())
         notes_list.adapter!!.notifyDataSetChanged()
     }
 
     override fun onAddNote(note: Note) {
-        dataNotes.add(note)
+        notes.add(note)
         (notes_list.adapter as NotesAdapter).validateLastNote()
     }
 
     override fun onInviteAction(success: Boolean) {
         if (success) {
-            UIUtils.toast(context!!, getString(R.string.message_invite_sent))
+            LongToast.show(context!!, getString(R.string.message_invite_sent))
         } else {
-            UIUtils.toast(context!!, getString(R.string.error_invite_sent))
+            LongToast.show(context!!, getString(R.string.error_invite_sent))
         }
     }
 
     override fun handleMenuItemClick(menuItemId: Int) {
         when (menuItemId) {
             R.id.menu_login_action -> {
-                if (ParseUtils.isAuthorized()) {
-                    val parseUser = ParseUser.getCurrentUser()
-                    if (ParseFacebookUtils.isLinked(parseUser)) {
-                        AccessToken.setCurrentAccessToken(null)
-                        if (LoginManager.getInstance() != null) {
-                            LoginManager.getInstance().logOut()
-                        }
-                    }
-                    ParseUser.logOutInBackground {
+                if (ParseApi.isAuthorized()) {
+                    ParseApi.logout {
                         validateLoginMenuIcon()
                     }
                 } else {
@@ -181,7 +127,7 @@ class MainFragment : BaseFragment(), AddNoteListener, InviteCallback {
     }
 
     private fun validateLoginMenuIcon() {
-        val icon = if (ParseUtils.isAuthorized()) {
+        val icon = if (ParseApi.isAuthorized()) {
             R.drawable.ic_logout
         } else {
             R.drawable.ic_login

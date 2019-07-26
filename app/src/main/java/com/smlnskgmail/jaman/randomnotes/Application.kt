@@ -3,16 +3,12 @@ package com.smlnskgmail.jaman.randomnotes
 import android.app.Application
 import com.parse.Parse
 import com.parse.facebook.ParseFacebookUtils
-import com.smlnskgmail.jaman.randomnotes.db.support.DatabaseFactory
-import com.smlnskgmail.jaman.randomnotes.prefs.PrefsHelper
+import com.smlnskgmail.jaman.randomnotes.db.factory.DatabaseFactory
 
 class Application : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        if (PrefsHelper.isFirstLaunch(this)) {
-            PrefsHelper.setFirstLaunchStatus(this, false)
-        }
         DatabaseFactory.set(this)
         initializeParse()
     }

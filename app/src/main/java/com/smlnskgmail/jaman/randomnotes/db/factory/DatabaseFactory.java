@@ -1,4 +1,4 @@
-package com.smlnskgmail.jaman.randomnotes.db.support;
+package com.smlnskgmail.jaman.randomnotes.db.factory;
 
 import android.content.Context;
 import com.j256.ormlite.android.apptools.OpenHelperManager;

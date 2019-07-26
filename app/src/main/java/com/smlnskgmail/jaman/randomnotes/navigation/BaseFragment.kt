@@ -16,16 +16,17 @@ abstract class BaseFragment : Fragment(), FragmentResume {
     private lateinit var menu: Menu
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setHasOptionsMenu(true)
-        setTitle()
-        initialize()
+        onViewCreated()
     }
 
     private fun setTitle() {
         activity!!.setTitle(getTitleResId())
     }
 
-    abstract fun initialize()
+    open fun onViewCreated() {
+        setHasOptionsMenu(true)
+        setTitle()
+    }
 
     override fun onFragmentResume() {
         setTitle()

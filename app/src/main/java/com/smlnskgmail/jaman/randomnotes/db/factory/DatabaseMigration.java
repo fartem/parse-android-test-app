@@ -1,4 +1,4 @@
-package com.smlnskgmail.jaman.randomnotes.db.support;
+package com.smlnskgmail.jaman.randomnotes.db.factory;
 
 import android.util.Log;
 import com.smlnskgmail.jaman.randomnotes.db.DatabaseHelper;

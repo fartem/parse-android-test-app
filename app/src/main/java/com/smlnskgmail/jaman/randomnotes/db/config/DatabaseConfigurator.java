@@ -1,4 +1,4 @@
-package com.smlnskgmail.jaman.randomnotes.db.util;
+package com.smlnskgmail.jaman.randomnotes.db.config;
 
 import com.j256.ormlite.android.apptools.OrmLiteConfigUtil;
 import com.smlnskgmail.jaman.randomnotes.db.DatabaseHelper;

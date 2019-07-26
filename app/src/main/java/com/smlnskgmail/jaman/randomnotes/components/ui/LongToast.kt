@@ -1,11 +1,11 @@
-package com.smlnskgmail.jaman.randomnotes.utils
+package com.smlnskgmail.jaman.randomnotes.components.ui
 
 import android.content.Context
 import android.widget.Toast
 
-object UIUtils {
+object LongToast {
 
-    fun toast(context: Context, text: String) {
+    fun show(context: Context, text: String) {
         Toast.makeText(context, text, Toast.LENGTH_LONG).show()
     }
 

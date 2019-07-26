@@ -7,4 +7,8 @@ abstract class Entity(
     @DatabaseField(generatedId = true)
     var id: Long = -1
 
-)
+) {
+
+    fun isNew() = id == -1L
+
+}

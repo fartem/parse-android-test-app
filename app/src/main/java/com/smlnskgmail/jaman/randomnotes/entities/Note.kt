@@ -2,7 +2,7 @@ package com.smlnskgmail.jaman.randomnotes.entities
 
 import com.j256.ormlite.field.DatabaseField
 import com.parse.ParseObject
-import com.smlnskgmail.jaman.randomnotes.db.support.DatabaseFactory
+import com.smlnskgmail.jaman.randomnotes.db.factory.DatabaseFactory
 
 class Note(
 
@@ -36,13 +36,12 @@ class Note(
         return parseObject
     }
 
-    fun restoreFromParseObject(parseObject: ParseObject): ParseObject {
+    fun restoreFromParseObject(parseObject: ParseObject) {
         if (parseObjectId == null) {
             parseObjectId = parseObject.objectId
         }
         title = parseObject.getString(COLUMN_TITLE)
         subtitle = parseObject.getString(COLUMN_SUBTITLE)
-        return parseObject
     }
 
     fun contentEquals(note: Note): Boolean {
@@ -96,10 +95,6 @@ class Note(
         const val COLUMN_SUBTITLE = "subtitle"
 
         fun getAllNotes() = DatabaseFactory.get().allNotes
-
-        fun deleteAllNotes() {
-            DatabaseFactory.get().deleteAllNotes()
-        }
 
     }
 

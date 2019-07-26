@@ -45,8 +45,7 @@
 
         <TextView
                 android:id="@+id/register_account"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/AppText"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/margin_default"
                 android:textSize="@dimen/text_size_default"
