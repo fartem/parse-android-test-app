@@ -34,7 +34,7 @@ private fun initializeParse() {
 
 | Name  | Description |
 | ------------- | ------------- |
-| APP_ID  | Parse server app id;  |
+| APP_ID  | Parse server app id  |
 | SERVER_ADDRESS  | Address of Parse server in your network  |
 | CLIENT_KEY  | Parse server client key  |
 

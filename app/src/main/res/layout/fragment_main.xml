@@ -59,7 +59,7 @@
             <jahirfiquitiva.libs.fabsmenu.TitleFAB
                     android:id="@+id/share_access"
                     style="@style/AppFAB"
-                    fab:fab_title="@string/common_share"
+                    fab:fab_title="@string/common_invite"
                     fab:backgroundTint="@color/colorMainFabShare"
                     fab:srcCompat="@drawable/ic_share"
                     fab:fabSize="mini"/>

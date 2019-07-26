@@ -113,4 +113,6 @@ class LoginFragment : BaseFragment() {
 
     override fun getLayoutResId() = R.layout.fragment_login
 
+    override fun showMenuInToolbar() = false
+
 }

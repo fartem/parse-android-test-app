@@ -23,10 +23,9 @@
     <string name="action_add_note">Add note</string>
     <string name="action_login">Login</string>
     <string name="action_sign_up">Sign up</string>
-    <string name="action_send">Send</string>
 
     <!-- Commons -->
-    <string name="common_share">Share</string>
+    <string name="common_invite">Invite</string>
     <string name="common_cancel">Cancel</string>
 
     <!-- Messages -->
@@ -34,8 +33,10 @@
     <string name="message_have_account">I have an account</string>
     <string name="message_sign_in">Please sign in to app and try again!</string>
     <string name="message_empty_notes_list">Notes list is empty!</string>
+    <string name="message_invite_sent">Invite sent!</string>
 
     <!-- Errors -->
-    <string name="error_sign_in">Sign in error! See more in logs.</string>
-    <string name="error_sign_up">Sign up error! See more in logs.</string>
+    <string name="error_sign_in">Sign in error! See more in logs</string>
+    <string name="error_sign_up">Sign up error! See more in logs</string>
+    <string name="error_invite_sent">Cannot find user with entered email!</string>
 </resources>
