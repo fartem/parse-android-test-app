@@ -41,11 +41,122 @@ private fun initializeParse() {
 
 ### 2.2 Requiring parameters
 
-| Name  | Description |
-| ------------- | ------------- |
+| Name | Description |
+| --- | --- |
 | APP_ID | Parse server app id |
 | SERVER_ADDRESS | Address of Parse server in your network |
 | CLIENT_KEY | Parse server client key |
+
+### 2.3 Parse API
+
+Parse API provided methods for managing entities in app.
+
+#### 2.3.1 Save all notes
+
+```kotlin
+fun saveAllNotes(notes: List<Note>, errorOnSave: (e: Exception) -> Unit) {
+    ...
+}
+```
+
+| Argument | Type | Description |
+| --- | --- | --- |
+| notes | List<Note> | Notes to save |
+| errorOnSave | Function | Error callback |
+
+#### 2.3.2 Restore all notes
+
+```kotlin
+fun restoreAllNotes(notes: List<Note>, afterRestore: (e: Exception?) -> Unit) {
+    ...
+}
+```
+
+| Argument | Type | Description |
+| --- | --- | --- |
+| notes | List<Note> | Notes in local database |
+| afterRestore | Function | Restore callback |
+
+### 2.4 Parse Auth API
+
+Parse Auth API provides methods for authorization with email or Facebook account.
+
+#### 2.4.1 Authorization check
+
+```kotlin
+fun isAuthorized() = ParseUser.getCurrentUser() != null
+```
+
+#### 2.4.2 Register with email
+
+```kotlin
+fun register(username: String, email: String, password: String,
+                 afterLogin: (e: Exception?) -> Unit) {
+     ...
+}
+```
+
+| Argument | Type | Description |
+| --- | --- | --- |
+| username | String | Name |
+| email | String | Email |
+| password | String| Password |
+| afterLogin | Function | Login callback |
+
+#### 2.4.3 Log in with email
+
+```kotlin
+fun logInWithEmail(email: String, password: String, afterLogin: (e: Exception?) -> Unit) {
+    ...                       
+}
+```
+
+| Argument | Type | Description |
+| --- | --- | --- |
+| email | String | Email |
+| password | String| Password |
+| afterLogin | Function | Login callback |
+
+#### 2.4.4 Log in with Facebook
+
+##### 2.4.4.1 Log in method
+
+```kotlin
+fun logInWithFacebook(fragment: Fragment, afterFacebookLogin: (success: Boolean) -> Unit) {
+    ...
+}
+```
+
+| Argument | Type | Description |
+| --- | --- | --- |
+| fragment | Fragment | Fragment (can be replaced to Activity) for user data request |
+| afterFacebookLogin | Function | Login callback |
+
+##### 2.4.4.1 Handling onActivityResult
+
+```kotlin
+fun handleOnActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    ...
+}
+```
+
+| Argument | Type | Description |
+| --- | --- | --- |
+| requestCode | Int | requestCode from request |
+| resultCode | Int | resultCode from request |
+| data | Intent | data from request |
+
+#### 2.4.5 Logout
+
+```kotlin
+fun logout(afterLogout: (e: Exception) -> Unit) {
+    ...
+}
+```
+
+| Argument | Type | Description |
+| --- | --- | --- |
+| afterLogout | Function | Logout callback |
 
 ## 3.Database
 

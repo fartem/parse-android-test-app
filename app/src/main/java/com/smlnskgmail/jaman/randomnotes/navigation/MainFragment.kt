@@ -9,9 +9,10 @@ import com.smlnskgmail.jaman.randomnotes.components.bottomsheets.addnote.AddNote
 import com.smlnskgmail.jaman.randomnotes.components.dialogs.invite.InviteCallback
 import com.smlnskgmail.jaman.randomnotes.components.dialogs.invite.InviteDialog
 import com.smlnskgmail.jaman.randomnotes.components.noteslist.NotesAdapter
-import com.smlnskgmail.jaman.randomnotes.components.ui.LongToast
+import com.smlnskgmail.jaman.randomnotes.components.support.LongToast
 import com.smlnskgmail.jaman.randomnotes.entities.Note
 import com.smlnskgmail.jaman.randomnotes.parse.ParseApi
+import com.smlnskgmail.jaman.randomnotes.parse.ParseAuth
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : BaseFragment(), AddNoteListener, InviteCallback {
@@ -111,8 +112,8 @@ class MainFragment : BaseFragment(), AddNoteListener, InviteCallback {
     override fun handleMenuItemClick(menuItemId: Int) {
         when (menuItemId) {
             R.id.menu_login_action -> {
-                if (ParseApi.isAuthorized()) {
-                    ParseApi.logout {
+                if (ParseAuth.isAuthorized()) {
+                    ParseAuth.logout {
                         validateLoginMenuIcon()
                     }
                 } else {
@@ -127,7 +128,7 @@ class MainFragment : BaseFragment(), AddNoteListener, InviteCallback {
     }
 
     private fun validateLoginMenuIcon() {
-        val icon = if (ParseApi.isAuthorized()) {
+        val icon = if (ParseAuth.isAuthorized()) {
             R.drawable.ic_logout
         } else {
             R.drawable.ic_login

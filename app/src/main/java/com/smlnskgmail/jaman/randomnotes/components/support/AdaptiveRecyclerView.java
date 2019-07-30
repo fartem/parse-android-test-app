@@ -1,4 +1,4 @@
-package com.smlnskgmail.jaman.randomnotes.components.ui;
+package com.smlnskgmail.jaman.randomnotes.components.support;
 
 import android.content.Context;
 import android.util.AttributeSet;

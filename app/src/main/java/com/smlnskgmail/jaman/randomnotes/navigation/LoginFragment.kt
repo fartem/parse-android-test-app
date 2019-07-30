@@ -1,22 +1,26 @@
 package com.smlnskgmail.jaman.randomnotes.navigation
 
 import android.content.Intent
-import android.util.Log
-import com.parse.facebook.ParseFacebookUtils
 import com.smlnskgmail.jaman.randomnotes.MainActivity
 import com.smlnskgmail.jaman.randomnotes.R
-import com.smlnskgmail.jaman.randomnotes.components.ui.LongToast
-import com.smlnskgmail.jaman.randomnotes.parse.ParseApi
+import com.smlnskgmail.jaman.randomnotes.components.support.LongToast
+import com.smlnskgmail.jaman.randomnotes.parse.ParseAuth
 import kotlinx.android.synthetic.main.fragment_login.*
-import java.lang.Exception
 
 class LoginFragment : BaseFragment() {
+
+    private lateinit var parseAuth: ParseAuth
 
     private var loginMode = true
 
     override fun onViewCreated() {
         super.onViewCreated()
+        initializeParseAuth()
         setupActions()
+    }
+
+    private fun initializeParseAuth() {
+        parseAuth = ParseAuth()
     }
 
     private fun setupActions() {
@@ -46,18 +50,18 @@ class LoginFragment : BaseFragment() {
         val username = email.text.toString()
         val password = password.text.toString()
         if (loginMode) {
-            ParseApi.register(username, password) {
+            parseAuth.logInWithEmail(username, password) {
                 verifyLogin(it)
             }
         } else {
-            ParseApi.loginWithEmail(username, username, password) {
+            parseAuth.register(username, username, password) {
                 verifyLogin(it)
             }
         }
     }
 
     private fun loginWithFacebook() {
-        ParseApi.loginWithFacebook(this) {
+        parseAuth.logInWithFacebook(this) {
             if (it) {
                 (activity as MainActivity).loginComplete()
             } else {
@@ -76,8 +80,7 @@ class LoginFragment : BaseFragment() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        ParseFacebookUtils.onActivityResult(requestCode, resultCode, data)
+        parseAuth.handleOnActivityResult(requestCode, resultCode, data)
     }
 
     override fun getTitleResId() = R.string.title_login_fragment
