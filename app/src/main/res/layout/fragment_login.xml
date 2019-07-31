@@ -34,13 +34,10 @@
                 android:inputType="textPassword"
                 android:hint="@string/hint_password"/>
 
-        <Button
+        <com.smlnskgmail.jaman.randomnotes.components.support.VectorDrawableButton
                 android:id="@+id/login_action"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/AppLoginButton"
                 android:layout_marginTop="@dimen/margin_large"
-                android:background="@color/colorAccent"
-                android:textColor="@color/colorWhite"
                 android:text="@string/action_login"/>
 
         <TextView
@@ -52,10 +49,9 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:text="@string/message_not_account"/>
 
-        <com.facebook.login.widget.LoginButton
+        <com.smlnskgmail.jaman.randomnotes.components.support.VectorDrawableButton
                 android:id="@+id/facebook_login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/AppFacebookLoginButton"
                 android:layout_marginTop="@dimen/margin_large"/>
 
     </LinearLayout>

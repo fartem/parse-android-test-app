@@ -61,8 +61,8 @@ fun saveAllNotes(notes: List<Note>, errorOnSave: (e: Exception) -> Unit) {
 
 | Argument | Type | Description |
 | --- | --- | --- |
-| notes | List<Note> | Notes to save |
-| errorOnSave | Function | Error callback |
+| notes | `List<Note>` | Notes to save |
+| errorOnSave | `Function` | Error callback |
 
 #### 2.3.2 Restore all notes
 
@@ -74,8 +74,8 @@ fun restoreAllNotes(notes: List<Note>, afterRestore: (e: Exception?) -> Unit) {
 
 | Argument | Type | Description |
 | --- | --- | --- |
-| notes | List<Note> | Notes in local database |
-| afterRestore | Function | Restore callback |
+| notes | `List<Note>` | Notes in local database |
+| afterRestore | `Function` | Restore callback |
 
 ### 2.4 Parse Auth API
 
@@ -98,10 +98,10 @@ fun register(username: String, email: String, password: String,
 
 | Argument | Type | Description |
 | --- | --- | --- |
-| username | String | Name |
-| email | String | Email |
-| password | String| Password |
-| afterLogin | Function | Login callback |
+| username | `String` | Name |
+| email | `String` | Email |
+| password | `String` | Password |
+| afterLogin | `Function` | Login callback |
 
 #### 2.4.3 Log in with email
 
@@ -113,9 +113,9 @@ fun logInWithEmail(email: String, password: String, afterLogin: (e: Exception?) 
 
 | Argument | Type | Description |
 | --- | --- | --- |
-| email | String | Email |
-| password | String| Password |
-| afterLogin | Function | Login callback |
+| email | `String` | Email |
+| password | `String` | Password |
+| afterLogin | `Function` | Login callback |
 
 #### 2.4.4 Log in with Facebook
 
@@ -129,8 +129,8 @@ fun logInWithFacebook(fragment: Fragment, afterFacebookLogin: (success: Boolean)
 
 | Argument | Type | Description |
 | --- | --- | --- |
-| fragment | Fragment | Fragment (can be replaced to Activity) for user data request |
-| afterFacebookLogin | Function | Login callback |
+| fragment | `Fragment` | Fragment (can be replaced to Activity) for user data request |
+| afterFacebookLogin | `Function` | Login callback |
 
 ##### 2.4.4.1 Handling onActivityResult
 
@@ -142,9 +142,9 @@ fun handleOnActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
 | Argument | Type | Description |
 | --- | --- | --- |
-| requestCode | Int | requestCode from request |
-| resultCode | Int | resultCode from request |
-| data | Intent | data from request |
+| requestCode | `Int` | requestCode from request |
+| resultCode | `Int` | resultCode from request |
+| data | `Intent` | data from request |
 
 #### 2.4.5 Logout
 
@@ -156,7 +156,7 @@ fun logout(afterLogout: (e: Exception) -> Unit) {
 
 | Argument | Type | Description |
 | --- | --- | --- |
-| afterLogout | Function | Logout callback |
+| afterLogout | `Function` | Logout callback |
 
 ## 3.Database
 
@@ -314,6 +314,7 @@ In `preferences.xml` replace this values to own analogues:
 ```
 
 ## 7. Screenshots
+
 <p align="center">
   <img src="media/screenshot_01.png" width="200" />
   <img src="media/screenshot_02.png" width="200" />
