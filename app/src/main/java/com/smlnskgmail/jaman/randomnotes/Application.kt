@@ -1,9 +1,9 @@
 package com.smlnskgmail.jaman.randomnotes
 
 import android.app.Application
-import com.parse.Parse
-import com.parse.facebook.ParseFacebookUtils
 import com.smlnskgmail.jaman.randomnotes.db.factory.DatabaseFactory
+import com.smlnskgmail.jaman.randomnotes.parse.api.ParseApi
+import com.smlnskgmail.jaman.randomnotes.parse.auth.ParseAuth
 
 class Application : Application() {
 
@@ -14,17 +14,12 @@ class Application : Application() {
     }
 
     private fun initializeParse() {
-        val applicationId = "APP_ID"
         val serverAddress = "SERVER_ADDRESS"
+        val applicationId = "APP_ID"
         val clientKey = "CLIENT_KEY"
 
-        val parseConfig = Parse.Configuration.Builder(this)
-            .applicationId(applicationId)
-            .clientKey(clientKey)
-            .server(serverAddress)
-            .build()
-        Parse.initialize(parseConfig)
-        ParseFacebookUtils.initialize(this)
+        ParseApi.initialize(this, serverAddress, applicationId, clientKey)
+        ParseAuth.initialize(this)
     }
 
     override fun onTerminate() {

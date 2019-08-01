@@ -1,10 +1,22 @@
-package com.smlnskgmail.jaman.randomnotes.parse
+package com.smlnskgmail.jaman.randomnotes.parse.api
 
+import android.content.Context
+import com.parse.Parse
 import com.parse.ParseObject
 import com.parse.ParseQuery
 import com.smlnskgmail.jaman.randomnotes.entities.Note
 
 object ParseApi {
+
+    fun initialize(context: Context, serverAddress: String, applicationId: String,
+                   clientKey: String) {
+        val parseConfig = Parse.Configuration.Builder(context)
+            .server(serverAddress)
+            .applicationId(applicationId)
+            .clientKey(clientKey)
+            .build()
+        Parse.initialize(parseConfig)
+    }
 
     fun saveAllNotes(notes: List<Note>, errorOnSave: (e: Exception) -> Unit) {
         val objectsToSave = mutableListOf<ParseObject>()

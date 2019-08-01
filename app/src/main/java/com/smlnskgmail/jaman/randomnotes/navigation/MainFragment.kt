@@ -11,11 +11,13 @@ import com.smlnskgmail.jaman.randomnotes.components.dialogs.invite.InviteDialog
 import com.smlnskgmail.jaman.randomnotes.components.noteslist.NotesAdapter
 import com.smlnskgmail.jaman.randomnotes.components.support.LongToast
 import com.smlnskgmail.jaman.randomnotes.entities.Note
-import com.smlnskgmail.jaman.randomnotes.parse.ParseApi
-import com.smlnskgmail.jaman.randomnotes.parse.ParseAuth
+import com.smlnskgmail.jaman.randomnotes.parse.api.ParseApi
+import com.smlnskgmail.jaman.randomnotes.parse.auth.ParseAuth
+import com.smlnskgmail.jaman.randomnotes.parse.auth.data.AuthCallback
+import com.smlnskgmail.jaman.randomnotes.parse.auth.data.AuthStatus
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class MainFragment : BaseFragment(), AddNoteListener, InviteCallback {
+class MainFragment : BaseFragment(), AddNoteListener, InviteCallback, AuthCallback {
 
     private val notes: MutableList<Note> = mutableListOf()
 
@@ -113,12 +115,18 @@ class MainFragment : BaseFragment(), AddNoteListener, InviteCallback {
         when (menuItemId) {
             R.id.menu_login_action -> {
                 if (ParseAuth.isAuthorized()) {
-                    ParseAuth.logout {
-                        validateLoginMenuIcon()
-                    }
+                    ParseAuth(this, this).logOut()
                 } else {
                     (activity as MainActivity).showLoginFragment()
                 }
+            }
+        }
+    }
+
+    override fun onAuthResult(authStatus: AuthStatus) {
+        when (authStatus) {
+            AuthStatus.LOGOUT_SUCCESS, AuthStatus.LOGOUT_ERROR -> {
+                validateLoginMenuIcon()
             }
         }
     }

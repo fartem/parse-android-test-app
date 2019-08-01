@@ -4,10 +4,12 @@ import android.content.Intent
 import com.smlnskgmail.jaman.randomnotes.MainActivity
 import com.smlnskgmail.jaman.randomnotes.R
 import com.smlnskgmail.jaman.randomnotes.components.support.LongToast
-import com.smlnskgmail.jaman.randomnotes.parse.ParseAuth
+import com.smlnskgmail.jaman.randomnotes.parse.auth.ParseAuth
+import com.smlnskgmail.jaman.randomnotes.parse.auth.data.AuthCallback
+import com.smlnskgmail.jaman.randomnotes.parse.auth.data.AuthStatus
 import kotlinx.android.synthetic.main.fragment_login.*
 
-class LoginFragment : BaseFragment() {
+class LoginFragment : BaseFragment(), AuthCallback {
 
     private lateinit var parseAuth: ParseAuth
 
@@ -20,7 +22,7 @@ class LoginFragment : BaseFragment() {
     }
 
     private fun initializeParseAuth() {
-        parseAuth = ParseAuth()
+        parseAuth = ParseAuth(this, this)
     }
 
     private fun setupActions() {
@@ -50,37 +52,41 @@ class LoginFragment : BaseFragment() {
         val username = email.text.toString()
         val password = password.text.toString()
         if (loginMode) {
-            parseAuth.logInWithEmail(username, password) {
-                verifyLogin(it)
-            }
+            parseAuth.logInWithEmail(username, password)
         } else {
-            parseAuth.register(username, username, password) {
-                verifyLogin(it)
-            }
+            parseAuth.registerWithEmail(username, username, password)
         }
     }
 
     private fun loginWithFacebook() {
-        parseAuth.logInWithFacebook(this) {
-            if (it) {
-                (activity as MainActivity).loginComplete()
-            } else {
-                (activity as MainActivity).loginError()
-            }
-        }
-    }
-
-    private fun verifyLogin(e: Exception?) {
-        if (e == null) {
-            (activity as MainActivity).loginComplete()
-        } else {
-            LongToast.show(context!!, getString(R.string.error_sign_up))
-            log(e)
-        }
+        parseAuth.logInWithFacebook()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         parseAuth.handleOnActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onAuthResult(authStatus: AuthStatus) {
+        when (authStatus) {
+            AuthStatus.EMAIL_REGISTER_SUCCESS -> {
+                (activity as MainActivity).loginComplete()
+            }
+            AuthStatus.EMAIL_REGISTER_ERROR -> {
+                LongToast.show(context!!, getString(R.string.error_sign_up))
+            }
+            AuthStatus.EMAIL_LOGIN_SUCCESS -> {
+                (activity as MainActivity).loginComplete()
+            }
+            AuthStatus.EMAIL_LOGIN_ERROR -> {
+                LongToast.show(context!!, getString(R.string.error_sign_in))
+            }
+            AuthStatus.FACEBOOK_SUCCESS -> {
+                (activity as MainActivity).loginComplete()
+            }
+            AuthStatus.FACEBOOK_ERROR -> {
+                (activity as MainActivity).loginError()
+            }
+        }
     }
 
     override fun getTitleResId() = R.string.title_login_fragment
