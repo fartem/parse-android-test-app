@@ -45,7 +45,7 @@ class MainFragment : BaseFragment(), AddNoteListener, InviteCallback, AuthCallba
                     if (it == null) {
                         refreshNotes()
                     } else {
-                        LongToast.show(context!!, getString(R.string.error_cannot_restore_notes))
+                        LongToast(context!!, getString(R.string.error_cannot_restore_notes)).show()
                     }
                 }
             }
@@ -53,7 +53,7 @@ class MainFragment : BaseFragment(), AddNoteListener, InviteCallback, AuthCallba
         sync_notes.setOnClickListener {
             actionWithNotes {
                 ParseApi.saveAllNotes(notes) {
-                    LongToast.show(context!!, getString(R.string.error_cannot_sync_notes))
+                    LongToast(context!!, getString(R.string.error_cannot_sync_notes)).show()
                 }
             }
         }
@@ -87,7 +87,7 @@ class MainFragment : BaseFragment(), AddNoteListener, InviteCallback, AuthCallba
             if (ParseUser.getCurrentUser() != null) {
                 action()
             } else {
-                LongToast.show(context!!, getString(R.string.message_sign_in))
+                LongToast(context!!, getString(R.string.message_sign_in)).show()
             }
         }
     }
@@ -105,9 +105,9 @@ class MainFragment : BaseFragment(), AddNoteListener, InviteCallback, AuthCallba
 
     override fun onInviteAction(success: Boolean) {
         if (success) {
-            LongToast.show(context!!, getString(R.string.message_invite_sent))
+            LongToast(context!!, getString(R.string.message_invite_sent)).show()
         } else {
-            LongToast.show(context!!, getString(R.string.error_invite_sent))
+            LongToast(context!!, getString(R.string.error_invite_sent)).show()
         }
     }
 
@@ -124,10 +124,9 @@ class MainFragment : BaseFragment(), AddNoteListener, InviteCallback, AuthCallba
     }
 
     override fun onAuthResult(authStatus: AuthStatus) {
-        when (authStatus) {
-            AuthStatus.LOGOUT_SUCCESS, AuthStatus.LOGOUT_ERROR -> {
-                validateLoginMenuIcon()
-            }
+        if (authStatus == AuthStatus.LOGOUT_SUCCESS
+            || authStatus == AuthStatus.LOGOUT_ERROR) {
+            validateLoginMenuIcon()
         }
     }
 
@@ -141,8 +140,7 @@ class MainFragment : BaseFragment(), AddNoteListener, InviteCallback, AuthCallba
         } else {
             R.drawable.ic_login
         }
-        getMenu().findItem(R.id.menu_login_action)!!
-            .icon = ContextCompat.getDrawable(context!!, icon)
+        getMenu().findItem(R.id.menu_login_action)!!.icon = ContextCompat.getDrawable(context!!, icon)
     }
 
     override fun getTitleResId() = R.string.title_main_fragment

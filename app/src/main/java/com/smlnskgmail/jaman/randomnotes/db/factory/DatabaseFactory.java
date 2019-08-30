@@ -1,11 +1,14 @@
 package com.smlnskgmail.jaman.randomnotes.db.factory;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.smlnskgmail.jaman.randomnotes.db.DatabaseHelper;
 
 public class DatabaseFactory {
 
+    @SuppressLint("StaticFieldLeak")
     private static DatabaseHelper databaseHelper;
 
     public static void set(Context context) {
@@ -15,7 +18,7 @@ public class DatabaseFactory {
         databaseHelper = new DatabaseHelper(context);
     }
 
-    public static DatabaseHelper get() {
+    public static DatabaseHelper getHelper() {
         if (databaseHelper == null) {
             throw new RuntimeException("Database must be initialized in *Application class");
         }

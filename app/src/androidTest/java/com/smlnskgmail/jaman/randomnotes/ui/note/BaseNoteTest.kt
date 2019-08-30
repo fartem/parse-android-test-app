@@ -14,7 +14,7 @@ abstract class BaseNoteTest {
     @JvmField
     var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java)
 
-    fun getActivity() = activityRule.activity
+    fun getActivity(): MainActivity = activityRule.activity
 
     @Test
     abstract fun runTest()

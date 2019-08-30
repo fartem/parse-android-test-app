@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_height="match_parent"
-             android:layout_width="match_parent"
-             android:padding="@dimen/padding_large"
-             android:background="@color/colorWhite">
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:padding="@dimen/padding_large"
+        android:background="@color/colorWhite">
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
 
         <TextView
                 android:layout_width="wrap_content"
@@ -25,14 +27,16 @@
                 android:id="@+id/email"
                 style="@style/AppEditText"
                 android:layout_marginTop="@dimen/margin_default"
-                android:hint="@string/hint_email"/>
+                android:hint="@string/hint_email"
+                tools:ignore="Autofill,TextFields"/>
 
         <EditText
                 android:id="@+id/password"
                 style="@style/AppEditText"
                 android:layout_marginTop="@dimen/margin_default"
                 android:inputType="textPassword"
-                android:hint="@string/hint_password"/>
+                android:hint="@string/hint_password"
+                tools:ignore="Autofill,TextFields"/>
 
         <com.smlnskgmail.jaman.randomnotes.components.support.VectorDrawableButton
                 android:id="@+id/login_action"

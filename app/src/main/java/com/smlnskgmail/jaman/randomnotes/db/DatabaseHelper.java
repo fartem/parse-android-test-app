@@ -3,6 +3,7 @@ package com.smlnskgmail.jaman.randomnotes.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
@@ -29,7 +30,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             Note.class
     };
 
-    private Context context;
+    private final Context context;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION_CURRENT);
@@ -67,7 +68,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         try {
             return getDao(Note.class).queryForAll();
         } catch (SQLException e) {
-            Log.e(LOG_TAG, "Failed get all notes\n", e);
+            Log.e(LOG_TAG, "Failed getHelper all notes\n", e);
         }
         return new ArrayList<>();
     }

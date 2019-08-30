@@ -3,6 +3,7 @@ package com.smlnskgmail.jaman.randomnotes.components.support;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,7 +12,7 @@ public class AdaptiveRecyclerView extends RecyclerView {
 
     private View emptyView;
 
-    private AdapterDataObserver dataObserver = new AdapterDataObserver() {
+    private final AdapterDataObserver dataObserver = new AdapterDataObserver() {
         private void validateList() {
             Adapter adapter = getAdapter();
             if (adapter != null && emptyView != null) {

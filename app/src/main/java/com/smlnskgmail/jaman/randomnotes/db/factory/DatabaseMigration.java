@@ -1,6 +1,7 @@
 package com.smlnskgmail.jaman.randomnotes.db.factory;
 
 import android.util.Log;
+
 import com.smlnskgmail.jaman.randomnotes.db.DatabaseHelper;
 import com.smlnskgmail.jaman.randomnotes.entities.Note;
 

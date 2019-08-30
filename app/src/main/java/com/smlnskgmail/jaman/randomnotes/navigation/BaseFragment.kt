@@ -1,7 +1,6 @@
 package com.smlnskgmail.jaman.randomnotes.navigation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 
@@ -36,15 +35,10 @@ abstract class BaseFragment : Fragment(), FragmentResume {
 
     abstract fun showToolbarMenu(): Boolean
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?)
-            = inflater.inflate(getLayoutResId(), container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?)
+            : View = inflater.inflate(getLayoutResId(), container, false)
 
     abstract fun getLayoutResId(): Int
-
-    fun log(e: Exception) {
-        Log.e(TAG, javaClass.name, e)
-    }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         if (showMenuInToolbar()) {

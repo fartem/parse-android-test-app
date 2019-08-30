@@ -20,11 +20,11 @@ class Note(
 ) : Entity() {
 
     fun save() {
-        DatabaseFactory.get().saveNote(this)
+        DatabaseFactory.getHelper().saveNote(this)
     }
 
     fun delete() {
-        DatabaseFactory.get().deleteNote(this)
+        DatabaseFactory.getHelper().deleteNote(this)
     }
 
     fun getParseObject(): ParseObject {
@@ -94,7 +94,7 @@ class Note(
         const val COLUMN_TITLE = "title"
         const val COLUMN_SUBTITLE = "subtitle"
 
-        fun getAllNotes() = DatabaseFactory.get().allNotes
+        fun getAllNotes(): MutableList<Note> = DatabaseFactory.getHelper().allNotes
 
     }
 

@@ -68,24 +68,12 @@ class LoginFragment : BaseFragment(), AuthCallback {
 
     override fun onAuthResult(authStatus: AuthStatus) {
         when (authStatus) {
-            AuthStatus.EMAIL_REGISTER_SUCCESS -> {
-                (activity as MainActivity).loginComplete()
-            }
-            AuthStatus.EMAIL_REGISTER_ERROR -> {
-                LongToast.show(context!!, getString(R.string.error_sign_up))
-            }
-            AuthStatus.EMAIL_LOGIN_SUCCESS -> {
-                (activity as MainActivity).loginComplete()
-            }
-            AuthStatus.EMAIL_LOGIN_ERROR -> {
-                LongToast.show(context!!, getString(R.string.error_sign_in))
-            }
-            AuthStatus.FACEBOOK_SUCCESS -> {
-                (activity as MainActivity).loginComplete()
-            }
-            AuthStatus.FACEBOOK_ERROR -> {
-                (activity as MainActivity).loginError()
-            }
+            AuthStatus.EMAIL_REGISTER_SUCCESS -> (activity as MainActivity).loginComplete()
+            AuthStatus.EMAIL_REGISTER_ERROR -> LongToast(context!!, getString(R.string.error_sign_up)).show()
+            AuthStatus.EMAIL_LOGIN_SUCCESS -> (activity as MainActivity).loginComplete()
+            AuthStatus.EMAIL_LOGIN_ERROR -> LongToast(context!!, getString(R.string.error_sign_in)).show()
+            AuthStatus.FACEBOOK_SUCCESS -> (activity as MainActivity).loginComplete()
+            else -> (activity as MainActivity).loginError()
         }
     }
 

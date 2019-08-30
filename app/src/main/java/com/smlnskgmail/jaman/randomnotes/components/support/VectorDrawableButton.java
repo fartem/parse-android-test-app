@@ -5,9 +5,11 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
+
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.widget.TextViewCompat;
+
 import com.smlnskgmail.jaman.randomnotes.R;
 
 public class VectorDrawableButton extends AppCompatButton {

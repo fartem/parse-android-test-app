@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:padding="@dimen/padding_default">
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_default">
 
     <EditText
             android:id="@+id/edit_title"
             style="@style/AppEditText"
-            android:hint="@string/hint_title"/>
+            android:hint="@string/hint_title"
+            tools:ignore="Autofill,TextFields"/>
 
     <EditText
             android:id="@+id/edit_subtitle"
             style="@style/AppEditText"
             android:layout_marginTop="@dimen/margin_default"
-            android:hint="@string/hint_subtitle"/>
+            android:hint="@string/hint_subtitle"
+            tools:ignore="Autofill,TextFields"/>
 
     <Button
             android:id="@+id/save_note"
