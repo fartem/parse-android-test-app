@@ -7,7 +7,7 @@ import kotlinx.android.synthetic.main.bottom_sheet_add_note.*
 
 class AddNoteBottomSheet : BaseBottomSheet() {
 
-    private var addNoteListener: AddNoteListener? = null
+    private var addNoteTarget: AddNoteTarget? = null
 
     override fun initialize() {
         edit_title.requestFocus()
@@ -16,13 +16,13 @@ class AddNoteBottomSheet : BaseBottomSheet() {
             note.title = edit_title.text.toString()
             note.subtitle = edit_subtitle.text.toString()
             note.save()
-            addNoteListener?.onAddNote(note)
+            addNoteTarget?.newNoteAdded(note)
             dismiss()
         }
     }
 
-    fun addNoteCreationCallback(addNoteListener: AddNoteListener) {
-        this.addNoteListener = addNoteListener
+    fun addNoteCreationCallback(addNoteTarget: AddNoteTarget) {
+        this.addNoteTarget = addNoteTarget
     }
 
     override fun getLayoutResId() = R.layout.bottom_sheet_add_note

@@ -1,25 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/padding_default"
-        android:orientation="horizontal"
-        android:foreground="?selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true">
+        style="@style/AppItemView">
 
     <ImageView
-            style="@style/AppImageView"
-            android:src="@drawable/ic_label"
-            android:tint="@color/colorSecondaryText"
+            style="@style/AppIconLabel"
             tools:ignore="ContentDescription" />
 
-    <LinearLayout android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_weight="1"
-                  android:layout_marginStart="@dimen/margin_default"
-                  android:orientation="vertical">
+    <LinearLayout style="@style/AppItemData">
 
         <TextView android:id="@+id/note_title"
                   style="@style/AppText"
@@ -35,11 +23,7 @@
 
     <ImageView
             android:id="@+id/delete_note"
-            style="@style/AppImageView"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/margin_default"
-            android:src="@drawable/ic_delete"
-            android:tint="@color/colorSecondaryText"
+            style="@style/AppIconTrash"
             tools:ignore="ContentDescription" />
 
 </LinearLayout>

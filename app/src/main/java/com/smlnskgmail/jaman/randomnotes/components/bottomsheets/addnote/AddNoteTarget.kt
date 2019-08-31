@@ -2,8 +2,8 @@ package com.smlnskgmail.jaman.randomnotes.components.bottomsheets.addnote
 
 import com.smlnskgmail.jaman.randomnotes.entities.Note
 
-interface AddNoteListener {
+interface AddNoteTarget {
 
-    fun onAddNote(note: Note)
+    fun newNoteAdded(note: Note)
 
 }

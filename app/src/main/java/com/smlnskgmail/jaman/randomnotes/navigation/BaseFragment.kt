@@ -6,12 +6,6 @@ import androidx.fragment.app.Fragment
 
 abstract class BaseFragment : Fragment(), FragmentResume {
 
-    companion object {
-
-        private const val TAG = "RN"
-
-    }
-
     private lateinit var menu: Menu
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

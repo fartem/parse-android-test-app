@@ -21,7 +21,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private static final String DATABASE_NAME = "rn.db";
 
-    private static final int DATABASE_VERSION_1 = 1;
     private static final int DATABASE_VERSION_2 = 2;
 
     private static final int DATABASE_VERSION_CURRENT = DATABASE_VERSION_2;

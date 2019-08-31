@@ -1,9 +1,10 @@
-package com.smlnskgmail.jaman.randomnotes.navigation
+package com.smlnskgmail.jaman.randomnotes.navigation.auth
 
 import android.content.Intent
 import com.smlnskgmail.jaman.randomnotes.MainActivity
 import com.smlnskgmail.jaman.randomnotes.R
 import com.smlnskgmail.jaman.randomnotes.components.support.LongToast
+import com.smlnskgmail.jaman.randomnotes.navigation.BaseFragment
 import com.smlnskgmail.jaman.randomnotes.parse.auth.ParseAuth
 import com.smlnskgmail.jaman.randomnotes.parse.auth.data.AuthCallback
 import com.smlnskgmail.jaman.randomnotes.parse.auth.data.AuthStatus

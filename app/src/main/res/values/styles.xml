@@ -55,4 +55,33 @@
         <item name="android:text">@string/com_facebook_loginview_log_in_button_continue</item>
     </style>
 
+    <style name="AppItemView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/padding_default</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="AppItemData">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginStart">@dimen/margin_default</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="AppIconLabel" parent="AppImageView">
+        <item name="android:src">@drawable/ic_label</item>
+        <item name="android:tint">@color/colorSecondaryText</item>
+    </style>
+
+    <style name="AppIconTrash" parent="AppImageView">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginStart">@dimen/margin_default</item>
+        <item name="android:src">@drawable/ic_delete</item>
+        <item name="android:tint">@color/colorSecondaryText</item>
+    </style>
+
 </resources>

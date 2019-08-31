@@ -1,23 +1,24 @@
-package com.smlnskgmail.jaman.randomnotes.navigation
+package com.smlnskgmail.jaman.randomnotes.navigation.main
 
 import androidx.core.content.ContextCompat
 import com.parse.ParseUser
 import com.smlnskgmail.jaman.randomnotes.MainActivity
 import com.smlnskgmail.jaman.randomnotes.R
 import com.smlnskgmail.jaman.randomnotes.components.bottomsheets.addnote.AddNoteBottomSheet
-import com.smlnskgmail.jaman.randomnotes.components.bottomsheets.addnote.AddNoteListener
+import com.smlnskgmail.jaman.randomnotes.components.bottomsheets.addnote.AddNoteTarget
 import com.smlnskgmail.jaman.randomnotes.components.dialogs.invite.InviteCallback
 import com.smlnskgmail.jaman.randomnotes.components.dialogs.invite.InviteDialog
 import com.smlnskgmail.jaman.randomnotes.components.noteslist.NotesAdapter
 import com.smlnskgmail.jaman.randomnotes.components.support.LongToast
 import com.smlnskgmail.jaman.randomnotes.entities.Note
+import com.smlnskgmail.jaman.randomnotes.navigation.BaseFragment
 import com.smlnskgmail.jaman.randomnotes.parse.api.ParseApi
 import com.smlnskgmail.jaman.randomnotes.parse.auth.ParseAuth
 import com.smlnskgmail.jaman.randomnotes.parse.auth.data.AuthCallback
 import com.smlnskgmail.jaman.randomnotes.parse.auth.data.AuthStatus
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class MainFragment : BaseFragment(), AddNoteListener, InviteCallback, AuthCallback {
+class MainFragment : BaseFragment(), AddNoteTarget, InviteCallback, AuthCallback {
 
     private val notes: MutableList<Note> = mutableListOf()
 
@@ -98,7 +99,7 @@ class MainFragment : BaseFragment(), AddNoteListener, InviteCallback, AuthCallba
         notes_list.adapter!!.notifyDataSetChanged()
     }
 
-    override fun onAddNote(note: Note) {
+    override fun newNoteAdded(note: Note) {
         notes.add(note)
         (notes_list.adapter as NotesAdapter).validateLastNote()
     }
