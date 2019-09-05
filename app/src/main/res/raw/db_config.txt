@@ -2,7 +2,7 @@
 # generated on 2019/07/16 11:17:46
 #
 # --table-start--
-dataClass=com.smlnskgmail.jaman.randomnotes.entities.Note
+dataClass=com.smlnskgmail.jaman.randomnotes.entities.note.Note
 tableName=note
 # --table-fields-start--
 # --field-start--

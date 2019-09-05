@@ -1,14 +1,14 @@
 package com.smlnskgmail.jaman.randomnotes.db.config;
 
 import com.j256.ormlite.android.apptools.OrmLiteConfigUtil;
-import com.smlnskgmail.jaman.randomnotes.db.DatabaseHelper;
+import com.smlnskgmail.jaman.randomnotes.db.HelperFactory;
 
 import java.io.File;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 
-public class DatabaseConfigurator extends OrmLiteConfigUtil {
+public class DatabaseConfigurator {
 
     public static void main(String[] args) throws Exception {
         // About: https://github.com/j256/ormlite-android/issues/79
@@ -19,7 +19,8 @@ public class DatabaseConfigurator extends OrmLiteConfigUtil {
         Method method = urlClass.getDeclaredMethod("addURL", new Class[]{URL.class});
         method.setAccessible(true);
         method.invoke(urlClassLoader, new Object[]{url});
-        writeConfigFile("db_config.txt", DatabaseHelper.DATABASE_CLASSES);
+
+        OrmLiteConfigUtil.writeConfigFile("db_config.txt", HelperFactory.dbClasses());
     }
 
 }

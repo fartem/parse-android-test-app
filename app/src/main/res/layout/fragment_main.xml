@@ -4,14 +4,13 @@
         xmlns:fab="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorWhite">
+        android:layout_height="match_parent">
 
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <com.smlnskgmail.jaman.randomnotes.components.support.AdaptiveRecyclerView
+        <com.smlnskgmail.jaman.randomnotes.components.views.AdaptiveRecyclerView
                 android:id="@+id/notes_list"
                 style="@style/AppRecyclerView"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>

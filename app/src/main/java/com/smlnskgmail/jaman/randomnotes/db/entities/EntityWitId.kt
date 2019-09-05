@@ -1,8 +1,8 @@
-package com.smlnskgmail.jaman.randomnotes.entities
+package com.smlnskgmail.jaman.randomnotes.db.entities
 
 import com.j256.ormlite.field.DatabaseField
 
-abstract class Entity(
+abstract class EntityWitId(
 
     @DatabaseField(generatedId = true)
     var id: Long = -1

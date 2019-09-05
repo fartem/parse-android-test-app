@@ -4,12 +4,12 @@ import android.content.Context
 import com.parse.Parse
 import com.parse.ParseObject
 import com.parse.ParseQuery
-import com.smlnskgmail.jaman.randomnotes.entities.Note
+import com.smlnskgmail.jaman.randomnotes.entities.note.Note
+import com.smlnskgmail.jaman.randomnotes.entities.note.support.NoteFactory
 
 object ParseApi {
 
-    fun initialize(context: Context, serverAddress: String, applicationId: String,
-                   clientKey: String) {
+    fun initialize(context: Context, serverAddress: String, applicationId: String, clientKey: String) {
         val parseConfig = Parse.Configuration.Builder(context)
             .server(serverAddress)
             .applicationId(applicationId)
@@ -31,7 +31,7 @@ object ParseApi {
                     }
                     if (note != null) {
                         note.parseObjectId = savedNote.objectId
-                        note.save()
+                        NoteFactory.save(note)
                     }
                 }
             } else {
@@ -53,7 +53,7 @@ object ParseApi {
                         note = Note()
                         note.restoreFromParseObject(parseData)
                         if (note.isNew()) {
-                            note.save()
+                            NoteFactory.save(note)
                         }
                     }
                 }

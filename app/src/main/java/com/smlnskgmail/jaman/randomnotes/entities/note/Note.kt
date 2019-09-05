@@ -1,8 +1,8 @@
-package com.smlnskgmail.jaman.randomnotes.entities
+package com.smlnskgmail.jaman.randomnotes.entities.note
 
 import com.j256.ormlite.field.DatabaseField
 import com.parse.ParseObject
-import com.smlnskgmail.jaman.randomnotes.db.factory.DatabaseFactory
+import com.smlnskgmail.jaman.randomnotes.db.entities.EntityWitId
 
 class Note(
 
@@ -17,15 +17,7 @@ class Note(
 
     var positionInList: Int = 0
 
-) : Entity() {
-
-    fun save() {
-        DatabaseFactory.getHelper().saveNote(this)
-    }
-
-    fun delete() {
-        DatabaseFactory.getHelper().deleteNote(this)
-    }
+) : EntityWitId() {
 
     fun getParseObject(): ParseObject {
         val parseObject = ParseObject(TABLE_NOTE)
@@ -93,8 +85,6 @@ class Note(
         const val COLUMN_ID = "note_id"
         const val COLUMN_TITLE = "title"
         const val COLUMN_SUBTITLE = "subtitle"
-
-        fun getAllNotes(): MutableList<Note> = DatabaseFactory.getHelper().allNotes
 
     }
 

@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.smlnskgmail.jaman.randomnotes.navigation.BaseFragment
 import com.smlnskgmail.jaman.randomnotes.navigation.FragmentResume
-import com.smlnskgmail.jaman.randomnotes.navigation.auth.LoginFragment
+import com.smlnskgmail.jaman.randomnotes.navigation.login.LoginFragment
 import com.smlnskgmail.jaman.randomnotes.navigation.main.MainFragment
 
 class MainActivity : AppCompatActivity() {

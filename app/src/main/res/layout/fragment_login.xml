@@ -3,8 +3,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:padding="@dimen/padding_large"
-        android:background="@color/colorWhite">
+        android:padding="@dimen/padding_large">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -38,7 +37,7 @@
                 android:hint="@string/hint_password"
                 tools:ignore="Autofill,TextFields"/>
 
-        <com.smlnskgmail.jaman.randomnotes.components.support.VectorDrawableButton
+        <com.smlnskgmail.jaman.randomnotes.components.views.VectorDrawableButton
                 android:id="@+id/login_action"
                 style="@style/AppLoginButton"
                 android:layout_marginTop="@dimen/margin_large"
@@ -53,7 +52,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:text="@string/message_not_account"/>
 
-        <com.smlnskgmail.jaman.randomnotes.components.support.VectorDrawableButton
+        <com.smlnskgmail.jaman.randomnotes.components.views.VectorDrawableButton
                 android:id="@+id/facebook_login"
                 style="@style/AppFacebookLoginButton"
                 android:layout_marginTop="@dimen/margin_large"/>

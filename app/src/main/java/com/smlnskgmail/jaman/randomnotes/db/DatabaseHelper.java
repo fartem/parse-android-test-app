@@ -8,14 +8,13 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.smlnskgmail.jaman.randomnotes.R;
-import com.smlnskgmail.jaman.randomnotes.db.factory.DatabaseMigration;
-import com.smlnskgmail.jaman.randomnotes.entities.Note;
+import com.smlnskgmail.jaman.randomnotes.db.migration.DatabaseMigration;
+import com.smlnskgmail.jaman.randomnotes.entities.note.Note;
+import com.smlnskgmail.jaman.randomnotes.entities.note.support.NoteDefaultData;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
+class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private static final String LOG_TAG = "RNDB";
 
@@ -25,14 +24,14 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private static final int DATABASE_VERSION_CURRENT = DATABASE_VERSION_2;
 
-    public static final Class[] DATABASE_CLASSES = new Class[]{
+    static final Class[] DATABASE_CLASSES = new Class[]{
             Note.class
     };
 
     private final Context context;
 
-    public DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION_CURRENT);
+    DatabaseHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION_CURRENT, R.raw.db_config);
         this.context = context;
     }
 
@@ -41,50 +40,22 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         for (Class clazz: DATABASE_CLASSES) {
             try {
                 TableUtils.createTable(connectionSource, clazz);
-                createDefaultNote();
+                createDefaultData();
             } catch (SQLException e) {
                 Log.e(LOG_TAG, "Failed create database tables", e);
             }
         }
     }
 
-    private void createDefaultNote() {
-        Note note = new Note();
-        note.setTitle(context.getString(R.string.default_note_title));
-        note.setSubtitle(context.getString(R.string.default_note_subtitle));
-        note.save();
+    private void createDefaultData() {
+        new NoteDefaultData(context).create();
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource,
-                          int oldVersion, int newVersion) {
+    public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion,
+                          int newVersion) {
         if (oldVersion < DATABASE_VERSION_2) {
             DatabaseMigration.addSyncStatusToNotes(this);
-        }
-    }
-
-    public List<Note> getAllNotes() {
-        try {
-            return getDao(Note.class).queryForAll();
-        } catch (SQLException e) {
-            Log.e(LOG_TAG, "Failed getHelper all notes\n", e);
-        }
-        return new ArrayList<>();
-    }
-
-    public void saveNote(Note note) {
-        try {
-            getDao(Note.class).createOrUpdate(note);
-        } catch (SQLException e) {
-            Log.e(LOG_TAG, "Failed save note:\n" + note.toString(), e);
-        }
-    }
-
-    public void deleteNote(Note note) {
-        try {
-            getDao(Note.class).delete(note);
-        } catch (SQLException e) {
-            Log.e(LOG_TAG, "Failed delete note:\n" + note.toString(), e);
         }
     }
 

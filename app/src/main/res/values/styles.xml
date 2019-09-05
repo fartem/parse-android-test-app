@@ -8,6 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTextPrimary" parent="AppText">
+        <item name="android:textColor">@color/colorPrimaryText</item>
+    </style>
+
+    <style name="AppTextSecondary" parent="AppText">
+        <item name="android:textColor">@color/colorSecondaryText</item>
+    </style>
+
     <style name="AppText">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>

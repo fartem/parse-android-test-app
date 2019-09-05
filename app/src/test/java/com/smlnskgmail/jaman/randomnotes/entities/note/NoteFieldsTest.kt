@@ -1,8 +1,7 @@
 package com.smlnskgmail.jaman.randomnotes.entities.note
 
-import com.smlnskgmail.jaman.randomnotes.entities.Note
-import junit.framework.Assert.assertEquals
-import junit.framework.Assert.assertNull
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Test
 
 class NoteFieldsTest {

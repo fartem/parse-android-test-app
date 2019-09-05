@@ -2,7 +2,8 @@ package com.smlnskgmail.jaman.randomnotes.components.noteslist
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.smlnskgmail.jaman.randomnotes.entities.Note
+import com.smlnskgmail.jaman.randomnotes.entities.note.Note
+import com.smlnskgmail.jaman.randomnotes.entities.note.support.NoteFactory
 import kotlinx.android.synthetic.main.item_note.view.*
 
 class NotesHolder(itemView: View, private val noteDeleteListener: NoteDeleteListener)
@@ -12,7 +13,7 @@ class NotesHolder(itemView: View, private val noteDeleteListener: NoteDeleteList
         itemView.note_title.text = note.title
         itemView.note_subtitle.text = note.subtitle
         itemView.delete_note.setOnClickListener {
-            note.delete()
+            NoteFactory.delete(note)
             noteDeleteListener.onNoteDelete(note.positionInList)
         }
     }

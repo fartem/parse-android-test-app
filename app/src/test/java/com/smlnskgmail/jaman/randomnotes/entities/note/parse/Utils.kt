@@ -1,6 +1,6 @@
 package com.smlnskgmail.jaman.randomnotes.entities.note.parse
 
-import com.smlnskgmail.jaman.randomnotes.entities.Note
+import com.smlnskgmail.jaman.randomnotes.entities.note.Note
 
 object Utils {
 

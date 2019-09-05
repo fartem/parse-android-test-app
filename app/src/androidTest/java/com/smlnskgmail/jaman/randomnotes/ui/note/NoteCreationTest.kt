@@ -7,14 +7,14 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.smlnskgmail.jaman.randomnotes.R
 import com.smlnskgmail.jaman.randomnotes.components.noteslist.NotesHolder
-import com.smlnskgmail.jaman.randomnotes.entities.Note
+import com.smlnskgmail.jaman.randomnotes.entities.note.support.NoteFactory
 import com.smlnskgmail.jaman.randomnotes.ui.utils.ChildClick
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class NoteCreationTest : BaseNoteTest() {
 
-    private var testNotePosition: Int = 0
+    private var notePosition: Int = 0
 
     @Test
     override fun runTest() {
@@ -31,10 +31,10 @@ class NoteCreationTest : BaseNoteTest() {
         onView(withText(getActivity().getString(R.string.action_add_note))).perform(click())
         delay()
 
-        onView(withId(R.id.edit_title)).perform(typeText(getTestNote().title), closeSoftKeyboard())
+        onView(withId(R.id.edit_title)).perform(typeText(note().title), closeSoftKeyboard())
         delay()
 
-        onView(withId(R.id.edit_subtitle)).perform(typeText(getTestNote().subtitle), closeSoftKeyboard())
+        onView(withId(R.id.edit_subtitle)).perform(typeText(note().subtitle), closeSoftKeyboard())
         delay()
 
         onView(withId(R.id.save_note)).perform(click())
@@ -42,22 +42,22 @@ class NoteCreationTest : BaseNoteTest() {
     }
 
     private fun setIndex() {
-        testNotePosition = Note.getAllNotes().indexOfLast {
-            it.contentEquals(getTestNote())
+        notePosition = NoteFactory.all().indexOfLast {
+            it.contentEquals(note())
         }
-        assertTrue(testNotePosition != -1)
+        assertTrue(notePosition != -1)
     }
 
     private fun deleteNote() {
         onView(withId(R.id.notes_list)).perform(RecyclerViewActions
-            .actionOnItemAtPosition<NotesHolder>(testNotePosition, ChildClick.withChildId(R.id.delete_note)))
+            .actionOnItemAtPosition<NotesHolder>(notePosition, ChildClick.withChildId(R.id.delete_note)))
     }
 
     private fun checkNoteInDB() {
-        val testNote = getTestNote()
+        val note = note()
 
-        assertTrue(Note.getAllNotes().none {
-            it.contentEquals(testNote)
+        assertTrue(NoteFactory.all().none {
+            it.contentEquals(note)
         })
     }
 

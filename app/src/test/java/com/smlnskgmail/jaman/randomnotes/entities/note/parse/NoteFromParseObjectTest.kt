@@ -1,7 +1,7 @@
 package com.smlnskgmail.jaman.randomnotes.entities.note.parse
 
 import com.parse.ParseObject
-import com.smlnskgmail.jaman.randomnotes.entities.Note
+import com.smlnskgmail.jaman.randomnotes.entities.note.Note
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull
 import org.junit.Assert.assertNotEquals

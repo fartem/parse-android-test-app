@@ -9,8 +9,9 @@ import com.smlnskgmail.jaman.randomnotes.components.bottomsheets.addnote.AddNote
 import com.smlnskgmail.jaman.randomnotes.components.dialogs.invite.InviteCallback
 import com.smlnskgmail.jaman.randomnotes.components.dialogs.invite.InviteDialog
 import com.smlnskgmail.jaman.randomnotes.components.noteslist.NotesAdapter
-import com.smlnskgmail.jaman.randomnotes.components.support.LongToast
-import com.smlnskgmail.jaman.randomnotes.entities.Note
+import com.smlnskgmail.jaman.randomnotes.components.views.LongToast
+import com.smlnskgmail.jaman.randomnotes.entities.note.Note
+import com.smlnskgmail.jaman.randomnotes.entities.note.support.NoteFactory
 import com.smlnskgmail.jaman.randomnotes.navigation.BaseFragment
 import com.smlnskgmail.jaman.randomnotes.parse.api.ParseApi
 import com.smlnskgmail.jaman.randomnotes.parse.auth.ParseAuth
@@ -29,7 +30,7 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteCallback, AuthCallback
     }
 
     private fun addNotesToList() {
-        notes.addAll(Note.getAllNotes())
+        notes.addAll(NoteFactory.all())
         notes_list.setEmptyView(notes_list_empty_view)
         notes_list.adapter = NotesAdapter(notes)
     }
@@ -95,7 +96,7 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteCallback, AuthCallback
 
     private fun refreshNotes() {
         notes.clear()
-        notes.addAll(Note.getAllNotes())
+        notes.addAll(NoteFactory.all())
         notes_list.adapter!!.notifyDataSetChanged()
     }
 
