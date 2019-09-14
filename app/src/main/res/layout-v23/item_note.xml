@@ -9,13 +9,15 @@
 
     <LinearLayout style="@style/AppItemData">
 
-        <TextView android:id="@+id/note_title"
-                  style="@style/AppTextPrimary"
-                  tools:text="Title"/>
+        <TextView
+                android:id="@+id/note_title"
+                style="@style/AppTextPrimary"
+                tools:text="Title"/>
 
-        <TextView android:id="@+id/note_subtitle"
-                  style="@style/AppTextSecondary"
-                  tools:text="Subtitle"/>
+        <TextView
+                android:id="@+id/note_subtitle"
+                style="@style/AppTextSecondary"
+                tools:text="Subtitle"/>
 
     </LinearLayout>
 
