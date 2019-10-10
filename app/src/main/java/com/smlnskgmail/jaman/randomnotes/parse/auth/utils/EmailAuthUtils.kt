@@ -4,8 +4,7 @@ import com.parse.ParseUser
 
 class EmailAuthUtils {
 
-    fun register(username: String, email: String, password: String,
-                 afterLogin: (e: Exception?) -> Unit) {
+    fun register(username: String, email: String, password: String, afterLogin: (e: Exception?) -> Unit) {
         val parseUser = ParseUser()
         parseUser.username = username
         parseUser.email = email

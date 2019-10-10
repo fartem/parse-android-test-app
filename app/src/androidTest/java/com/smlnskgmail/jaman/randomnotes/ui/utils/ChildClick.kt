@@ -18,8 +18,7 @@ object ChildClick {
             }
 
             override fun perform(uiController: UiController, view: View) {
-                val v = view.findViewById<View>(id)
-                v.performClick()
+                view.findViewById<View>(id).performClick()
             }
         }
     }

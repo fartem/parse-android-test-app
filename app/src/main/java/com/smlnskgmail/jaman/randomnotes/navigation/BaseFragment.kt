@@ -34,20 +34,20 @@ abstract class BaseFragment : Fragment(), FragmentResume {
 
     abstract fun getLayoutResId(): Int
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         if (showMenuInToolbar()) {
-            inflater!!.inflate(getToolbarMenuResId(), menu)
+            inflater.inflate(getToolbarMenuResId(), menu)
         } else {
-            menu?.clear()
+            menu.clear()
         }
-        this.menu = menu!!
+        this.menu = menu
         onPostMenuInflated()
     }
 
     open fun onPostMenuInflated() {}
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        handleMenuItemClick(item!!.itemId)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        handleMenuItemClick(item.itemId)
         return super.onOptionsItemSelected(item)
     }
 

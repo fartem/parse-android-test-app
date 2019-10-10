@@ -8,6 +8,7 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 
+@SuppressWarnings("ALL")
 public class DatabaseConfigurator {
 
     public static void main(String[] args) throws Exception {

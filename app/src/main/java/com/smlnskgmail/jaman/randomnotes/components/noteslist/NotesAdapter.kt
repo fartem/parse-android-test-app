@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.smlnskgmail.jaman.randomnotes.R
 import com.smlnskgmail.jaman.randomnotes.entities.note.Note
 
-class NotesAdapter(private val notes: MutableList<Note>) : RecyclerView.Adapter<NotesHolder>(),
-    NoteDeleteListener {
+class NotesAdapter(private val notes: MutableList<Note>)
+    : RecyclerView.Adapter<NotesHolder>(), NoteDeleteListener {
 
     override fun onBindViewHolder(holder: NotesHolder, position: Int) {
         val note = notes[position]

@@ -19,6 +19,16 @@ class Note(
 
 ) : EntityWitId() {
 
+    companion object {
+
+        const val TABLE_NOTE = "note"
+
+        const val COLUMN_ID = "note_id"
+        const val COLUMN_TITLE = "title"
+        const val COLUMN_SUBTITLE = "subtitle"
+
+    }
+
     fun getParseObject(): ParseObject {
         val parseObject = ParseObject(TABLE_NOTE)
         parseObject.objectId = parseObjectId
@@ -76,16 +86,6 @@ class Note(
         result = 31 * result + (subtitle?.hashCode() ?: 0)
         result = 31 * result + positionInList
         return result
-    }
-
-    companion object {
-
-        const val TABLE_NOTE = "note"
-
-        const val COLUMN_ID = "note_id"
-        const val COLUMN_TITLE = "title"
-        const val COLUMN_SUBTITLE = "subtitle"
-
     }
 
 }

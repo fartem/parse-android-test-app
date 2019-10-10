@@ -11,8 +11,7 @@ abstract class BaseDialog(context: Context) : Dialog(context) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutResId())
         initializeDialog()
-        window!!.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT)
+        window!!.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     }
 
     abstract fun initializeDialog()
