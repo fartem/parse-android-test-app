@@ -1,10 +1,17 @@
-# parse-android-test-app
+<img src="media/ic_app.png" height="100px" />
+
+![Open issues](https://img.shields.io/github/issues-raw/fartem/parse-android-test-app.svg?color=ff534a)
+![Last commit](https://img.shields.io/github/last-commit/fartem/parse-android-test-app.svg?color=51539c)
+![Repo size](https://img.shields.io/github/repo-size/fartem/parse-android-test-app.svg?color=02778b)
+[![License](https://img.shields.io/github/license/fartem/parse-android-test-app.svg?color=7ea4b0)](https://github.com/fartem/parse-android-test-app/blob/master/LICENSE)
+
+## About
 
 Test Android application for [Parse test server](https://github.com/fartem/parse-test-server).
 
-## 1. Information
+## Information
 
-### 1.1. Features
+### Features
 
 __Fully working communication with Parse test server:__
 
@@ -14,14 +21,14 @@ __Fully working communication with Parse test server:__
 - sign up from application with email address or Facebook account;
 - sign in to server with email or Facebook.
 
-### 1.2. Not handling exceptions
+### Not handling exceptions
 
 - Internet connection unavailable status;
 - Parse Server connection unavailable status.
 
-## 2. Parse initialization
+## Parse initialization
 
-### 2.1. Application class
+### Application class
 
 ```kotlin
 private fun initializeParse() {
@@ -34,7 +41,7 @@ private fun initializeParse() {
 }
 ```
 
-### 2.2. ParseApi class
+### ParseApi class
 
 ```kotlin
 fun initialize(context: Context, serverAddress: String, applicationId: String,
@@ -48,7 +55,7 @@ fun initialize(context: Context, serverAddress: String, applicationId: String,
 }
 ```
 
-### 2.3. Requiring parameters
+### Requiring parameters
 
 | Name | Description |
 | --- | --- |
@@ -56,11 +63,11 @@ fun initialize(context: Context, serverAddress: String, applicationId: String,
 | APP_ID | Parse server app id |
 | CLIENT_KEY | Parse server client key |
 
-### 2.4. Parse API
+### Parse API
 
 Parse API provided methods for managing entities in app.
 
-#### 2.4.1. Save all notes
+#### Save all notes
 
 ```kotlin
 fun saveAllNotes(notes: List<Note>, errorOnSave: (e: Exception) -> Unit) {
@@ -73,7 +80,7 @@ fun saveAllNotes(notes: List<Note>, errorOnSave: (e: Exception) -> Unit) {
 | notes | `List<Note>` | Notes to save |
 | errorOnSave | `Function` | Error callback |
 
-#### 2.4.2. Restore all notes
+#### Restore all notes
 
 ```kotlin
 fun restoreAllNotes(notes: List<Note>, afterRestore: (e: Exception?) -> Unit) {
@@ -86,17 +93,17 @@ fun restoreAllNotes(notes: List<Note>, afterRestore: (e: Exception?) -> Unit) {
 | notes | `List<Note>` | Notes in local database |
 | afterRestore | `Function` | Restore callback |
 
-### 2.5. Parse Auth API
+### Parse Auth API
 
 Parse Auth API provides methods for authorization with email or Facebook account.
 
-#### 2.5.1. Authorization check
+#### Authorization check
 
 ```kotlin
 fun isAuthorized() = ParseUser.getCurrentUser() != null
 ```
 
-#### 2.5.2. Register with email
+#### Register with email
 
 ```kotlin
 fun register(username: String, email: String, password: String,
@@ -112,7 +119,7 @@ fun register(username: String, email: String, password: String,
 | password | `String` | Password |
 | afterLogin | `Function` | Login callback |
 
-#### 2.5.3. Log in with email
+#### Log in with email
 
 ```kotlin
 fun logInWithEmail(email: String, password: String, afterLogin: (e: Exception?) -> Unit) {
@@ -126,9 +133,9 @@ fun logInWithEmail(email: String, password: String, afterLogin: (e: Exception?) 
 | password | `String` | Password |
 | afterLogin | `Function` | Login callback |
 
-#### 2.5.4. Log in with Facebook
+#### Log in with Facebook
 
-##### 2.5.4.1. Log in method
+##### Log in method
 
 ```kotlin
 fun logInWithFacebook(fragment: Fragment, afterFacebookLogin: (success: Boolean) -> Unit) {
@@ -141,7 +148,7 @@ fun logInWithFacebook(fragment: Fragment, afterFacebookLogin: (success: Boolean)
 | fragment | `Fragment` | Fragment (can be replaced to Activity) for user data request |
 | afterFacebookLogin | `Function` | Login callback |
 
-##### 2.5.4.1. Handling onActivityResult
+##### Handling onActivityResult
 
 ```kotlin
 fun handleOnActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -155,7 +162,7 @@ fun handleOnActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 | resultCode | `Int` | resultCode from request |
 | data | `Intent` | data from request |
 
-#### 2.5.5. Logout
+#### Logout
 
 ```kotlin
 fun logout(afterLogout: (e: Exception) -> Unit) {
@@ -167,15 +174,15 @@ fun logout(afterLogout: (e: Exception) -> Unit) {
 | --- | --- | --- |
 | afterLogout | `Function` | Logout callback |
 
-## 3. Database
+## Database
 
 ORMLite. More on [official site](http://ormlite.com/).
 
-## 4. Data structure
+## Data structure
 
 This section contains full list of entities using in app.
 
-### 4.1. Entity
+### Entity
 
 Base class for all database entities.
 
@@ -188,7 +195,7 @@ abstract class Entity(
 )
 ```
 
-### 4.2. Note
+### Note
 
 ```kotlin
 class Note(
@@ -211,7 +218,7 @@ class Note(
 }
 ```
 
-### 4.2.1. Save note
+### Save note
 
 __From Note class method:__
 ```kotlin
@@ -227,7 +234,7 @@ __Example:__
     
 ```
 
-### 4.2.2. Delete note
+### Delete note
 
 __From Note class method:__
 ```kotlin
@@ -242,7 +249,7 @@ __Example:__
     note.delete()
 ```
 
-### 4.2.3. Get all notes from database
+### Get all notes from database
 
 __From Note class method:__
 ```kotlin
@@ -254,7 +261,7 @@ __Example:__
     val notes = Note.getAllNotes()
 ```
 
-### 4.2.4. Delete all notes from database
+### Delete all notes from database
 
 __From Note class method:__
 ```kotlin
@@ -268,7 +275,7 @@ __Example:__
     Note.deleteAllNotes()
 ```
 
-### 4.2.5. Get ParseObject for note
+### Get ParseObject for note
 
 __From Note class method:__
 ```kotlin
@@ -282,7 +289,7 @@ __Example:__
 val parseNote = newNote.getParseObject(false, authUser)
 ```
 
-### 4.2.6. Initialize note from ParseObject
+### Initialize note from ParseObject
 
 __From Note class method:__
 ```kotlin
@@ -300,14 +307,14 @@ for (obj in parseObjects) {
 }
 ```
 
-## 5. Facebook install
+## Facebook install
 
-### 5.1. Resources
+### Resources
 
 - [Official Guide](https://developers.facebook.com/docs/facebook-login/android)
 - [Get hash with openssl in Windows](https://github.com/magus/react-native-facebook-login/issues/297#issuecomment-433816732)
 
-### 5.2. Usage
+### Usage
 
 In `preferences.xml` replace this values to own analogues:
 
@@ -316,13 +323,13 @@ In `preferences.xml` replace this values to own analogues:
 <string name="fb_login_protocol_scheme">fb[APP_ID]</string>
 ```
 
-## 6. Permissions
+## Permissions
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET"/>
 ```
 
-## 7. Screenshots
+## Screenshots
 
 <p align="center">
   <img src="media/screenshot_01.png" width="200" />
