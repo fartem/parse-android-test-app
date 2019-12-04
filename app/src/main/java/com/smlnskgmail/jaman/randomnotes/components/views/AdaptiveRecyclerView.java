@@ -50,7 +50,11 @@ public class AdaptiveRecyclerView extends RecyclerView {
         super(context, attrs);
     }
 
-    public AdaptiveRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyle) {
+    public AdaptiveRecyclerView(
+            @NonNull Context context,
+            @Nullable AttributeSet attrs,
+            int defStyle
+    ) {
         super(context, attrs, defStyle);
     }
 

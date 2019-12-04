@@ -40,7 +40,10 @@ public class VectorDrawableButton extends AppCompatButton {
             return;
         }
 
-        TypedArray attributeArray = getContext().obtainStyledAttributes(attrs, R.styleable.VectorDrawableButton);
+        TypedArray attributeArray = getContext().obtainStyledAttributes(
+                attrs,
+                R.styleable.VectorDrawableButton
+        );
 
         Drawable drawableStart = null;
         Drawable drawableEnd = null;

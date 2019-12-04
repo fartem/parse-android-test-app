@@ -1,4 +1,4 @@
-package com.smlnskgmail.jaman.randomnotes.navigation.main
+package com.smlnskgmail.jaman.randomnotes.navigation
 
 import androidx.core.content.ContextCompat
 import com.parse.ParseUser
@@ -10,16 +10,11 @@ import com.smlnskgmail.jaman.randomnotes.components.dialogs.invite.InviteCallbac
 import com.smlnskgmail.jaman.randomnotes.components.dialogs.invite.InviteDialog
 import com.smlnskgmail.jaman.randomnotes.components.noteslist.NotesAdapter
 import com.smlnskgmail.jaman.randomnotes.components.views.LongToast
-import com.smlnskgmail.jaman.randomnotes.entities.note.Note
-import com.smlnskgmail.jaman.randomnotes.entities.note.support.NoteFactory
-import com.smlnskgmail.jaman.randomnotes.navigation.BaseFragment
-import com.smlnskgmail.jaman.randomnotes.parse.api.ParseApi
-import com.smlnskgmail.jaman.randomnotes.parse.auth.ParseAuth
-import com.smlnskgmail.jaman.randomnotes.parse.auth.data.AuthCallback
-import com.smlnskgmail.jaman.randomnotes.parse.auth.data.AuthStatus
+import com.smlnskgmail.jaman.randomnotes.repository.DataRepositoryAccessor
+import com.smlnskgmail.jaman.randomnotes.repository.entities.Note
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class MainFragment : BaseFragment(), AddNoteTarget, InviteCallback, AuthCallback {
+class MainFragment : BaseFragment(), AddNoteTarget, InviteCallback {
 
     private val notes: MutableList<Note> = mutableListOf()
 
@@ -30,7 +25,7 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteCallback, AuthCallback
     }
 
     private fun addNotesToList() {
-        notes.addAll(NoteFactory.all())
+        notes.addAll(DataRepositoryAccessor.get().allNotes())
         notes_list.setEmptyView(notes_list_empty_view)
         notes_list.adapter = NotesAdapter(notes)
     }
@@ -43,8 +38,9 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteCallback, AuthCallback
         }
         restore_notes.setOnClickListener {
             actionWithNotes {
-                ParseApi.restoreAllNotes(notes) {
-                    if (it == null) {
+                DataRepositoryAccessor.get().restoreAllNotes(notes) { newNotes, e ->
+                    if (e == null) {
+                        DataRepositoryAccessor.get().saveNotes(newNotes)
                         refreshNotes()
                     } else {
                         LongToast(context!!, getString(R.string.error_cannot_restore_notes)).show()
@@ -54,7 +50,7 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteCallback, AuthCallback
         }
         sync_notes.setOnClickListener {
             actionWithNotes {
-                ParseApi.saveAllNotes(notes) {
+                DataRepositoryAccessor.get().syncNotes(notes) {
                     LongToast(context!!, getString(R.string.error_cannot_sync_notes)).show()
                 }
             }
@@ -96,7 +92,7 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteCallback, AuthCallback
 
     private fun refreshNotes() {
         notes.clear()
-        notes.addAll(NoteFactory.all())
+        notes.addAll(DataRepositoryAccessor.get().allNotes())
         notes_list.adapter!!.notifyDataSetChanged()
     }
 
@@ -116,19 +112,14 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteCallback, AuthCallback
     override fun handleMenuItemClick(menuItemId: Int) {
         when (menuItemId) {
             R.id.menu_login_action -> {
-                if (ParseAuth.isAuthorized()) {
-                    ParseAuth(this, this).logOut()
+                if (DataRepositoryAccessor.get().isAuthorized()) {
+                    DataRepositoryAccessor.get().logOut {
+                        validateLoginMenuIcon()
+                    }
                 } else {
                     (activity as MainActivity).showLoginFragment()
                 }
             }
-        }
-    }
-
-    override fun onAuthResult(authStatus: AuthStatus) {
-        if (authStatus == AuthStatus.LOGOUT_SUCCESS
-            || authStatus == AuthStatus.LOGOUT_ERROR) {
-            validateLoginMenuIcon()
         }
     }
 
@@ -137,7 +128,7 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteCallback, AuthCallback
     }
 
     private fun validateLoginMenuIcon() {
-        val icon = if (ParseAuth.isAuthorized()) {
+        val icon = if (DataRepositoryAccessor.get().isAuthorized()) {
             R.drawable.ic_logout
         } else {
             R.drawable.ic_login

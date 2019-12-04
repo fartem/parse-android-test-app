@@ -1,6 +1,6 @@
 package com.smlnskgmail.jaman.randomnotes.components.bottomsheets.addnote
 
-import com.smlnskgmail.jaman.randomnotes.entities.note.Note
+import com.smlnskgmail.jaman.randomnotes.repository.entities.Note
 
 interface AddNoteTarget {
 

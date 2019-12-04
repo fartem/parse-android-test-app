@@ -36,8 +36,6 @@
     <string name="message_invite_sent">Invite sent!</string>
 
     <!-- Errors -->
-    <string name="error_sign_in">Sign in error! See more in logs</string>
-    <string name="error_sign_up">Sign up error! See more in logs</string>
     <string name="error_invite_sent">Cannot find user with entered email!</string>
     <string name="error_cannot_sync_notes">Cannot sync notes!</string>
     <string name="error_cannot_restore_notes">Cannot restore notes!</string>

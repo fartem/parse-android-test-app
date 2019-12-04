@@ -13,18 +13,16 @@ Test Android application for [Parse test server](https://github.com/fartem/parse
 
 ### Features
 
-- managing simple entity (Note);
-- sync data with server;
-- restore data from server;
-- sign up from application with email address or Facebook account;
-- sign in to server with email or Facebook.
+- managing the simple entity (Note);
+- sync data with the server;
+- restore data from the server;
+- sign up from the application with email address or Facebook account;
+- sign in to the server with email or Facebook.
 
 ### Not handling exceptions
 
 - Internet connection unavailable status;
 - Parse Server connection unavailable status.
-
-## Data structure
 
 ## Facebook install
 

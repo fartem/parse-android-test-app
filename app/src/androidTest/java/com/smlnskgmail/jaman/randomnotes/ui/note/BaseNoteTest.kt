@@ -2,7 +2,7 @@ package com.smlnskgmail.jaman.randomnotes.ui.note
 
 import androidx.test.rule.ActivityTestRule
 import com.smlnskgmail.jaman.randomnotes.MainActivity
-import com.smlnskgmail.jaman.randomnotes.entities.note.Note
+import com.smlnskgmail.jaman.randomnotes.repository.entities.Note
 import org.junit.Rule
 import org.junit.Test
 

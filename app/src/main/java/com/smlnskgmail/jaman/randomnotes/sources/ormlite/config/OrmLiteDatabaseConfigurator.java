@@ -1,7 +1,7 @@
-package com.smlnskgmail.jaman.randomnotes.db.config;
+package com.smlnskgmail.jaman.randomnotes.sources.ormlite.config;
 
 import com.j256.ormlite.android.apptools.OrmLiteConfigUtil;
-import com.smlnskgmail.jaman.randomnotes.db.HelperFactory;
+import com.smlnskgmail.jaman.randomnotes.sources.ormlite.OrmLiteDataSource;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -9,7 +9,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 
 @SuppressWarnings("ALL")
-public class DatabaseConfigurator {
+public class OrmLiteDatabaseConfigurator {
 
     public static void main(String[] args) throws Exception {
         // About: https://github.com/j256/ormlite-android/issues/79
@@ -21,7 +21,10 @@ public class DatabaseConfigurator {
         method.setAccessible(true);
         method.invoke(urlClassLoader, new Object[]{url});
 
-        OrmLiteConfigUtil.writeConfigFile("db_config.txt", HelperFactory.dbClasses());
+        OrmLiteConfigUtil.writeConfigFile(
+                "db_config.txt",
+                OrmLiteDataSource.Companion.getDatabaseEntities()
+        );
     }
 
 }

@@ -29,8 +29,11 @@ abstract class BaseFragment : Fragment(), FragmentResume {
 
     abstract fun showToolbarMenu(): Boolean
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?)
-            : View = inflater.inflate(getLayoutResId(), container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View = inflater.inflate(getLayoutResId(), container, false)
 
     abstract fun getLayoutResId(): Int
 
@@ -57,6 +60,8 @@ abstract class BaseFragment : Fragment(), FragmentResume {
 
     open fun getToolbarMenuResId() = -1
 
-    open fun handleMenuItemClick(menuItemId: Int) {}
+    open fun handleMenuItemClick(menuItemId: Int) {
+
+    }
 
 }

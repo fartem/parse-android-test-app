@@ -7,8 +7,9 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.smlnskgmail.jaman.randomnotes.R
 import com.smlnskgmail.jaman.randomnotes.components.noteslist.NotesHolder
-import com.smlnskgmail.jaman.randomnotes.entities.note.support.NoteFactory
+import com.smlnskgmail.jaman.randomnotes.repository.DataRepositoryAccessor
 import com.smlnskgmail.jaman.randomnotes.ui.utils.ChildClick
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -42,8 +43,8 @@ class NoteCreationTest : BaseNoteTest() {
     }
 
     private fun setIndex() {
-        notePosition = NoteFactory.all().indexOfLast {
-            it.contentEquals(note())
+        notePosition = DataRepositoryAccessor.get().allNotes().indexOfLast {
+            it == note()
         }
         assertTrue(notePosition != -1)
     }
@@ -54,11 +55,7 @@ class NoteCreationTest : BaseNoteTest() {
     }
 
     private fun checkNoteInDB() {
-        val note = note()
-
-        assertTrue(NoteFactory.all().none {
-            it.contentEquals(note)
-        })
+        assertFalse(DataRepositoryAccessor.get().allNotes().contains(note()))
     }
 
 }

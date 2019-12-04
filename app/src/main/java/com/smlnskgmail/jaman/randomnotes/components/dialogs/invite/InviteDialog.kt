@@ -27,7 +27,7 @@ class InviteDialog(context: Context) : BaseDialog(context) {
         inviteData["email"] = dialog_invite_email.text.toString()
         ParseCloud.callFunctionInBackground("invite", inviteData,
             FunctionCallback<Boolean> { success, e ->
-                inviteCallback?.onInviteAction(success)
+                inviteCallback?.onInviteAction(success && e == null)
             }
         )
     }
