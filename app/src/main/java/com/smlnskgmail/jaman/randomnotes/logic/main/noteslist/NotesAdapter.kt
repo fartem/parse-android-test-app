@@ -1,4 +1,4 @@
-package com.smlnskgmail.jaman.randomnotes.components.noteslist
+package com.smlnskgmail.jaman.randomnotes.logic.main.noteslist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

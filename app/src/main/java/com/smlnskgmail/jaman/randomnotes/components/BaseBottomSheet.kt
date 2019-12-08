@@ -1,4 +1,4 @@
-package com.smlnskgmail.jaman.randomnotes.components.bottomsheets
+package com.smlnskgmail.jaman.randomnotes.components
 
 import android.os.Bundle
 import android.view.LayoutInflater

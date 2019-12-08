@@ -1,4 +1,4 @@
-package com.smlnskgmail.jaman.randomnotes.components.dialogs
+package com.smlnskgmail.jaman.randomnotes.components
 
 import android.app.Dialog
 import android.content.Context

@@ -1,4 +1,4 @@
-package com.smlnskgmail.jaman.randomnotes.components.views
+package com.smlnskgmail.jaman.randomnotes.components
 
 import android.content.Context
 import android.widget.Toast

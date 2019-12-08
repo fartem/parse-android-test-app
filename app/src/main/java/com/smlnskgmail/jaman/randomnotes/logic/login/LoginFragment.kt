@@ -1,10 +1,11 @@
-package com.smlnskgmail.jaman.randomnotes.navigation
+package com.smlnskgmail.jaman.randomnotes.logic.login
 
 import android.content.Intent
 import com.smlnskgmail.jaman.randomnotes.MainActivity
 import com.smlnskgmail.jaman.randomnotes.R
-import com.smlnskgmail.jaman.randomnotes.logger.L
+import com.smlnskgmail.jaman.randomnotes.components.BaseFragment
 import com.smlnskgmail.jaman.randomnotes.repository.DataRepositoryAccessor
+import com.smlnskgmail.jaman.randomnotes.tools.L
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : BaseFragment() {

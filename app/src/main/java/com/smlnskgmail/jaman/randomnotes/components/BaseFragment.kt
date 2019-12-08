@@ -1,4 +1,4 @@
-package com.smlnskgmail.jaman.randomnotes.navigation
+package com.smlnskgmail.jaman.randomnotes.components
 
 import android.os.Bundle
 import android.view.*
@@ -63,5 +63,11 @@ abstract class BaseFragment : Fragment(), FragmentResume {
     open fun handleMenuItemClick(menuItemId: Int) {
 
     }
+
+}
+
+interface FragmentResume {
+
+    fun onFragmentResume()
 
 }

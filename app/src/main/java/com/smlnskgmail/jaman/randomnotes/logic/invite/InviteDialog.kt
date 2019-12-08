@@ -1,10 +1,10 @@
-package com.smlnskgmail.jaman.randomnotes.components.dialogs.invite
+package com.smlnskgmail.jaman.randomnotes.logic.invite
 
 import android.content.Context
 import com.parse.FunctionCallback
 import com.parse.ParseCloud
 import com.smlnskgmail.jaman.randomnotes.R
-import com.smlnskgmail.jaman.randomnotes.components.dialogs.BaseDialog
+import com.smlnskgmail.jaman.randomnotes.components.BaseDialog
 import kotlinx.android.synthetic.main.dialog_invite.*
 
 class InviteDialog(context: Context) : BaseDialog(context) {

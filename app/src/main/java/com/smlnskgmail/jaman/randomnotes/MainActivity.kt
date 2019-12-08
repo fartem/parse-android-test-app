@@ -4,10 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.smlnskgmail.jaman.randomnotes.navigation.BaseFragment
-import com.smlnskgmail.jaman.randomnotes.navigation.FragmentResume
-import com.smlnskgmail.jaman.randomnotes.navigation.LoginFragment
-import com.smlnskgmail.jaman.randomnotes.navigation.MainFragment
+import com.smlnskgmail.jaman.randomnotes.components.BaseFragment
+import com.smlnskgmail.jaman.randomnotes.components.FragmentResume
+import com.smlnskgmail.jaman.randomnotes.logic.login.LoginFragment
+import com.smlnskgmail.jaman.randomnotes.logic.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,7 +39,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun showMainFragment() {
         val mainFragment: MainFragment = (supportFragmentManager
-            .findFragmentByTag(MainFragment::class.java.name) ?: MainFragment()) as MainFragment
+            .findFragmentByTag(MainFragment::class.java.name)
+            ?: MainFragment()) as MainFragment
         showBaseFragment(mainFragment)
     }
 

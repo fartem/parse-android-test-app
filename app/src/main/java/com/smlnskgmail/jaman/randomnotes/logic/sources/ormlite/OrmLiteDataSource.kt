@@ -1,4 +1,4 @@
-package com.smlnskgmail.jaman.randomnotes.sources.ormlite
+package com.smlnskgmail.jaman.randomnotes.logic.sources.ormlite
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -7,9 +7,9 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper
 import com.j256.ormlite.support.ConnectionSource
 import com.j256.ormlite.table.TableUtils
 import com.smlnskgmail.jaman.randomnotes.R
-import com.smlnskgmail.jaman.randomnotes.logger.L
 import com.smlnskgmail.jaman.randomnotes.repository.entities.Note
 import com.smlnskgmail.jaman.randomnotes.repository.model.local.LocalDataSource
+import com.smlnskgmail.jaman.randomnotes.tools.L
 import java.sql.SQLException
 
 private const val databaseFileName = "rn.db"

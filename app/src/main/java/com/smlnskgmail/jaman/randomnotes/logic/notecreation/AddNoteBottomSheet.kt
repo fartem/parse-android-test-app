@@ -1,8 +1,8 @@
-package com.smlnskgmail.jaman.randomnotes.components.bottomsheets.addnote
+package com.smlnskgmail.jaman.randomnotes.logic.notecreation
 
 import android.widget.EditText
 import com.smlnskgmail.jaman.randomnotes.R
-import com.smlnskgmail.jaman.randomnotes.components.bottomsheets.BaseBottomSheet
+import com.smlnskgmail.jaman.randomnotes.components.BaseBottomSheet
 import com.smlnskgmail.jaman.randomnotes.repository.DataRepositoryAccessor
 import com.smlnskgmail.jaman.randomnotes.repository.entities.Note
 import kotlinx.android.synthetic.main.bottom_sheet_add_note.*
@@ -34,5 +34,11 @@ class AddNoteBottomSheet : BaseBottomSheet() {
     }
 
     override fun getLayoutResId() = R.layout.bottom_sheet_add_note
+
+    interface AddNoteTarget {
+
+        fun newNoteAdded(note: Note)
+
+    }
 
 }

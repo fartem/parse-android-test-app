@@ -1,4 +1,4 @@
-package com.smlnskgmail.jaman.randomnotes.sources.parse
+package com.smlnskgmail.jaman.randomnotes.logic.sources.parse
 
 import android.content.Context
 import android.content.Intent

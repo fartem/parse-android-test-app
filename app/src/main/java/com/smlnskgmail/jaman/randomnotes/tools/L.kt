@@ -1,4 +1,4 @@
-package com.smlnskgmail.jaman.randomnotes.logger
+package com.smlnskgmail.jaman.randomnotes.tools
 
 import android.util.Log
 

@@ -1,4 +1,4 @@
-package com.smlnskgmail.jaman.randomnotes.components.dialogs.invite
+package com.smlnskgmail.jaman.randomnotes.logic.invite
 
 interface InviteCallback {
 

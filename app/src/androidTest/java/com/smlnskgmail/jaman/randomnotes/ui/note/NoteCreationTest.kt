@@ -6,7 +6,7 @@ import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.smlnskgmail.jaman.randomnotes.R
-import com.smlnskgmail.jaman.randomnotes.components.noteslist.NotesHolder
+import com.smlnskgmail.jaman.randomnotes.logic.main.noteslist.NotesHolder
 import com.smlnskgmail.jaman.randomnotes.repository.DataRepositoryAccessor
 import com.smlnskgmail.jaman.randomnotes.ui.utils.ChildClick
 import org.junit.Assert.assertFalse

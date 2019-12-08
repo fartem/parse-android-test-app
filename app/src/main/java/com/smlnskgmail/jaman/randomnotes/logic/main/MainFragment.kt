@@ -1,20 +1,20 @@
-package com.smlnskgmail.jaman.randomnotes.navigation
+package com.smlnskgmail.jaman.randomnotes.logic.main
 
 import androidx.core.content.ContextCompat
 import com.parse.ParseUser
 import com.smlnskgmail.jaman.randomnotes.MainActivity
 import com.smlnskgmail.jaman.randomnotes.R
-import com.smlnskgmail.jaman.randomnotes.components.bottomsheets.addnote.AddNoteBottomSheet
-import com.smlnskgmail.jaman.randomnotes.components.bottomsheets.addnote.AddNoteTarget
-import com.smlnskgmail.jaman.randomnotes.components.dialogs.invite.InviteCallback
-import com.smlnskgmail.jaman.randomnotes.components.dialogs.invite.InviteDialog
-import com.smlnskgmail.jaman.randomnotes.components.noteslist.NotesAdapter
-import com.smlnskgmail.jaman.randomnotes.components.views.LongToast
+import com.smlnskgmail.jaman.randomnotes.components.BaseFragment
+import com.smlnskgmail.jaman.randomnotes.components.LongToast
+import com.smlnskgmail.jaman.randomnotes.logic.invite.InviteCallback
+import com.smlnskgmail.jaman.randomnotes.logic.invite.InviteDialog
+import com.smlnskgmail.jaman.randomnotes.logic.main.noteslist.NotesAdapter
+import com.smlnskgmail.jaman.randomnotes.logic.notecreation.AddNoteBottomSheet
 import com.smlnskgmail.jaman.randomnotes.repository.DataRepositoryAccessor
 import com.smlnskgmail.jaman.randomnotes.repository.entities.Note
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class MainFragment : BaseFragment(), AddNoteTarget, InviteCallback {
+class MainFragment : BaseFragment(), AddNoteBottomSheet.AddNoteTarget, InviteCallback {
 
     private val notes: MutableList<Note> = mutableListOf()
 
@@ -43,7 +43,10 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteCallback {
                         DataRepositoryAccessor.get().saveNotes(newNotes)
                         refreshNotes()
                     } else {
-                        LongToast(context!!, getString(R.string.error_cannot_restore_notes)).show()
+                        LongToast(
+                            context!!,
+                            getString(R.string.error_cannot_restore_notes)
+                        ).show()
                     }
                 }
             }
@@ -51,7 +54,10 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteCallback {
         sync_notes.setOnClickListener {
             actionWithNotes {
                 DataRepositoryAccessor.get().syncNotes(notes) {
-                    LongToast(context!!, getString(R.string.error_cannot_sync_notes)).show()
+                    LongToast(
+                        context!!,
+                        getString(R.string.error_cannot_sync_notes)
+                    ).show()
                 }
             }
         }
@@ -63,13 +69,15 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteCallback {
     }
 
     private fun share() {
-        val inviteDialog = InviteDialog(context!!)
+        val inviteDialog =
+            InviteDialog(context!!)
         inviteDialog.setInviteCallback(this)
         inviteDialog.show()
     }
 
     private fun addNote() {
-        val addNoteBottomSheet = AddNoteBottomSheet()
+        val addNoteBottomSheet =
+            AddNoteBottomSheet()
         addNoteBottomSheet.addNoteCreationCallback(this)
         addNoteBottomSheet.show(activity!!.supportFragmentManager,
             addNoteBottomSheet.javaClass.name)
@@ -85,7 +93,10 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteCallback {
             if (ParseUser.getCurrentUser() != null) {
                 action()
             } else {
-                LongToast(context!!, getString(R.string.message_sign_in)).show()
+                LongToast(
+                    context!!,
+                    getString(R.string.message_sign_in)
+                ).show()
             }
         }
     }
@@ -103,9 +114,15 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteCallback {
 
     override fun onInviteAction(success: Boolean) {
         if (success) {
-            LongToast(context!!, getString(R.string.message_invite_sent)).show()
+            LongToast(
+                context!!,
+                getString(R.string.message_invite_sent)
+            ).show()
         } else {
-            LongToast(context!!, getString(R.string.error_invite_sent)).show()
+            LongToast(
+                context!!,
+                getString(R.string.error_invite_sent)
+            ).show()
         }
     }
 
@@ -133,7 +150,9 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteCallback {
         } else {
             R.drawable.ic_login
         }
-        getMenu().findItem(R.id.menu_login_action)!!.icon = ContextCompat.getDrawable(context!!, icon)
+        getMenu().findItem(
+            R.id.menu_login_action
+        )!!.icon = ContextCompat.getDrawable(context!!, icon)
     }
 
     override fun getTitleResId() = R.string.title_main_fragment

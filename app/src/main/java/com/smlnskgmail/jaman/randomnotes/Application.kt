@@ -1,9 +1,9 @@
 package com.smlnskgmail.jaman.randomnotes
 
 import android.app.Application
+import com.smlnskgmail.jaman.randomnotes.logic.sources.ormlite.OrmLiteDataSource
+import com.smlnskgmail.jaman.randomnotes.logic.sources.parse.ParseDataSource
 import com.smlnskgmail.jaman.randomnotes.repository.DataRepositoryAccessor
-import com.smlnskgmail.jaman.randomnotes.sources.ormlite.OrmLiteDataSource
-import com.smlnskgmail.jaman.randomnotes.sources.parse.ParseDataSource
 
 @Suppress("unused")
 class Application : Application() {
