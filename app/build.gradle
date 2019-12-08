@@ -43,10 +43,10 @@ dependencies {
     // FAB menu
     implementation 'me.jahirfiquitiva:FABsMenu:1.1.4'
 
-    // JUnit
+    // Unit tests
     testImplementation 'junit:junit:4.12'
 
-    // Android Tests
+    // Android tests
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.2.0'
