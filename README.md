@@ -3,6 +3,7 @@
 Random Notes
 =======================
 
+![Travis CI](https://img.shields.io/travis/fartem/parse-android-test-app?style=flat-square)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-site-brightgreen?style=flat-square)](https://android-arsenal.com/details/3/7906)
 ![Open issues](https://img.shields.io/github/issues-raw/fartem/parse-android-test-app.svg?color=ff534a&style=flat-square)
 

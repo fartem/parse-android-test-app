@@ -12,12 +12,6 @@ import com.smlnskgmail.jaman.randomnotes.repository.model.local.LocalDataSource
 import com.smlnskgmail.jaman.randomnotes.tools.L
 import java.sql.SQLException
 
-private const val databaseFileName = "rn.db"
-
-private const val databaseVersion1 = 1
-
-private const val currentDatabaseVersion = databaseVersion1
-
 class OrmLiteDataSource(
     private var context: Context
 ) : OrmLiteSqliteOpenHelper(
@@ -29,6 +23,12 @@ class OrmLiteDataSource(
 ), LocalDataSource {
 
     companion object {
+
+        private const val databaseFileName = "rn.db"
+
+        private const val databaseVersion1 = 1
+
+        private const val currentDatabaseVersion = databaseVersion1
 
         val databaseEntities = arrayOf<Class<*>>(
             Note::class.java
