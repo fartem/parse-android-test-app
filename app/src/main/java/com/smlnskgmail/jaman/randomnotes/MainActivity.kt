@@ -38,8 +38,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showMainFragment() {
-        val mainFragment: MainFragment = (supportFragmentManager
-            .findFragmentByTag(MainFragment::class.java.name)
+        val mainFragment: MainFragment
+                = (supportFragmentManager.findFragmentByTag(MainFragment::class.java.name)
             ?: MainFragment()) as MainFragment
         showBaseFragment(mainFragment)
     }
