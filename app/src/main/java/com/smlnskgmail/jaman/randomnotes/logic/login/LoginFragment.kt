@@ -1,23 +1,27 @@
 package com.smlnskgmail.jaman.randomnotes.logic.login
 
 import android.content.Intent
+import android.os.Bundle
+import android.view.View
+import com.smlnskgmail.jaman.randomnotes.Application
 import com.smlnskgmail.jaman.randomnotes.MainActivity
 import com.smlnskgmail.jaman.randomnotes.R
-import com.smlnskgmail.jaman.randomnotes.components.BaseFragment
-import com.smlnskgmail.jaman.randomnotes.repository.DataRepositoryAccessor
-import com.smlnskgmail.jaman.randomnotes.tools.L
+import com.smlnskgmail.jaman.randomnotes.components.fragments.BaseFragment
+import com.smlnskgmail.jaman.randomnotes.logic.repository.CloudAuth
+import com.smlnskgmail.jaman.randomnotes.tools.LogTool
 import kotlinx.android.synthetic.main.fragment_login.*
+import javax.inject.Inject
 
 class LoginFragment : BaseFragment() {
 
     private var loginMode = true
 
-    override fun onViewCreated() {
-        super.onViewCreated()
-        setupActions()
-    }
+    @Inject
+    lateinit var cloudAuth: CloudAuth
 
-    private fun setupActions() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Application.applicationComponent.inject(this)
         register_account.setOnClickListener {
             register()
         }
@@ -44,11 +48,11 @@ class LoginFragment : BaseFragment() {
         val username = email.text.toString()
         val password = password.text.toString()
         if (loginMode) {
-            DataRepositoryAccessor.get().signInWithEmail(username, password) {
+            cloudAuth.signInWithEmail(username, password) {
                 handleLoginResult(it)
             }
         } else {
-            DataRepositoryAccessor.get().signUpWithEmail(username, username, password) {
+            cloudAuth.signUpWithEmail(username, username, password) {
                 handleLoginResult(it)
             }
         }
@@ -58,19 +62,23 @@ class LoginFragment : BaseFragment() {
         if (exception == null) {
             (activity as MainActivity).loginComplete()
         } else {
-            L.e(exception)
+            LogTool.e(exception)
             (activity as MainActivity).loginError()
         }
     }
 
     private fun loginWithFacebook() {
-        DataRepositoryAccessor.get().signInWithFacebook(this) {
+        cloudAuth.signInWithFacebook(this) {
             handleLoginResult(it)
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        DataRepositoryAccessor.get().bindForAuth(requestCode, resultCode, data)
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?
+    ) {
+        cloudAuth.bindForAuth(requestCode, resultCode, data)
     }
 
     override fun getTitleResId() = R.string.title_login_fragment

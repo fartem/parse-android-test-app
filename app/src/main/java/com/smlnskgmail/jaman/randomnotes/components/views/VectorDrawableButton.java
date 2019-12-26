@@ -75,8 +75,13 @@ public class VectorDrawableButton extends AppCompatButton {
             }
         }
 
-        TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(this,
-                drawableStart, drawableTop, drawableEnd, drawableBottom);
+        TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                this,
+                drawableStart,
+                drawableTop,
+                drawableEnd,
+                drawableBottom
+        );
 
         attributeArray.recycle();
     }

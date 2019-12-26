@@ -1,33 +1,47 @@
 package com.smlnskgmail.jaman.randomnotes.logic.main
 
+import android.os.Bundle
+import android.view.View
 import androidx.core.content.ContextCompat
 import com.parse.ParseUser
+import com.smlnskgmail.jaman.randomnotes.Application
 import com.smlnskgmail.jaman.randomnotes.MainActivity
 import com.smlnskgmail.jaman.randomnotes.R
-import com.smlnskgmail.jaman.randomnotes.components.BaseFragment
-import com.smlnskgmail.jaman.randomnotes.components.LongToast
-import com.smlnskgmail.jaman.randomnotes.logic.invite.InviteCallback
+import com.smlnskgmail.jaman.randomnotes.components.fragments.BaseFragment
+import com.smlnskgmail.jaman.randomnotes.components.views.LongToast
 import com.smlnskgmail.jaman.randomnotes.logic.invite.InviteDialog
+import com.smlnskgmail.jaman.randomnotes.logic.invite.InviteUserTarget
+import com.smlnskgmail.jaman.randomnotes.logic.main.noteslist.NoteDeleteTarget
 import com.smlnskgmail.jaman.randomnotes.logic.main.noteslist.NotesAdapter
 import com.smlnskgmail.jaman.randomnotes.logic.notecreation.AddNoteBottomSheet
-import com.smlnskgmail.jaman.randomnotes.repository.DataRepositoryAccessor
-import com.smlnskgmail.jaman.randomnotes.repository.entities.Note
+import com.smlnskgmail.jaman.randomnotes.logic.notecreation.AddNoteTarget
+import com.smlnskgmail.jaman.randomnotes.logic.repository.CloudAuth
+import com.smlnskgmail.jaman.randomnotes.logic.repository.DataRepository
+import com.smlnskgmail.jaman.randomnotes.logic.repository.entities.Note
 import kotlinx.android.synthetic.main.fragment_main.*
+import javax.inject.Inject
 
-class MainFragment : BaseFragment(), AddNoteBottomSheet.AddNoteTarget, InviteCallback {
+class MainFragment : BaseFragment(), AddNoteTarget, InviteUserTarget, NoteDeleteTarget {
 
     private val notes: MutableList<Note> = mutableListOf()
 
-    override fun onViewCreated() {
-        super.onViewCreated()
+    @Inject
+    lateinit var dataRepository: DataRepository
+
+    @Inject
+    lateinit var cloudAuth: CloudAuth
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Application.applicationComponent.inject(this)
         addNotesToList()
         setupFabMenu()
     }
 
     private fun addNotesToList() {
-        notes.addAll(DataRepositoryAccessor.get().allNotes())
+        notes.addAll(dataRepository.allNotes())
         notes_list.setEmptyView(notes_list_empty_view)
-        notes_list.adapter = NotesAdapter(notes)
+        notes_list.adapter = NotesAdapter(notes, this)
     }
 
     private fun setupFabMenu() {
@@ -38,9 +52,9 @@ class MainFragment : BaseFragment(), AddNoteBottomSheet.AddNoteTarget, InviteCal
         }
         restore_notes.setOnClickListener {
             actionWithNotes {
-                DataRepositoryAccessor.get().restoreAllNotes(notes) { newNotes, e ->
+                dataRepository.restoreAllNotes(notes) { newNotes, e ->
                     if (e == null) {
-                        DataRepositoryAccessor.get().saveNotes(newNotes)
+                        dataRepository.saveNotes(newNotes)
                         refreshNotes()
                     } else {
                         LongToast(
@@ -53,7 +67,7 @@ class MainFragment : BaseFragment(), AddNoteBottomSheet.AddNoteTarget, InviteCal
         }
         sync_notes.setOnClickListener {
             actionWithNotes {
-                DataRepositoryAccessor.get().syncNotes(notes) {
+                dataRepository.syncNotes(notes) {
                     LongToast(
                         context!!,
                         getString(R.string.error_cannot_sync_notes)
@@ -69,18 +83,18 @@ class MainFragment : BaseFragment(), AddNoteBottomSheet.AddNoteTarget, InviteCal
     }
 
     private fun share() {
-        val inviteDialog =
-            InviteDialog(context!!)
+        val inviteDialog = InviteDialog(context!!)
         inviteDialog.setInviteCallback(this)
         inviteDialog.show()
     }
 
     private fun addNote() {
-        val addNoteBottomSheet =
-            AddNoteBottomSheet()
-        addNoteBottomSheet.addNoteCreationCallback(this)
-        addNoteBottomSheet.show(activity!!.supportFragmentManager,
-            addNoteBottomSheet.javaClass.name)
+        val addNoteBottomSheet = AddNoteBottomSheet()
+        addNoteBottomSheet.addNoteCreationTarget(this)
+        addNoteBottomSheet.show(
+            activity!!.supportFragmentManager,
+            addNoteBottomSheet.javaClass.name
+        )
     }
 
     private fun collapseMenuAndRun(action: () -> Unit) {
@@ -103,11 +117,12 @@ class MainFragment : BaseFragment(), AddNoteBottomSheet.AddNoteTarget, InviteCal
 
     private fun refreshNotes() {
         notes.clear()
-        notes.addAll(DataRepositoryAccessor.get().allNotes())
+        notes.addAll(dataRepository.allNotes())
         notes_list.adapter!!.notifyDataSetChanged()
     }
 
     override fun newNoteAdded(note: Note) {
+        dataRepository.saveNote(note)
         notes.add(note)
         (notes_list.adapter as NotesAdapter).validateLastNote()
     }
@@ -129,8 +144,8 @@ class MainFragment : BaseFragment(), AddNoteBottomSheet.AddNoteTarget, InviteCal
     override fun handleMenuItemClick(menuItemId: Int) {
         when (menuItemId) {
             R.id.menu_login_action -> {
-                if (DataRepositoryAccessor.get().isAuthorized()) {
-                    DataRepositoryAccessor.get().logOut {
+                if (cloudAuth.isAuthorized()) {
+                    cloudAuth.logOut {
                         validateLoginMenuIcon()
                     }
                 } else {
@@ -145,7 +160,7 @@ class MainFragment : BaseFragment(), AddNoteBottomSheet.AddNoteTarget, InviteCal
     }
 
     private fun validateLoginMenuIcon() {
-        val icon = if (DataRepositoryAccessor.get().isAuthorized()) {
+        val icon = if (cloudAuth.isAuthorized()) {
             R.drawable.ic_logout
         } else {
             R.drawable.ic_login
@@ -153,6 +168,13 @@ class MainFragment : BaseFragment(), AddNoteBottomSheet.AddNoteTarget, InviteCal
         getMenu().findItem(
             R.id.menu_login_action
         )!!.icon = ContextCompat.getDrawable(context!!, icon)
+    }
+
+    override fun onNoteDelete(position: Int) {
+        dataRepository.delete(
+            notes.removeAt(position)
+        )
+        notes_list.adapter!!.notifyItemRemoved(position)
     }
 
     override fun getTitleResId() = R.string.title_main_fragment

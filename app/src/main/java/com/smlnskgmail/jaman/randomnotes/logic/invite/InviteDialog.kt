@@ -1,17 +1,19 @@
 package com.smlnskgmail.jaman.randomnotes.logic.invite
 
 import android.content.Context
+import android.os.Bundle
 import com.parse.FunctionCallback
 import com.parse.ParseCloud
 import com.smlnskgmail.jaman.randomnotes.R
-import com.smlnskgmail.jaman.randomnotes.components.BaseDialog
+import com.smlnskgmail.jaman.randomnotes.components.dialogs.BaseDialog
 import kotlinx.android.synthetic.main.dialog_invite.*
 
 class InviteDialog(context: Context) : BaseDialog(context) {
 
-    private var inviteCallback: InviteCallback? = null
+    private var inviteUserTarget: InviteUserTarget? = null
 
-    override fun initializeDialog() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         dialog_invite_cancel.setOnClickListener {
             cancel()
         }
@@ -27,13 +29,13 @@ class InviteDialog(context: Context) : BaseDialog(context) {
         inviteData["email"] = dialog_invite_email.text.toString()
         ParseCloud.callFunctionInBackground("invite", inviteData,
             FunctionCallback<Boolean> { success, e ->
-                inviteCallback?.onInviteAction(success && e == null)
+                inviteUserTarget?.onInviteAction(success && e == null)
             }
         )
     }
 
-    fun setInviteCallback(inviteCallback: InviteCallback) {
-        this.inviteCallback = inviteCallback
+    fun setInviteCallback(inviteUserTarget: InviteUserTarget) {
+        this.inviteUserTarget = inviteUserTarget
     }
 
     override fun getLayoutResId() = R.layout.dialog_invite

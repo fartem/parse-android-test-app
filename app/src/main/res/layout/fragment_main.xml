@@ -11,7 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <com.smlnskgmail.jaman.randomnotes.components.views.AdaptiveRecyclerView
+        <com.smlnskgmail.jaman.randomnotes.components.containers.AdaptiveRecyclerView
                 android:id="@+id/notes_list"
                 style="@style/AppRecyclerView"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>

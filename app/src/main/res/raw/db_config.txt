@@ -2,7 +2,7 @@
 # generated on 2019/12/08 11:34:43
 #
 # --table-start--
-dataClass=com.smlnskgmail.jaman.randomnotes.repository.entities.Note
+dataClass=com.smlnskgmail.jaman.randomnotes.logic.repository.entities.Note
 tableName=note
 # --table-fields-start--
 # --field-start--

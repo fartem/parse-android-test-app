@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.smlnskgmail.jaman.randomnotes.R
-import com.smlnskgmail.jaman.randomnotes.repository.entities.Note
+import com.smlnskgmail.jaman.randomnotes.logic.repository.entities.Note
 
-class NotesAdapter(private val notes: MutableList<Note>)
-    : RecyclerView.Adapter<NotesHolder>(), NoteDeleteListener {
+class NotesAdapter(
+    private val notes: MutableList<Note>,
+    private val noteDeleteTarget: NoteDeleteTarget
+) : RecyclerView.Adapter<NotesHolder>() {
 
     override fun onBindViewHolder(holder: NotesHolder, position: Int) {
         val note = notes[position]
@@ -16,17 +18,17 @@ class NotesAdapter(private val notes: MutableList<Note>)
     }
 
     fun validateLastNote() {
-        notifyItemInserted(itemCount - 1)
+        if (notes.size == 1) {
+            notifyDataSetChanged()
+        } else {
+            notifyItemInserted(itemCount - 1)
+        }
     }
 
-    override fun onNoteDelete(position: Int) {
-        notes.removeAt(position)
-        notifyDataSetChanged()
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
-            = NotesHolder(LayoutInflater.from(parent.context)
-        .inflate(R.layout.item_note, parent, false), this)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = NotesHolder(
+        LayoutInflater.from(parent.context).inflate(R.layout.item_note, parent, false),
+        noteDeleteTarget
+    )
 
     override fun getItemCount() = notes.size
 
