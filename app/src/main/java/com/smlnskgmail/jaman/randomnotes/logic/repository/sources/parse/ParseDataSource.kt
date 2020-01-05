@@ -14,9 +14,9 @@ class ParseDataSource(
 
     private val tableNote = "note"
 
-    private val columnId = "note_id"
-    private val columnTitle = "title"
-    private val columnSubtitle = "subtitle"
+    private val columnNoteId = "note_id"
+    private val columnNoteTitle = "title"
+    private val columnNoteSubtitle = "subtitle"
 
     init {
         val parseConfig = Parse.Configuration.Builder(context)
@@ -28,7 +28,10 @@ class ParseDataSource(
         ParseFacebookUtils.initialize(context)
     }
 
-    override fun saveAllNotes(notes: List<Note>, errorOnSave: (e: Exception) -> Unit) {
+    override fun saveAllNotes(
+        notes: List<Note>,
+        errorOnSave: (e: Exception) -> Unit
+    ) {
         val objectsToSave = mutableListOf<ParseObject>()
         for (note in notes) {
             objectsToSave.add(parseObjectForNote(note))
@@ -37,7 +40,7 @@ class ParseDataSource(
             if (it == null) {
                 for (savedNote in objectsToSave) {
                     val note = notes.firstOrNull { noteInList ->
-                        noteInList.id == savedNote.get(columnId)
+                        noteInList.id == savedNote.get(columnNoteId)
                     }
                     if (note != null) {
                         note.parseObjectId = savedNote.objectId
@@ -52,9 +55,9 @@ class ParseDataSource(
     private fun parseObjectForNote(note: Note): ParseObject {
         val parseObject = ParseObject(tableNote)
         parseObject.objectId = note.parseObjectId
-        parseObject.put(columnId, note.id)
-        parseObject.put(columnTitle, note.title!!)
-        parseObject.put(columnSubtitle, note.subtitle!!)
+        parseObject.put(columnNoteId, note.id)
+        parseObject.put(columnNoteTitle, note.title!!)
+        parseObject.put(columnNoteSubtitle, note.subtitle!!)
         return parseObject
     }
 
@@ -67,7 +70,7 @@ class ParseDataSource(
             if (objects.isNotEmpty()) {
                 val newNotes = mutableListOf<Note>()
                 for (parseData in objects) {
-                    val id = parseData.getLong(columnId)
+                    val id = parseData.getLong(columnNoteId)
                     var note = notes.lastOrNull {
                         it.id == id
                     }
@@ -86,8 +89,8 @@ class ParseDataSource(
     private fun noteFromParseObject(parseObject: ParseObject): Note {
         val note = Note()
         note.parseObjectId = parseObject.objectId
-        note.title = parseObject.getString(columnTitle)
-        note.subtitle = parseObject.getString(columnSubtitle)
+        note.title = parseObject.getString(columnNoteTitle)
+        note.subtitle = parseObject.getString(columnNoteSubtitle)
         return note
     }
 
