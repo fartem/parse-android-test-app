@@ -4,7 +4,7 @@ Random Notes
 =======================
 
 ![Travis CI](https://img.shields.io/travis/fartem/parse-android-test-app)
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-site-brightgreen)](https://android-arsenal.com/details/3/7906)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android%20Parse%20Server%20Client-brightgreen.svg?style=flat)](https://android-arsenal.com/details/3/7906)
 ![Open issues](https://img.shields.io/github/issues-raw/fartem/parse-android-test-app.svg?color=ff534a)
 
 About
