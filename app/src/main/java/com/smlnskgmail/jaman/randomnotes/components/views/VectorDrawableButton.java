@@ -56,20 +56,22 @@ public class VectorDrawableButton extends AppCompatButton {
             drawableEnd = getDrawable(attributeArray, DRAWABLE_END_ID);
             drawableBottom = getDrawable(attributeArray, DRAWABLE_BOTTOM_ID);
         } else {
-            int drawableTopId = getResourceId(attributeArray, DRAWABLE_TOP_ID);
             int drawableStartId = getResourceId(attributeArray, DRAWABLE_START_ID);
-            int drawableEndId = getResourceId(attributeArray, DRAWABLE_END_ID);
-            int drawableBottomId = getResourceId(attributeArray, DRAWABLE_BOTTOM_ID);
-
             if (drawableStartId != DEFAULT_ID_VALUE) {
                 drawableStart = AppCompatResources.getDrawable(getContext(), drawableStartId);
             }
-            if (drawableEndId != DEFAULT_ID_VALUE) {
-                drawableEnd = AppCompatResources.getDrawable(getContext(), drawableEndId);
-            }
+
+            int drawableTopId = getResourceId(attributeArray, DRAWABLE_TOP_ID);
             if (drawableTopId != DEFAULT_ID_VALUE) {
                 drawableTop = AppCompatResources.getDrawable(getContext(), drawableTopId);
             }
+
+            int drawableEndId = getResourceId(attributeArray, DRAWABLE_END_ID);
+            if (drawableEndId != DEFAULT_ID_VALUE) {
+                drawableEnd = AppCompatResources.getDrawable(getContext(), drawableEndId);
+            }
+
+            int drawableBottomId = getResourceId(attributeArray, DRAWABLE_BOTTOM_ID);
             if (drawableBottomId != DEFAULT_ID_VALUE) {
                 drawableBottom = AppCompatResources.getDrawable(getContext(), drawableBottomId);
             }

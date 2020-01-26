@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'io.gitlab.arturbosch.detekt'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'checkstyle'
 
 android {
     compileSdkVersion 29
@@ -36,6 +37,27 @@ detekt {
     filters = ".*build.*,.*/resources/.*,.*/tmp/.*,*.java"
 }
 
+checkstyle {
+    toolVersion '8.26'
+    ignoreFailures false
+    showViolations true
+}
+
+task checkstyle(type: Checkstyle) {
+    group 'verification'
+    
+    config project.resources.text.fromUri(
+            "https://raw.githubusercontent.com/fartem/repository-rules/master/java/checkstyle/checkstyle.xml"
+    )
+    source rootProject.file('app/src/main/java/')
+    classpath = files()
+
+    reports {
+        xml.enabled true
+        xml.destination rootProject.file("checkstyle-result.xml")
+    }
+}
+
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -64,7 +86,7 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:2.24'
 
     // Unit tests
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
 
     // Android tests
     androidTestImplementation 'androidx.test:runner:1.2.0'
