@@ -16,7 +16,4 @@
     <dimen name="text_size_title">20sp</dimen>
     <dimen name="text_size_large">26sp</dimen>
     <dimen name="text_size_default">14sp</dimen>
-
-    <!-- Images -->
-    <dimen name="size_empty_image">64dp</dimen>
 </resources>

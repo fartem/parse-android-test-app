@@ -1,4 +1,4 @@
-package com.smlnskgmail.jaman.randomnotes.logic.repository
+package com.smlnskgmail.jaman.randomnotes.logic.repository.api
 
 import android.content.Intent
 import androidx.fragment.app.Fragment

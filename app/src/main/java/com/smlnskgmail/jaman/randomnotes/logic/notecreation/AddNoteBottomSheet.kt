@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.EditText
 import com.smlnskgmail.jaman.randomnotes.R
 import com.smlnskgmail.jaman.randomnotes.components.bottomsheets.BaseBottomSheet
-import com.smlnskgmail.jaman.randomnotes.logic.repository.entities.Note
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.entities.Note
 import kotlinx.android.synthetic.main.bottom_sheet_add_note.*
 
 class AddNoteBottomSheet : BaseBottomSheet() {

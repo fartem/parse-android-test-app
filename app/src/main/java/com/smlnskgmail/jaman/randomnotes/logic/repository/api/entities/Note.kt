@@ -1,4 +1,4 @@
-package com.smlnskgmail.jaman.randomnotes.logic.repository.entities
+package com.smlnskgmail.jaman.randomnotes.logic.repository.api.entities
 
 import com.j256.ormlite.field.DatabaseField
 

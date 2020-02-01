@@ -1,6 +1,6 @@
 package com.smlnskgmail.jaman.randomnotes.di
 
-import com.smlnskgmail.jaman.randomnotes.logic.repository.CloudAuth
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.CloudAuth
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

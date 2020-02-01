@@ -1,8 +1,8 @@
 package com.smlnskgmail.jaman.randomnotes.di
 
-import com.smlnskgmail.jaman.randomnotes.logic.repository.CloudDataSource
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.CloudDataSource
 import com.smlnskgmail.jaman.randomnotes.logic.repository.DataRepository
-import com.smlnskgmail.jaman.randomnotes.logic.repository.LocalDataSource
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.LocalDataSource
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

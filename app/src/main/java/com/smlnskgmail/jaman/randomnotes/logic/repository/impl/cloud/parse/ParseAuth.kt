@@ -1,4 +1,4 @@
-package com.smlnskgmail.jaman.randomnotes.logic.repository.sources.parse
+package com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.parse
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,9 +8,10 @@ import com.facebook.GraphRequest
 import com.facebook.login.LoginManager
 import com.parse.ParseUser
 import com.parse.facebook.ParseFacebookUtils
-import com.smlnskgmail.jaman.randomnotes.logic.repository.CloudAuth
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.CloudAuth
 
-class ParseAuth : CloudAuth {
+class ParseAuth :
+    CloudAuth {
 
     override fun isAuthorized(): Boolean {
         return ParseUser.getCurrentUser() != null

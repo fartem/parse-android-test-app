@@ -1,6 +1,8 @@
 package com.smlnskgmail.jaman.randomnotes.logic.repository
 
-import com.smlnskgmail.jaman.randomnotes.logic.repository.entities.Note
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.CloudDataSource
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.LocalDataSource
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.entities.Note
 
 class DataRepository(
     private val localDataSource: LocalDataSource,
@@ -19,7 +21,7 @@ class DataRepository(
         localDataSource.createNotes(notes)
     }
 
-    fun syncNotes(notes: List<Note>, errorOnSave: (e: Exception) -> Unit) {
+    fun syncNotes(notes: List<Note>, errorOnSave: (e: Exception?) -> Unit) {
         cloudDataSource.saveAllNotes(notes, errorOnSave)
     }
 

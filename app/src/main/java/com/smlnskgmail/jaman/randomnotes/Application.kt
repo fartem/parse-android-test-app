@@ -6,12 +6,13 @@ import com.smlnskgmail.jaman.randomnotes.di.CloudAuthModule
 import com.smlnskgmail.jaman.randomnotes.di.DaggerApplicationComponent
 import com.smlnskgmail.jaman.randomnotes.di.DataRepositoryModule
 import com.smlnskgmail.jaman.randomnotes.logic.repository.DataRepository
-import com.smlnskgmail.jaman.randomnotes.logic.repository.sources.ormlite.OrmLiteDataSource
-import com.smlnskgmail.jaman.randomnotes.logic.repository.sources.parse.ParseAuth
-import com.smlnskgmail.jaman.randomnotes.logic.repository.sources.parse.ParseDataSource
+import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.fake.FakeCloudAuth
+import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.fake.FakeCloudDataSource
+import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.local.ormlite.OrmLiteDataSource
+import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.parse.ParseAuth
+import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.parse.ParseDataSource
 import javax.inject.Inject
 
-@Suppress("unused")
 class Application : Application() {
 
     companion object {
@@ -25,6 +26,10 @@ class Application : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        productionStart()
+    }
+
+    private fun productionStart() {
         applicationComponent = DaggerApplicationComponent.builder()
             .withDataRepository(
                 DataRepositoryModule(
@@ -35,6 +40,24 @@ class Application : Application() {
             .withCloudAuth(
                 CloudAuthModule(
                     ParseAuth()
+                )
+            )
+            .build()
+        applicationComponent.inject(this)
+    }
+
+    @Suppress("unused")
+    private fun testStart() {
+        applicationComponent = DaggerApplicationComponent.builder()
+            .withDataRepository(
+                DataRepositoryModule(
+                    OrmLiteDataSource(this),
+                    FakeCloudDataSource()
+                )
+            )
+            .withCloudAuth(
+                CloudAuthModule(
+                    FakeCloudAuth()
                 )
             )
             .build()

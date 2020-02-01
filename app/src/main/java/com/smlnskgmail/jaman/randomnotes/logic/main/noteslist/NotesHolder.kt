@@ -2,7 +2,7 @@ package com.smlnskgmail.jaman.randomnotes.logic.main.noteslist
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.smlnskgmail.jaman.randomnotes.logic.repository.entities.Note
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.entities.Note
 import kotlinx.android.synthetic.main.item_note.view.*
 
 class NotesHolder(

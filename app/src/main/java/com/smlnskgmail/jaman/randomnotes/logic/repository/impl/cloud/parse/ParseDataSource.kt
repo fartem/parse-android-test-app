@@ -1,12 +1,12 @@
-package com.smlnskgmail.jaman.randomnotes.logic.repository.sources.parse
+package com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.parse
 
 import android.content.Context
 import com.parse.Parse
 import com.parse.ParseObject
 import com.parse.ParseQuery
 import com.parse.facebook.ParseFacebookUtils
-import com.smlnskgmail.jaman.randomnotes.logic.repository.CloudDataSource
-import com.smlnskgmail.jaman.randomnotes.logic.repository.entities.Note
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.CloudDataSource
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.entities.Note
 
 class ParseDataSource(
     context: Context
@@ -30,7 +30,7 @@ class ParseDataSource(
 
     override fun saveAllNotes(
         notes: List<Note>,
-        errorOnSave: (e: Exception) -> Unit
+        errorOnSave: (e: Exception?) -> Unit
     ) {
         val objectsToSave = mutableListOf<ParseObject>()
         for (note in notes) {
@@ -46,9 +46,8 @@ class ParseDataSource(
                         note.parseObjectId = savedNote.objectId
                     }
                 }
-            } else {
-                errorOnSave(it)
             }
+            errorOnSave(it)
         }
     }
 

@@ -2,7 +2,7 @@ package com.smlnskgmail.jaman.randomnotes.tools
 
 import android.util.Log
 
-object LogTool {
+object L {
 
     fun e(exception: Exception) {
         Log.e(

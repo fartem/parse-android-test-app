@@ -1,4 +1,4 @@
-package com.smlnskgmail.jaman.randomnotes.logic.repository.sources.ormlite
+package com.smlnskgmail.jaman.randomnotes.logic.repository.impl.local.ormlite
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -7,9 +7,9 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper
 import com.j256.ormlite.support.ConnectionSource
 import com.j256.ormlite.table.TableUtils
 import com.smlnskgmail.jaman.randomnotes.R
-import com.smlnskgmail.jaman.randomnotes.logic.repository.LocalDataSource
-import com.smlnskgmail.jaman.randomnotes.logic.repository.entities.Note
-import com.smlnskgmail.jaman.randomnotes.tools.LogTool
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.LocalDataSource
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.entities.Note
+import com.smlnskgmail.jaman.randomnotes.tools.L
 import java.sql.SQLException
 
 class OrmLiteDataSource(
@@ -45,7 +45,7 @@ class OrmLiteDataSource(
                 TableUtils.createTable(connectionSource, clazz)
                 createDefaultData()
             } catch (e: SQLException) {
-                LogTool.e(e)
+                L.e(e)
             }
         }
     }
@@ -70,7 +70,7 @@ class OrmLiteDataSource(
         try {
             return getDao(Note::class.java).queryForAll()
         } catch (e: SQLException) {
-            LogTool.e(e)
+            L.e(e)
         }
         return emptyList()
     }
@@ -79,7 +79,7 @@ class OrmLiteDataSource(
         try {
             getDao(Note::class.java).createOrUpdate(note)
         } catch (e: SQLException) {
-            LogTool.e(e)
+            L.e(e)
         }
     }
 
@@ -87,7 +87,7 @@ class OrmLiteDataSource(
         try {
             getDao(Note::class.java).create(notes)
         } catch (e: SQLException) {
-            LogTool.e(e)
+            L.e(e)
         }
     }
 
@@ -95,7 +95,7 @@ class OrmLiteDataSource(
         try {
             getDao(Note::class.java).delete(note)
         } catch (e: SQLException) {
-            LogTool.e(e)
+            L.e(e)
         }
     }
 

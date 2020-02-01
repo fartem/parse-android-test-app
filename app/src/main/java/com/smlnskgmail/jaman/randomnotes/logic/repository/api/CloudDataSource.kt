@@ -1,12 +1,12 @@
-package com.smlnskgmail.jaman.randomnotes.logic.repository
+package com.smlnskgmail.jaman.randomnotes.logic.repository.api
 
-import com.smlnskgmail.jaman.randomnotes.logic.repository.entities.Note
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.entities.Note
 
 interface CloudDataSource {
 
     fun saveAllNotes(
         notes: List<Note>,
-        errorOnSave: (e: Exception) -> Unit
+        errorOnSave: (e: Exception?) -> Unit
     )
 
     fun restoreAllNotes(

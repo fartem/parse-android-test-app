@@ -7,8 +7,8 @@ import com.smlnskgmail.jaman.randomnotes.Application
 import com.smlnskgmail.jaman.randomnotes.MainActivity
 import com.smlnskgmail.jaman.randomnotes.R
 import com.smlnskgmail.jaman.randomnotes.components.fragments.BaseFragment
-import com.smlnskgmail.jaman.randomnotes.logic.repository.CloudAuth
-import com.smlnskgmail.jaman.randomnotes.tools.LogTool
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.CloudAuth
+import com.smlnskgmail.jaman.randomnotes.tools.L
 import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
 
@@ -62,7 +62,7 @@ class LoginFragment : BaseFragment() {
         if (exception == null) {
             (activity as MainActivity).loginComplete()
         } else {
-            LogTool.e(exception)
+            L.e(exception)
             (activity as MainActivity).loginError()
         }
     }

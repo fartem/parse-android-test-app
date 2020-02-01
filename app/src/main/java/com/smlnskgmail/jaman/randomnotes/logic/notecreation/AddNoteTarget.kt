@@ -1,6 +1,6 @@
 package com.smlnskgmail.jaman.randomnotes.logic.notecreation
 
-import com.smlnskgmail.jaman.randomnotes.logic.repository.entities.Note
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.entities.Note
 
 interface AddNoteTarget {
 

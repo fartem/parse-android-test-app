@@ -3,9 +3,9 @@ package com.smlnskgmail.jaman.randomnotes.components.fragments
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import com.smlnskgmail.jaman.randomnotes.components.fragments.lifecycle.FragmentResume
 
-abstract class BaseFragment : Fragment(), FragmentResume {
+abstract class BaseFragment : Fragment(),
+    FragmentResume {
 
     private lateinit var menu: Menu
 

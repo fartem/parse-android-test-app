@@ -1,7 +1,7 @@
-package com.smlnskgmail.jaman.randomnotes.logic.repository.sources.ormlite.config;
+package com.smlnskgmail.jaman.randomnotes.logic.repository.impl.local.ormlite.config;
 
 import com.j256.ormlite.android.apptools.OrmLiteConfigUtil;
-import com.smlnskgmail.jaman.randomnotes.logic.repository.sources.ormlite.OrmLiteDataSource;
+import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.local.ormlite.OrmLiteDataSource;
 
 import java.io.File;
 import java.lang.reflect.Method;

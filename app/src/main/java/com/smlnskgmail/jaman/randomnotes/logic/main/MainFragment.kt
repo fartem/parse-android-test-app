@@ -15,9 +15,9 @@ import com.smlnskgmail.jaman.randomnotes.logic.main.noteslist.NoteDeleteTarget
 import com.smlnskgmail.jaman.randomnotes.logic.main.noteslist.NotesAdapter
 import com.smlnskgmail.jaman.randomnotes.logic.notecreation.AddNoteBottomSheet
 import com.smlnskgmail.jaman.randomnotes.logic.notecreation.AddNoteTarget
-import com.smlnskgmail.jaman.randomnotes.logic.repository.CloudAuth
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.CloudAuth
 import com.smlnskgmail.jaman.randomnotes.logic.repository.DataRepository
-import com.smlnskgmail.jaman.randomnotes.logic.repository.entities.Note
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.entities.Note
 import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
 
@@ -40,7 +40,7 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteUserTarget, NoteDelete
 
     private fun addNotesToList() {
         notes.addAll(dataRepository.allNotes())
-        notes_list.setEmptyView(notes_list_empty_view)
+        notes_list.messageView = notes_list_empty_view
         notes_list.adapter = NotesAdapter(notes, this)
     }
 

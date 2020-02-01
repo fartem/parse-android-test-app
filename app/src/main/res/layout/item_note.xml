@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        style="@style/AppItemView">
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/AppItemView">
 
     <ImageView
-            style="@style/AppIconLabel"
-            tools:ignore="ContentDescription" />
+        style="@style/AppIconLabel"
+        tools:ignore="ContentDescription" />
 
     <LinearLayout style="@style/AppItemData">
 
         <TextView
-                android:id="@+id/note_title"
-                style="@style/AppTextPrimary"
-                tools:text="Title"/>
+            android:id="@+id/note_title"
+            style="@style/AppTextPrimary"
+            tools:text="Title"/>
 
         <TextView
-                android:id="@+id/note_subtitle"
-                style="@style/AppTextSecondary"
-                tools:text="Subtitle"/>
+            android:id="@+id/note_subtitle"
+            style="@style/AppTextSecondary"
+            tools:text="Subtitle"/>
 
     </LinearLayout>
 
     <ImageView
-            android:id="@+id/delete_note"
-            style="@style/AppIconTrash"
-            tools:ignore="ContentDescription" />
+        android:id="@+id/delete_note"
+        style="@style/AppIconTrash"
+        tools:ignore="ContentDescription" />
 
 </LinearLayout>

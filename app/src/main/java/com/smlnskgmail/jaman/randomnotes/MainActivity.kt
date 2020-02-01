@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.smlnskgmail.jaman.randomnotes.components.fragments.BaseFragment
-import com.smlnskgmail.jaman.randomnotes.components.fragments.lifecycle.FragmentResume
+import com.smlnskgmail.jaman.randomnotes.components.fragments.FragmentResume
 import com.smlnskgmail.jaman.randomnotes.logic.login.LoginFragment
 import com.smlnskgmail.jaman.randomnotes.logic.main.MainFragment
 
