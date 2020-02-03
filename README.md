@@ -25,6 +25,21 @@ __Not handling exceptions__
 * Internet connection unavailable status;
 * Parse Server connection unavailable status.
 
+Google auth
+-------------
+
+__Resources__
+
+* [Official Guide](https://developers.google.com/identity/sign-in/android/start-integrating)
+
+__Usage__
+
+In `preferences.xml` replace this value to own analogue:
+
+```xml
+<string name="google_web_app_token_id">[APP_ID]</string>
+```
+
 Facebook auth
 -------------
 
