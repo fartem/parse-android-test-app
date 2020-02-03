@@ -15,6 +15,7 @@ import com.parse.SaveCallback
 import com.parse.facebook.ParseFacebookUtils
 import com.smlnskgmail.jaman.randomnotes.R
 import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudAuth
+import java.lang.IllegalStateException
 
 class ParseAuth : CloudAuth {
 
@@ -112,17 +113,17 @@ class ParseAuth : CloudAuth {
                 val authData: MutableMap<String, String?> = HashMap()
                 authData["id"] = signInAccount.id
                 authData["id_token"] = signInAccount.idToken
-                val email = signInAccount.email
                 ParseUser.logInWithInBackground("google", authData)
-                    .continueWith<Any?> { task: Task<ParseUser?> ->
-                        val parseUser = task.result
-                        if (parseUser != null) {
-                            parseUser.email = email
-                            parseUser.saveInBackground(SaveCallback { e: ParseException? ->
-                                googleAuthCallback!!.sendResult(e)
-                            })
+                    .continueWith<Any?> {
+                        if (it.result == null) {
+                            googleAuthCallback!!.sendResult(null)
+                        } else {
+                            googleAuthCallback!!.sendResult(
+                                IllegalStateException(
+                                    "Google auth error!"
+                                )
+                            )
                         }
-                        null
                     }
             } else {
                 googleAuthCallback!!.sendResult(
