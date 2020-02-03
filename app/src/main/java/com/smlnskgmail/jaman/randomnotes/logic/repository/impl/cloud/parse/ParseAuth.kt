@@ -3,19 +3,15 @@ package com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.parse
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import bolts.Task
 import com.facebook.AccessToken
 import com.facebook.login.LoginManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.parse.ParseException
 import com.parse.ParseUser
-import com.parse.SaveCallback
 import com.parse.facebook.ParseFacebookUtils
 import com.smlnskgmail.jaman.randomnotes.R
 import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudAuth
-import java.lang.IllegalStateException
 
 class ParseAuth : CloudAuth {
 
