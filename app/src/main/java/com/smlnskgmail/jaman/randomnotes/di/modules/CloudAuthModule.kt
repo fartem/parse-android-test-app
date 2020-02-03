@@ -1,6 +1,6 @@
-package com.smlnskgmail.jaman.randomnotes.di
+package com.smlnskgmail.jaman.randomnotes.di.modules
 
-import com.smlnskgmail.jaman.randomnotes.logic.repository.api.CloudAuth
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudAuth
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -13,7 +13,7 @@ class CloudAuthModule(
     @Provides
     @Singleton
     fun cloudAuth(): CloudAuth {
-        return cloudAuth;
+        return cloudAuth
     }
 
 }

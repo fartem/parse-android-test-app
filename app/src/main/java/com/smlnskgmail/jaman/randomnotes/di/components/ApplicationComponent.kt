@@ -1,6 +1,8 @@
-package com.smlnskgmail.jaman.randomnotes.di
+package com.smlnskgmail.jaman.randomnotes.di.components
 
 import com.smlnskgmail.jaman.randomnotes.Application
+import com.smlnskgmail.jaman.randomnotes.di.modules.CloudAuthModule
+import com.smlnskgmail.jaman.randomnotes.di.modules.DataRepositoryModule
 import com.smlnskgmail.jaman.randomnotes.logic.login.LoginFragment
 import com.smlnskgmail.jaman.randomnotes.logic.main.MainFragment
 import dagger.Component

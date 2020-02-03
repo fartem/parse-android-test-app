@@ -1,16 +1,16 @@
 package com.smlnskgmail.jaman.randomnotes
 
 import android.app.Application
-import com.smlnskgmail.jaman.randomnotes.di.ApplicationComponent
-import com.smlnskgmail.jaman.randomnotes.di.CloudAuthModule
-import com.smlnskgmail.jaman.randomnotes.di.DaggerApplicationComponent
-import com.smlnskgmail.jaman.randomnotes.di.DataRepositoryModule
+import com.smlnskgmail.jaman.randomnotes.di.components.ApplicationComponent
+import com.smlnskgmail.jaman.randomnotes.di.components.DaggerApplicationComponent
+import com.smlnskgmail.jaman.randomnotes.di.modules.CloudAuthModule
+import com.smlnskgmail.jaman.randomnotes.di.modules.DataRepositoryModule
 import com.smlnskgmail.jaman.randomnotes.logic.repository.DataRepository
 import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.fake.FakeCloudAuth
 import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.fake.FakeCloudDataSource
-import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.local.ormlite.OrmLiteDataSource
 import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.parse.ParseAuth
 import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.parse.ParseDataSource
+import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.local.ormlite.OrmLiteDataSource
 import javax.inject.Inject
 
 class Application : Application() {

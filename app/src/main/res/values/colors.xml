@@ -23,4 +23,5 @@
     <color name="colorWhite">#FFF</color>
     <color name="colorBackgroundFab">#4d000000</color>
     <color name="colorUnselectedItem">#40000000</color>
+    <color name="colorGoogleAuth">#F3F3F3</color>
 </resources>

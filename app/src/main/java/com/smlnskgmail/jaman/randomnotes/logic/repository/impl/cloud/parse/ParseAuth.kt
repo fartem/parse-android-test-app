@@ -1,53 +1,70 @@
 package com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.parse
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
-import android.os.Bundle
-import androidx.fragment.app.Fragment
+import bolts.Task
 import com.facebook.AccessToken
-import com.facebook.GraphRequest
 import com.facebook.login.LoginManager
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.parse.ParseException
 import com.parse.ParseUser
+import com.parse.SaveCallback
 import com.parse.facebook.ParseFacebookUtils
-import com.smlnskgmail.jaman.randomnotes.logic.repository.api.CloudAuth
+import com.smlnskgmail.jaman.randomnotes.R
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudAuth
 
-class ParseAuth :
-    CloudAuth {
+class ParseAuth : CloudAuth {
+
+    private var googleAuthCallback: GoogleAuthCallback? = null
+
+    companion object {
+
+        const val googleAuthRequest = 101
+
+    }
 
     override fun isAuthorized(): Boolean {
         return ParseUser.getCurrentUser() != null
     }
 
-    override fun signInWithFacebook(
-        fragment: Fragment,
-        afterFacebookLogin: (e: Exception) -> Unit
+    override fun logInWithGoogle(
+        activity: Activity,
+        afterFacebookLogin: (e: Exception?) -> Unit
     ) {
-        val emailField = "email"
-        ParseFacebookUtils.logInWithReadPermissionsInBackground(fragment,
-            listOf("public_profile", emailField)) { user, e ->
-            if (user != null) {
-                if (user.email == null) {
-                    val graphRequest = GraphRequest.newMeRequest(
-                        AccessToken.getCurrentAccessToken()) { data, response ->
-                        if (data != null) {
-                            user.email = data.getString(emailField)
-                            user.saveInBackground {
-                                afterFacebookLogin(it)
-                            }
-                        } else {
-                            afterFacebookLogin(e)
-                        }
-                    }
-                    val parameters = Bundle()
-                    parameters.putString("fields", emailField)
-                    graphRequest.parameters = parameters
-                    graphRequest.executeAsync()
-                } else {
-                    afterFacebookLogin(e)
-                }
-            } else if (e != null) {
-                afterFacebookLogin(e)
+        val signInOptions = getGoogleSignInOptions(activity)
+        val signInClient = GoogleSignIn.getClient(activity, signInOptions)
+
+        googleAuthCallback = object : GoogleAuthCallback {
+            override fun sendResult(exception: Exception?) {
+                afterFacebookLogin(exception)
             }
         }
+
+        activity.startActivityForResult(
+            signInClient.signInIntent,
+            googleAuthRequest
+        )
+    }
+
+    private fun getGoogleSignInOptions(context: Context): GoogleSignInOptions {
+        return GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(context.getString(R.string.google_web_app_token_id))
+            .requestEmail()
+            .build()
+    }
+
+
+    override fun logInWithFacebook(
+        activity: Activity,
+        afterFacebookLogin: (e: Exception?) -> Unit
+    ) {
+        ParseFacebookUtils.logInWithReadPermissionsInBackground(
+            activity,
+            listOf("public_profile")
+        ) { _, e -> afterFacebookLogin(e) }
     }
 
     override fun signUpWithEmail(
@@ -80,7 +97,44 @@ class ParseAuth :
         resultCode: Int,
         data: Intent?
     ) {
-        ParseFacebookUtils.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == googleAuthRequest) {
+            bindForGoogle(data)
+        } else {
+            ParseFacebookUtils.onActivityResult(requestCode, resultCode, data)
+        }
+    }
+
+    private fun bindForGoogle(data: Intent?) {
+        try {
+            val signInAccount = GoogleSignIn.getSignedInAccountFromIntent(data)
+                    .getResult(ApiException::class.java)
+            if (signInAccount != null) {
+                val authData: MutableMap<String, String?> = HashMap()
+                authData["id"] = signInAccount.id
+                authData["id_token"] = signInAccount.idToken
+                val email = signInAccount.email
+                ParseUser.logInWithInBackground("google", authData)
+                    .continueWith<Any?> { task: Task<ParseUser?> ->
+                        val parseUser = task.result
+                        if (parseUser != null) {
+                            parseUser.email = email
+                            parseUser.saveInBackground(SaveCallback { e: ParseException? ->
+                                googleAuthCallback!!.sendResult(e)
+                            })
+                        }
+                        null
+                    }
+            } else {
+                googleAuthCallback!!.sendResult(
+                    NullPointerException(
+                        "Google account must not be null!"
+                    )
+                )
+            }
+        } catch (e: ApiException) {
+            googleAuthCallback!!.sendResult(e)
+        }
+
     }
 
     override fun logOut(afterLogOut: (e: Exception?) -> Unit) {
@@ -94,6 +148,12 @@ class ParseAuth :
         ParseUser.logOutInBackground {
             afterLogOut(it)
         }
+    }
+
+    private interface GoogleAuthCallback {
+
+        fun sendResult(exception: Exception?)
+
     }
 
 }

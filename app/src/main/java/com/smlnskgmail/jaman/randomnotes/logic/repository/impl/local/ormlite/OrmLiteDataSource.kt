@@ -7,8 +7,8 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper
 import com.j256.ormlite.support.ConnectionSource
 import com.j256.ormlite.table.TableUtils
 import com.smlnskgmail.jaman.randomnotes.R
-import com.smlnskgmail.jaman.randomnotes.logic.repository.api.LocalDataSource
 import com.smlnskgmail.jaman.randomnotes.logic.repository.api.entities.Note
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.local.LocalDataSource
 import com.smlnskgmail.jaman.randomnotes.tools.L
 import java.sql.SQLException
 

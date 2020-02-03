@@ -51,6 +51,14 @@
         <item name="android:textColor">@color/colorWhite</item>
     </style>
 
+    <style name="AppGoogleLoginButton" parent="AppLoginButton">
+        <item name="android:paddingStart">12dp</item>
+        <item name="drawableStart">@drawable/ic_google_logo</item>
+        <item name="android:backgroundTint">@color/colorGoogleAuth</item>
+        <item name="android:text">@string/action_continue_with_google</item>
+        <item name="android:textColor">@color/common_google_signin_btn_text_light_default</item>
+    </style>
+
     <style name="AppFacebookLoginButton" parent="AppLoginButton">
         <item name="android:paddingStart">12dp</item>
         <item name="drawableStart">@drawable/ic_facebook_logo</item>

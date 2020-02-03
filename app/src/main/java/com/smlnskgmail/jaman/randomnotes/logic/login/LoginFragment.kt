@@ -7,7 +7,7 @@ import com.smlnskgmail.jaman.randomnotes.Application
 import com.smlnskgmail.jaman.randomnotes.MainActivity
 import com.smlnskgmail.jaman.randomnotes.R
 import com.smlnskgmail.jaman.randomnotes.components.fragments.BaseFragment
-import com.smlnskgmail.jaman.randomnotes.logic.repository.api.CloudAuth
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudAuth
 import com.smlnskgmail.jaman.randomnotes.tools.L
 import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
@@ -27,6 +27,9 @@ class LoginFragment : BaseFragment() {
         }
         login_action.setOnClickListener {
             loginWithEmail()
+        }
+        google_login.setOnClickListener {
+            loginWithGoogle()
         }
         facebook_login.setOnClickListener {
             loginWithFacebook()
@@ -67,8 +70,14 @@ class LoginFragment : BaseFragment() {
         }
     }
 
+    private fun loginWithGoogle() {
+        cloudAuth.logInWithGoogle(activity!!) {
+            handleLoginResult(it)
+        }
+    }
+
     private fun loginWithFacebook() {
-        cloudAuth.signInWithFacebook(this) {
+        cloudAuth.logInWithFacebook(activity!!) {
             handleLoginResult(it)
         }
     }

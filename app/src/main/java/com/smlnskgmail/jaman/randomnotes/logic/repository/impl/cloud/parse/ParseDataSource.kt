@@ -5,7 +5,7 @@ import com.parse.Parse
 import com.parse.ParseObject
 import com.parse.ParseQuery
 import com.parse.facebook.ParseFacebookUtils
-import com.smlnskgmail.jaman.randomnotes.logic.repository.api.CloudDataSource
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudDataSource
 import com.smlnskgmail.jaman.randomnotes.logic.repository.api.entities.Note
 
 class ParseDataSource(

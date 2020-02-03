@@ -54,9 +54,14 @@
             android:text="@string/message_not_account"/>
 
         <com.smlnskgmail.jaman.randomnotes.components.views.VectorDrawableButton
+            android:id="@+id/google_login"
+            style="@style/AppGoogleLoginButton"
+            android:layout_marginTop="@dimen/margin_large"/>
+
+        <com.smlnskgmail.jaman.randomnotes.components.views.VectorDrawableButton
             android:id="@+id/facebook_login"
             style="@style/AppFacebookLoginButton"
-            android:layout_marginTop="@dimen/margin_large"/>
+            android:layout_marginTop="@dimen/margin_small"/>
 
     </LinearLayout>
 

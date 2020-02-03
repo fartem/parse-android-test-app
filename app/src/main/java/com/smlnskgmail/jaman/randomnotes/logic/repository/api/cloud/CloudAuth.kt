@@ -1,15 +1,20 @@
-package com.smlnskgmail.jaman.randomnotes.logic.repository.api
+package com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud
 
+import android.app.Activity
 import android.content.Intent
-import androidx.fragment.app.Fragment
 
 interface CloudAuth {
 
     fun isAuthorized(): Boolean
 
-    fun signInWithFacebook(
-        fragment: Fragment,
-        afterFacebookLogin: (e: Exception) -> Unit
+    fun logInWithGoogle(
+        activity: Activity,
+        afterFacebookLogin: (e: Exception?) -> Unit
+    )
+
+    fun logInWithFacebook(
+        activity: Activity,
+        afterFacebookLogin: (e: Exception?) -> Unit
     )
 
     fun signUpWithEmail(

@@ -1,4 +1,4 @@
-package com.smlnskgmail.jaman.randomnotes.logic.repository.api
+package com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud
 
 import com.smlnskgmail.jaman.randomnotes.logic.repository.api.entities.Note
 

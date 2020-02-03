@@ -1,8 +1,8 @@
 package com.smlnskgmail.jaman.randomnotes.logic.repository
 
-import com.smlnskgmail.jaman.randomnotes.logic.repository.api.CloudDataSource
-import com.smlnskgmail.jaman.randomnotes.logic.repository.api.LocalDataSource
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudDataSource
 import com.smlnskgmail.jaman.randomnotes.logic.repository.api.entities.Note
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.local.LocalDataSource
 
 class DataRepository(
     private val localDataSource: LocalDataSource,

@@ -15,8 +15,8 @@ import com.smlnskgmail.jaman.randomnotes.logic.main.noteslist.NoteDeleteTarget
 import com.smlnskgmail.jaman.randomnotes.logic.main.noteslist.NotesAdapter
 import com.smlnskgmail.jaman.randomnotes.logic.notecreation.AddNoteBottomSheet
 import com.smlnskgmail.jaman.randomnotes.logic.notecreation.AddNoteTarget
-import com.smlnskgmail.jaman.randomnotes.logic.repository.api.CloudAuth
 import com.smlnskgmail.jaman.randomnotes.logic.repository.DataRepository
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudAuth
 import com.smlnskgmail.jaman.randomnotes.logic.repository.api.entities.Note
 import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject

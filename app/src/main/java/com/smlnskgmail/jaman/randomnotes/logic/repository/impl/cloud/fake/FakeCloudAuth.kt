@@ -1,9 +1,8 @@
 package com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.fake
 
+import android.app.Activity
 import android.content.Intent
-import androidx.fragment.app.Fragment
-import com.smlnskgmail.jaman.randomnotes.logic.repository.api.CloudAuth
-import java.lang.IllegalStateException
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudAuth
 
 class FakeCloudAuth : CloudAuth {
 
@@ -11,13 +10,24 @@ class FakeCloudAuth : CloudAuth {
         return true
     }
 
-    override fun signInWithFacebook(
-        fragment: Fragment,
-        afterFacebookLogin: (e: Exception) -> Unit
+    override fun logInWithFacebook(
+        activity: Activity,
+        afterFacebookLogin: (e: Exception?) -> Unit
     ) {
         afterFacebookLogin(
             IllegalStateException(
                 "Fake impl cannot support Facebook auth!"
+            )
+        )
+    }
+
+    override fun logInWithGoogle(
+        activity: Activity,
+        afterFacebookLogin: (e: Exception?) -> Unit
+    ) {
+        afterFacebookLogin(
+            IllegalStateException(
+                "Fake impl cannot support Google auth!"
             )
         )
     }
