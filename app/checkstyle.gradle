@@ -10,7 +10,7 @@ task checkstyle(type: Checkstyle) {
     group 'verification'
 
     config project.resources.text.fromUri(
-            "https://raw.githubusercontent.com/fartem/repository-rules/master/java/checkstyle/checkstyle.xml"
+            "https://raw.githubusercontent.com/fartem/repository-rules/master/rules/java/checkstyle/checkstyle.xml"
     )
     source rootProject.file('app/src/main/java/')
     classpath = files()
