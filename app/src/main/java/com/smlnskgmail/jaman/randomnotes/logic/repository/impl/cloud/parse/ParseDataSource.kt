@@ -7,6 +7,8 @@ import com.parse.ParseQuery
 import com.parse.facebook.ParseFacebookUtils
 import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudDataSource
 import com.smlnskgmail.jaman.randomnotes.logic.repository.api.entities.Note
+import okhttp3.OkHttpClient
+import java.util.concurrent.TimeUnit
 
 class ParseDataSource(
     context: Context
@@ -19,7 +21,14 @@ class ParseDataSource(
     private val columnNoteSubtitle = "subtitle"
 
     init {
+        @Suppress("MagicNumber")
+        val httpClient = OkHttpClient.Builder()
+            .connectTimeout(5, TimeUnit.SECONDS)
+            .writeTimeout(5, TimeUnit.SECONDS)
+            .readTimeout(5, TimeUnit.SECONDS)
+            .callTimeout(5, TimeUnit.SECONDS)
         val parseConfig = Parse.Configuration.Builder(context)
+            .clientBuilder(httpClient)
             .server("SERVER_ADDRESS")
             .applicationId("APPLICATION_ID")
             .clientKey("CLIENT_KEY")
