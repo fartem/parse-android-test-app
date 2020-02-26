@@ -6,6 +6,7 @@ apply plugin: 'kotlin-kapt'
 apply from: 'detekt.gradle'
 apply from: 'checkstyle.gradle'
 apply from: 'cpd.gradle'
+apply from: 'jacoco.gradle'
 
 android {
     compileSdkVersion 29
@@ -18,6 +19,9 @@ android {
         versionName "2.3.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    lintOptions {
+        abortOnError false
     }
     testOptions {
         animationsDisabled = true

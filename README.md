@@ -4,6 +4,7 @@ Random Notes
 =============
 
 ![Travis CI](https://img.shields.io/travis/fartem/parse-android-test-app)
+![Codecov](https://img.shields.io/codecov/c/github/fartem/parse-android-test-app)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android%20Parse%20Server%20Client-brightgreen.svg?style=flat)](https://android-arsenal.com/details/3/7906)
 ![Open issues](https://img.shields.io/github/issues-raw/fartem/parse-android-test-app.svg?color=ff534a)
 
@@ -17,8 +18,8 @@ __Features__
 * managing the simple entity (Note);
 * sync data with the server;
 * restore data from the server;
-* sign up from the application with email address or Facebook account;
-* sign in to the server with email or Facebook.
+* sign up from the application with email address, Google or Facebook account;
+* sign in to the server with email address, Google or Facebook account.
 
 __Not handling exceptions__
 
