@@ -10,15 +10,15 @@ apply from: 'jacoco.gradle'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion '29.0.2'
     defaultConfig {
-        applicationId "com.smlnskgmail.jaman.randomnotes"
+        applicationId 'com.smlnskgmail.jaman.randomnotes'
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
-        versionName "2.3.2"
+        versionName '2.3.2'
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     lintOptions {
         abortOnError false
@@ -34,7 +34,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation "androidx.preference:preference:1.1.0"
+    implementation 'androidx.preference:preference:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
 
     // AdaptiveRecyclerView
