@@ -21,7 +21,6 @@ before_install:
 
 script:
   - ./gradlew build
-  - ./gradlew checkstyle
   - ./gradlew jacocoTestReport
 
 after_success:

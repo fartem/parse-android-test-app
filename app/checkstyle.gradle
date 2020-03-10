@@ -20,3 +20,5 @@ task checkstyle(type: Checkstyle) {
         xml.destination rootProject.file("checkstyle-result.xml")
     }
 }
+
+build.dependsOn 'checkstyle'
