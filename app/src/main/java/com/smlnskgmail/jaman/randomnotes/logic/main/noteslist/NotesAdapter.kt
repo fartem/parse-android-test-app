@@ -25,8 +25,15 @@ class NotesAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = NotesHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.item_note, parent, false),
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ) = NotesHolder(
+        LayoutInflater.from(parent.context).inflate(
+            R.layout.item_note,
+            parent,
+            false
+        ),
         noteDeleteTarget
     )
 

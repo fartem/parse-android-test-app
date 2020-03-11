@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 
-abstract class BaseFragment : Fragment(),
-    FragmentResume {
+abstract class BaseFragment : Fragment(), FragmentResume {
 
     private lateinit var menu: Menu
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
         setHasOptionsMenu(true)
         setTitle()
     }
@@ -30,11 +32,18 @@ abstract class BaseFragment : Fragment(),
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = inflater.inflate(getLayoutResId(), container, false)
+    ): View = inflater.inflate(
+        layoutResId(),
+        container,
+        false
+    )
 
-    abstract fun getLayoutResId(): Int
+    abstract fun layoutResId(): Int
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    override fun onCreateOptionsMenu(
+        menu: Menu,
+        inflater: MenuInflater
+    ) {
         if (showMenuInToolbar()) {
             inflater.inflate(getToolbarMenuResId(), menu)
         } else {

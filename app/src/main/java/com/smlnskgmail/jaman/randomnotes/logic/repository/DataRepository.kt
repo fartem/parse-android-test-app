@@ -21,7 +21,10 @@ class DataRepository(
         localDataSource.createNotes(notes)
     }
 
-    fun syncNotes(notes: List<Note>, errorOnSave: (e: Exception?) -> Unit) {
+    fun syncNotes(
+        notes: List<Note>,
+        errorOnSave: (e: Exception?) -> Unit
+    ) {
         cloudDataSource.saveAllNotes(notes, errorOnSave)
     }
 

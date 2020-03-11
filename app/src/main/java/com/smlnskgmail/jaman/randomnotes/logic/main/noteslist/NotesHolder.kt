@@ -14,7 +14,9 @@ class NotesHolder(
         itemView.note_title.text = note.title
         itemView.note_subtitle.text = note.subtitle
         itemView.delete_note.setOnClickListener {
-            noteDeleteTarget.onNoteDelete(note.positionInList)
+            noteDeleteTarget.onNoteDelete(
+                note.positionInList
+            )
         }
     }
 

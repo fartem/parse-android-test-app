@@ -6,6 +6,8 @@ import com.smlnskgmail.jaman.randomnotes.di.components.DaggerApplicationComponen
 import com.smlnskgmail.jaman.randomnotes.di.modules.CloudAuthModule
 import com.smlnskgmail.jaman.randomnotes.di.modules.DataRepositoryModule
 import com.smlnskgmail.jaman.randomnotes.logic.repository.DataRepository
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudAuth
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudDataSource
 import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.fake.FakeCloudAuth
 import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.fake.FakeCloudDataSource
 import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.parse.ParseAuth
@@ -26,38 +28,31 @@ class Application : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        productionStart()
+        configureRepositories()
     }
 
-    private fun productionStart() {
+    private fun configureRepositories() {
+        val cloudDataSource: CloudDataSource
+        val cloudAuth: CloudAuth
+        @Suppress("ConstantConditionIf")
+        if (BuildConfig.CLOUD_REPOSITORY == "PARSE") {
+            cloudDataSource = ParseDataSource(this)
+            cloudAuth = ParseAuth()
+        } else {
+            cloudDataSource = FakeCloudDataSource()
+            cloudAuth = FakeCloudAuth()
+        }
+
         applicationComponent = DaggerApplicationComponent.builder()
             .withDataRepository(
                 DataRepositoryModule(
                     OrmLiteDataSource(this),
-                    ParseDataSource(this)
+                    cloudDataSource
                 )
             )
             .withCloudAuth(
                 CloudAuthModule(
-                    ParseAuth()
-                )
-            )
-            .build()
-        applicationComponent.inject(this)
-    }
-
-    @Suppress("unused")
-    private fun testStart() {
-        applicationComponent = DaggerApplicationComponent.builder()
-            .withDataRepository(
-                DataRepositoryModule(
-                    OrmLiteDataSource(this),
-                    FakeCloudDataSource()
-                )
-            )
-            .withCloudAuth(
-                CloudAuthModule(
-                    FakeCloudAuth()
+                    cloudAuth
                 )
             )
             .build()

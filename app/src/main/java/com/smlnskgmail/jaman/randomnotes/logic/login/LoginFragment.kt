@@ -19,7 +19,10 @@ class LoginFragment : BaseFragment() {
     @Inject
     lateinit var cloudAuth: CloudAuth
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
         super.onViewCreated(view, savedInstanceState)
         Application.applicationComponent.inject(this)
         register_account.setOnClickListener {
@@ -94,7 +97,7 @@ class LoginFragment : BaseFragment() {
 
     override fun showToolbarMenu() = false
 
-    override fun getLayoutResId() = R.layout.fragment_login
+    override fun layoutResId() = R.layout.fragment_login
 
     override fun showMenuInToolbar() = false
 

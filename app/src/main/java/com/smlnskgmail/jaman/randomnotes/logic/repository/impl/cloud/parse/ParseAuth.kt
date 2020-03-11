@@ -32,7 +32,10 @@ class ParseAuth : CloudAuth {
         afterFacebookLogin: (e: Exception?) -> Unit
     ) {
         val signInOptions = getGoogleSignInOptions(activity)
-        val signInClient = GoogleSignIn.getClient(activity, signInOptions)
+        val signInClient = GoogleSignIn.getClient(
+            activity,
+            signInOptions
+        )
 
         googleAuthCallback = object : GoogleAuthCallback {
             override fun sendResult(exception: Exception?) {
@@ -97,7 +100,11 @@ class ParseAuth : CloudAuth {
         if (requestCode == googleAuthRequest) {
             bindForGoogle(data)
         } else {
-            ParseFacebookUtils.onActivityResult(requestCode, resultCode, data)
+            ParseFacebookUtils.onActivityResult(
+                requestCode,
+                resultCode,
+                data
+            )
         }
     }
 

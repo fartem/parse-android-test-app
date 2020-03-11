@@ -57,7 +57,11 @@ class FakeCloudAuth : CloudAuth {
         )
     }
 
-    override fun bindForAuth(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun bindForAuth(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?
+    ) {
 
     }
 

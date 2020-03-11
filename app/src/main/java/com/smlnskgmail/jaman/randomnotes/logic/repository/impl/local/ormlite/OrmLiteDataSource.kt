@@ -42,7 +42,10 @@ class OrmLiteDataSource(
     ) {
         for (clazz in databaseEntities) {
             try {
-                TableUtils.createTable(connectionSource, clazz)
+                TableUtils.createTable(
+                    connectionSource,
+                    clazz
+                )
                 createDefaultData()
             } catch (e: SQLException) {
                 L.e(e)

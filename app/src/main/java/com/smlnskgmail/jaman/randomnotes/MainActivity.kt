@@ -25,7 +25,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        supportFragmentManager.addOnBackStackChangedListener(fragmentBackStackListener)
+        supportFragmentManager.addOnBackStackChangedListener(
+            fragmentBackStackListener
+        )
         showBaseFragment(MainFragment(), false)
     }
 
@@ -48,18 +50,25 @@ class MainActivity : AppCompatActivity() {
         showBaseFragment(LoginFragment())
     }
 
-    private fun showBaseFragment(baseFragment: BaseFragment, inBackStack: Boolean= true) {
+    private fun showBaseFragment(
+        baseFragment: BaseFragment,
+        inBackStack: Boolean = true
+    ) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.add(R.id.container, baseFragment)
         if (inBackStack) {
-            fragmentTransaction.addToBackStack(baseFragment::class.java.name)
+            fragmentTransaction.addToBackStack(
+                baseFragment::class.java.name
+            )
         }
         fragmentTransaction.commit()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        supportFragmentManager.removeOnBackStackChangedListener(fragmentBackStackListener)
+        supportFragmentManager.removeOnBackStackChangedListener(
+            fragmentBackStackListener
+        )
     }
 
 }

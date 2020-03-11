@@ -16,10 +16,14 @@ public class VectorDrawableButton extends AppCompatButton {
 
     private static final int DEFAULT_ID_VALUE = -1;
 
-    private static final int DRAWABLE_TOP_ID = R.styleable.VectorDrawableButton_drawableTop;
-    private static final int DRAWABLE_START_ID = R.styleable.VectorDrawableButton_drawableStart;
-    private static final int DRAWABLE_END_ID = R.styleable.VectorDrawableButton_drawableEnd;
-    private static final int DRAWABLE_BOTTOM_ID = R.styleable.VectorDrawableButton_drawableBottom;
+    private static final int DRAWABLE_TOP_ID
+            = R.styleable.VectorDrawableButton_drawableTop;
+    private static final int DRAWABLE_START_ID
+            = R.styleable.VectorDrawableButton_drawableStart;
+    private static final int DRAWABLE_END_ID
+            = R.styleable.VectorDrawableButton_drawableEnd;
+    private static final int DRAWABLE_BOTTOM_ID
+            = R.styleable.VectorDrawableButton_drawableBottom;
 
     public VectorDrawableButton(Context context) {
         super(context);
@@ -30,7 +34,11 @@ public class VectorDrawableButton extends AppCompatButton {
         initSupportVectorDrawablesAttrs(attrs);
     }
 
-    public VectorDrawableButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public VectorDrawableButton(
+            Context context,
+            AttributeSet attrs,
+            int defStyleAttr
+    ) {
         super(context, attrs, defStyleAttr);
         initSupportVectorDrawablesAttrs(attrs);
     }
@@ -56,24 +64,48 @@ public class VectorDrawableButton extends AppCompatButton {
             drawableEnd = getDrawable(attributeArray, DRAWABLE_END_ID);
             drawableBottom = getDrawable(attributeArray, DRAWABLE_BOTTOM_ID);
         } else {
-            int drawableStartId = getResourceId(attributeArray, DRAWABLE_START_ID);
+            int drawableStartId = getResourceId(
+                    attributeArray,
+                    DRAWABLE_START_ID
+            );
             if (drawableStartId != DEFAULT_ID_VALUE) {
-                drawableStart = AppCompatResources.getDrawable(getContext(), drawableStartId);
+                drawableStart = AppCompatResources.getDrawable(
+                        getContext(),
+                        drawableStartId
+                );
             }
 
-            int drawableTopId = getResourceId(attributeArray, DRAWABLE_TOP_ID);
+            int drawableTopId = getResourceId(
+                    attributeArray,
+                    DRAWABLE_TOP_ID
+            );
             if (drawableTopId != DEFAULT_ID_VALUE) {
-                drawableTop = AppCompatResources.getDrawable(getContext(), drawableTopId);
+                drawableTop = AppCompatResources.getDrawable(
+                        getContext(),
+                        drawableTopId
+                );
             }
 
-            int drawableEndId = getResourceId(attributeArray, DRAWABLE_END_ID);
+            int drawableEndId = getResourceId(
+                    attributeArray,
+                    DRAWABLE_END_ID
+            );
             if (drawableEndId != DEFAULT_ID_VALUE) {
-                drawableEnd = AppCompatResources.getDrawable(getContext(), drawableEndId);
+                drawableEnd = AppCompatResources.getDrawable(
+                        getContext(),
+                        drawableEndId
+                );
             }
 
-            int drawableBottomId = getResourceId(attributeArray, DRAWABLE_BOTTOM_ID);
+            int drawableBottomId = getResourceId(
+                    attributeArray,
+                    DRAWABLE_BOTTOM_ID
+            );
             if (drawableBottomId != DEFAULT_ID_VALUE) {
-                drawableBottom = AppCompatResources.getDrawable(getContext(), drawableBottomId);
+                drawableBottom = AppCompatResources.getDrawable(
+                        getContext(),
+                        drawableBottomId
+                );
             }
         }
 
@@ -88,12 +120,21 @@ public class VectorDrawableButton extends AppCompatButton {
         attributeArray.recycle();
     }
 
-    private Drawable getDrawable(TypedArray attributeArray, int resId) {
+    private Drawable getDrawable(
+            TypedArray attributeArray,
+            int resId
+    ) {
         return attributeArray.getDrawable(resId);
     }
 
-    private int getResourceId(TypedArray attributeArray, int resId) {
-        return attributeArray.getResourceId(resId, DEFAULT_ID_VALUE);
+    private int getResourceId(
+            TypedArray attributeArray,
+            int resId
+    ) {
+        return attributeArray.getResourceId(
+                resId,
+                DEFAULT_ID_VALUE
+        );
     }
 
 }

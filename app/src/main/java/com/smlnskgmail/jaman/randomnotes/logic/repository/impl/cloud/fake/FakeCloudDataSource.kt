@@ -3,8 +3,7 @@ package com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.fake
 import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudDataSource
 import com.smlnskgmail.jaman.randomnotes.logic.repository.api.entities.Note
 
-class FakeCloudDataSource :
-    CloudDataSource {
+class FakeCloudDataSource : CloudDataSource {
 
     private val storage = mutableListOf<Note>()
 

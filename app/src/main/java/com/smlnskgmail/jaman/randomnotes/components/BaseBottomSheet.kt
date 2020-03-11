@@ -1,4 +1,4 @@
-package com.smlnskgmail.jaman.randomnotes.components.bottomsheets
+package com.smlnskgmail.jaman.randomnotes.components
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,8 +11,8 @@ abstract class BaseBottomSheet : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?, savedInstanceState: Bundle?
-    ): View = inflater.inflate(getLayoutResId(), container)
+    ): View = inflater.inflate(layoutResId(), container)
 
-    abstract fun getLayoutResId(): Int
+    abstract fun layoutResId(): Int
 
 }

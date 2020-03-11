@@ -5,7 +5,7 @@ import android.os.Bundle
 import com.parse.FunctionCallback
 import com.parse.ParseCloud
 import com.smlnskgmail.jaman.randomnotes.R
-import com.smlnskgmail.jaman.randomnotes.components.dialogs.BaseDialog
+import com.smlnskgmail.jaman.randomnotes.components.BaseDialog
 import kotlinx.android.synthetic.main.dialog_invite.*
 
 class InviteDialog(context: Context) : BaseDialog(context) {
@@ -38,6 +38,6 @@ class InviteDialog(context: Context) : BaseDialog(context) {
         this.inviteUserTarget = inviteUserTarget
     }
 
-    override fun getLayoutResId() = R.layout.dialog_invite
+    override fun layoutResId() = R.layout.dialog_invite
 
 }

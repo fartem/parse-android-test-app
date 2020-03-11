@@ -16,15 +16,37 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
-        versionName '2.3.2'
+        versionName '2.4.0'
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+
+        buildConfigField 'String', 'CLOUD_REPOSITORY', "\"\""
     }
     lintOptions {
         abortOnError false
     }
     testOptions {
         animationsDisabled = true
+    }
+
+    buildTypes {
+        debug {
+            testCoverageEnabled = true
+        }
+    }
+
+    flavorDimensions 'build'
+    productFlavors {
+        parse {
+            flavorDimensions 'build'
+
+            buildConfigField 'String', 'CLOUD_REPOSITORY', "\"PARSE\""
+        }
+        fake {
+            flavorDimensions 'build'
+
+            buildConfigField 'String', 'CLOUD_REPOSITORY', "\"FAKE\""
+        }
     }
 }
 
@@ -38,7 +60,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
 
     // AdaptiveRecyclerView
-    implementation 'com.smlnskgmail.jaman:adaptiverecyclerview:0.1.1'
+    implementation 'com.smlnskgmail.jaman:adaptiverecyclerview:0.1.2'
 
     // Parse
     implementation 'com.github.parse-community.Parse-SDK-Android:parse:1.22.1'

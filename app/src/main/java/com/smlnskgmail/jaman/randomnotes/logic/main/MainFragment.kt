@@ -90,7 +90,6 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteUserTarget, NoteDelete
 
     private fun addNote() {
         val addNoteBottomSheet = AddNoteBottomSheet()
-        addNoteBottomSheet.addNoteCreationTarget(this)
         addNoteBottomSheet.show(
             activity!!.supportFragmentManager,
             addNoteBottomSheet.javaClass.name
@@ -181,7 +180,7 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteUserTarget, NoteDelete
 
     override fun showToolbarMenu() = true
 
-    override fun getLayoutResId() = R.layout.fragment_main
+    override fun layoutResId() = R.layout.fragment_main
 
     override fun showMenuInToolbar() = true
 
