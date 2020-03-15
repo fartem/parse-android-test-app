@@ -94,7 +94,9 @@ class ParseDataSource(
         }
     }
 
-    private fun noteFromParseObject(parseObject: ParseObject): Note {
+    private fun noteFromParseObject(
+        parseObject: ParseObject
+    ): Note {
         val note = Note()
         note.parseObjectId = parseObject.objectId
         note.title = parseObject.getString(columnNoteTitle)

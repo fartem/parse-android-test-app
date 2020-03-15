@@ -36,7 +36,10 @@ class DataRepository(
         notes: List<Note>,
         afterRestore: (newNotes: List<Note>, e: Exception?) -> Unit
     ) {
-        cloudDataSource.restoreAllNotes(notes, afterRestore)
+        cloudDataSource.restoreAllNotes(
+            notes,
+            afterRestore
+        )
     }
 
     fun delete(note: Note) {

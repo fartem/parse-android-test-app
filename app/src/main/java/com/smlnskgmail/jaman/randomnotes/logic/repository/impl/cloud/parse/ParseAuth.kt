@@ -49,7 +49,9 @@ class ParseAuth : CloudAuth {
         )
     }
 
-    private fun getGoogleSignInOptions(context: Context): GoogleSignInOptions {
+    private fun getGoogleSignInOptions(
+        context: Context
+    ): GoogleSignInOptions {
         return GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(context.getString(R.string.google_web_app_token_id))
             .requestEmail()

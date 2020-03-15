@@ -9,7 +9,7 @@ import com.j256.ormlite.table.TableUtils
 import com.smlnskgmail.jaman.randomnotes.R
 import com.smlnskgmail.jaman.randomnotes.logic.repository.api.entities.Note
 import com.smlnskgmail.jaman.randomnotes.logic.repository.api.local.LocalDataSource
-import com.smlnskgmail.jaman.randomnotes.tools.L
+import com.smlnskgmail.jaman.randomnotes.logic.support.L
 import java.sql.SQLException
 
 class OrmLiteDataSource(

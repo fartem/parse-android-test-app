@@ -45,7 +45,10 @@ abstract class BaseFragment : Fragment(), FragmentResume {
         inflater: MenuInflater
     ) {
         if (showMenuInToolbar()) {
-            inflater.inflate(getToolbarMenuResId(), menu)
+            inflater.inflate(
+                getToolbarMenuResId(),
+                menu
+            )
         } else {
             menu.clear()
         }
@@ -55,7 +58,9 @@ abstract class BaseFragment : Fragment(), FragmentResume {
 
     open fun onPostMenuInflated() {}
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(
+        item: MenuItem
+    ): Boolean {
         handleMenuItemClick(item.itemId)
         return super.onOptionsItemSelected(item)
     }
