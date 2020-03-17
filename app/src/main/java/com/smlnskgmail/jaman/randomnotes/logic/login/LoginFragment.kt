@@ -8,7 +8,7 @@ import com.smlnskgmail.jaman.randomnotes.MainActivity
 import com.smlnskgmail.jaman.randomnotes.R
 import com.smlnskgmail.jaman.randomnotes.components.fragments.BaseFragment
 import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudAuth
-import com.smlnskgmail.jaman.randomnotes.tools.L
+import com.smlnskgmail.jaman.randomnotes.logic.support.L
 import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
 
@@ -54,11 +54,18 @@ class LoginFragment : BaseFragment() {
         val username = email.text.toString()
         val password = password.text.toString()
         if (loginMode) {
-            cloudAuth.signInWithEmail(username, password) {
+            cloudAuth.signInWithEmail(
+                username,
+                password
+            ) {
                 handleLoginResult(it)
             }
         } else {
-            cloudAuth.signUpWithEmail(username, username, password) {
+            cloudAuth.signUpWithEmail(
+                username,
+                username,
+                password
+            ) {
                 handleLoginResult(it)
             }
         }
@@ -90,7 +97,11 @@ class LoginFragment : BaseFragment() {
         resultCode: Int,
         data: Intent?
     ) {
-        cloudAuth.bindForAuth(requestCode, resultCode, data)
+        cloudAuth.bindForAuth(
+            requestCode,
+            resultCode,
+            data
+        )
     }
 
     override fun getTitleResId() = R.string.title_login_fragment

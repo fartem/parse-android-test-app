@@ -31,8 +31,14 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteUserTarget, NoteDelete
     @Inject
     lateinit var cloudAuth: CloudAuth
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
+        super.onViewCreated(
+            view,
+            savedInstanceState
+        )
         Application.applicationComponent.inject(this)
         addNotesToList()
         setupFabMenu()

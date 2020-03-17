@@ -28,7 +28,10 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.addOnBackStackChangedListener(
             fragmentBackStackListener
         )
-        showBaseFragment(MainFragment(), false)
+        showBaseFragment(
+            MainFragment(),
+            false
+        )
     }
 
     fun loginComplete() {

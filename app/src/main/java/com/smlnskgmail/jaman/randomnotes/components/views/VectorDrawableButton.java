@@ -29,7 +29,10 @@ public class VectorDrawableButton extends AppCompatButton {
         super(context);
     }
 
-    public VectorDrawableButton(Context context, AttributeSet attrs) {
+    public VectorDrawableButton(
+            Context context,
+            AttributeSet attrs
+    ) {
         super(context, attrs);
         initSupportVectorDrawablesAttrs(attrs);
     }
@@ -59,10 +62,22 @@ public class VectorDrawableButton extends AppCompatButton {
         Drawable drawableBottom = null;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            drawableTop = getDrawable(attributeArray, DRAWABLE_TOP_ID);
-            drawableStart = getDrawable(attributeArray, DRAWABLE_START_ID);
-            drawableEnd = getDrawable(attributeArray, DRAWABLE_END_ID);
-            drawableBottom = getDrawable(attributeArray, DRAWABLE_BOTTOM_ID);
+            drawableTop = getDrawable(
+                    attributeArray,
+                    DRAWABLE_TOP_ID
+            );
+            drawableStart = getDrawable(
+                    attributeArray,
+                    DRAWABLE_START_ID
+            );
+            drawableEnd = getDrawable(
+                    attributeArray,
+                    DRAWABLE_END_ID
+            );
+            drawableBottom = getDrawable(
+                    attributeArray,
+                    DRAWABLE_BOTTOM_ID
+            );
         } else {
             int drawableStartId = getResourceId(
                     attributeArray,

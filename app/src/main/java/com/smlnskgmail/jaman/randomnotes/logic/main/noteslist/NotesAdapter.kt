@@ -11,7 +11,10 @@ class NotesAdapter(
     private val noteDeleteTarget: NoteDeleteTarget
 ) : RecyclerView.Adapter<NotesHolder>() {
 
-    override fun onBindViewHolder(holder: NotesHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: NotesHolder,
+        position: Int
+    ) {
         val note = notes[position]
         note.positionInList = position
         holder.bind(note)

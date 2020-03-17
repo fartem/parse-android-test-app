@@ -10,8 +10,12 @@ abstract class BaseBottomSheet : BottomSheetDialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
-        container: ViewGroup?, savedInstanceState: Bundle?
-    ): View = inflater.inflate(layoutResId(), container)
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View = inflater.inflate(
+        layoutResId(),
+        container
+    )
 
     abstract fun layoutResId(): Int
 

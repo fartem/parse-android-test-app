@@ -17,7 +17,8 @@ public class OrmLiteDatabaseConfigurator {
                 "../../build/tmp/kotlin-classes/randomNotesDebug"
         );
         URL url = file.toURL();
-        URLClassLoader urlClassLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
+        URLClassLoader urlClassLoader
+                = (URLClassLoader) ClassLoader.getSystemClassLoader();
         Class urlClass = URLClassLoader.class;
         Method method = urlClass.getDeclaredMethod(
                 "addURL",
