@@ -5,6 +5,7 @@ Random Notes
 
 [![Travis CI](https://img.shields.io/travis/fartem/parse-android-test-app)](https://travis-ci.org/fartem/parse-android-test-app)
 ![Codecov](https://img.shields.io/codecov/c/github/fartem/parse-android-test-app)
+[![Hits-of-Code](https://hitsofcode.com/github/fartem/parse-android-test-app)](https://hitsofcode.com/view/github/fartem/parse-android-test-app)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android%20Parse%20Server%20Client-brightgreen.svg?style=flat)](https://android-arsenal.com/details/3/7906)
 
 About
