@@ -11,7 +11,7 @@ class Note(
     var subtitle: String? = null,
 
     @DatabaseField
-    var parseObjectId: String? = null,
+    var remoteId: String? = null,
 
     var positionInList: Int = 0
 

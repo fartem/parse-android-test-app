@@ -14,24 +14,28 @@ class ParseDataSource(
     context: Context
 ) : CloudDataSource {
 
-    private val tableNote = "note"
+    companion object {
 
-    private val columnNoteId = "note_id"
-    private val columnNoteTitle = "title"
-    private val columnNoteSubtitle = "subtitle"
+        private const val timeout = 5L
+
+        private const val tableNote = "note"
+
+        private const val columnNoteTitle = "title"
+        private const val columnNoteSubtitle = "subtitle"
+
+    }
 
     init {
-        @Suppress("MagicNumber")
         val httpClient = OkHttpClient.Builder()
-            .connectTimeout(5, TimeUnit.SECONDS)
-            .writeTimeout(5, TimeUnit.SECONDS)
-            .readTimeout(5, TimeUnit.SECONDS)
-            .callTimeout(5, TimeUnit.SECONDS)
+            .connectTimeout(timeout, TimeUnit.SECONDS)
+            .writeTimeout(timeout, TimeUnit.SECONDS)
+            .readTimeout(timeout, TimeUnit.SECONDS)
+            .callTimeout(timeout, TimeUnit.SECONDS)
         val parseConfig = Parse.Configuration.Builder(context)
             .clientBuilder(httpClient)
-            .server("SERVER_ADDRESS")
-            .applicationId("APPLICATION_ID")
-            .clientKey("CLIENT_KEY")
+            .server("http://192.168.1.8:1337/parse")
+            .applicationId("0b65a26a-98e7-46c0-93dc-a162418da5a2")
+            .clientKey("26e92573-897f-42e9-b9e1-6cb51505990d")
             .build()
         Parse.initialize(parseConfig)
         ParseFacebookUtils.initialize(context)
@@ -43,16 +47,17 @@ class ParseDataSource(
     ) {
         val objectsToSave = mutableListOf<ParseObject>()
         for (note in notes) {
-            objectsToSave.add(parseObjectForNote(note))
+            objectsToSave.add(
+                parseObjectForNote(
+                    note
+                )
+            )
         }
         ParseObject.saveAllInBackground(objectsToSave) {
             if (it == null) {
-                for (savedNote in objectsToSave) {
-                    val note = notes.firstOrNull { noteInList ->
-                        noteInList.id == savedNote.get(columnNoteId)
-                    }
-                    if (note != null) {
-                        note.parseObjectId = savedNote.objectId
+                objectsToSave.forEach { savedNote ->
+                    notes.forEach { note ->
+                        note.remoteId = savedNote.objectId
                     }
                 }
             }
@@ -62,32 +67,27 @@ class ParseDataSource(
 
     private fun parseObjectForNote(note: Note): ParseObject {
         val parseObject = ParseObject(tableNote)
-        parseObject.objectId = note.parseObjectId
-        parseObject.put(columnNoteId, note.id)
+        parseObject.objectId = note.remoteId
         parseObject.put(columnNoteTitle, note.title!!)
         parseObject.put(columnNoteSubtitle, note.subtitle!!)
         return parseObject
     }
 
     override fun restoreAllNotes(
-        notes: List<Note>,
-        afterRestore: (newNotes: List<Note>, e: Exception?) -> Unit
+        afterRestore: (notes: List<Note>, e: Exception?) -> Unit
     ) {
         val parseQuery: ParseQuery<ParseObject> = ParseQuery.getQuery(tableNote)
         parseQuery.findInBackground { objects, e ->
             if (objects.isNotEmpty()) {
-                val newNotes = mutableListOf<Note>()
+                val notes = mutableListOf<Note>()
                 for (parseData in objects) {
-                    val id = parseData.getLong(columnNoteId)
-                    var note = notes.lastOrNull {
-                        it.id == id
-                    }
-                    if (note == null) {
-                        note = noteFromParseObject(parseData)
-                        newNotes.add(note)
-                    }
+                    notes.add(
+                        noteFromParseObject(
+                            parseData
+                        )
+                    )
                 }
-                afterRestore(newNotes, null)
+                afterRestore(notes, null)
             } else if (e != null) {
                 afterRestore(emptyList(), e)
             }
@@ -98,7 +98,7 @@ class ParseDataSource(
         parseObject: ParseObject
     ): Note {
         val note = Note()
-        note.parseObjectId = parseObject.objectId
+        note.remoteId = parseObject.objectId
         note.title = parseObject.getString(columnNoteTitle)
         note.subtitle = parseObject.getString(columnNoteSubtitle)
         return note

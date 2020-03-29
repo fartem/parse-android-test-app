@@ -58,9 +58,8 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteUserTarget, NoteDelete
         }
         restore_notes.setOnClickListener {
             actionWithNotes {
-                dataRepository.restoreAllNotes(notes) { newNotes, e ->
+                dataRepository.restoreAllNotes() { e ->
                     if (e == null) {
-                        dataRepository.saveNotes(newNotes)
                         refreshNotes()
                     } else {
                         LongToast(
@@ -73,7 +72,7 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteUserTarget, NoteDelete
         }
         sync_notes.setOnClickListener {
             actionWithNotes {
-                dataRepository.syncNotes(notes) {
+                dataRepository.syncNotes() {
                     LongToast(
                         context!!,
                         getString(R.string.error_cannot_sync_notes)

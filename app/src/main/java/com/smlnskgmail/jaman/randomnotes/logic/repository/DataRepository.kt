@@ -17,15 +17,21 @@ class DataRepository(
         localDataSource.createOrUpdateNote(note)
     }
 
-    fun saveNotes(notes: List<Note>) {
-        localDataSource.createNotes(notes)
-    }
-
     fun syncNotes(
-        notes: List<Note>,
         errorOnSave: (e: Exception?) -> Unit
     ) {
-        cloudDataSource.saveAllNotes(notes, errorOnSave)
+        val notes = localDataSource.allNotes()
+        cloudDataSource.saveAllNotes(notes) {
+            if (it == null) {
+                notes.forEach { note ->
+                    localDataSource.createOrUpdateNote(
+                        note
+                    )
+                }
+            } else {
+                errorOnSave(it)
+            }
+        }
     }
 
     fun destroy() {
@@ -33,13 +39,25 @@ class DataRepository(
     }
 
     fun restoreAllNotes(
-        notes: List<Note>,
-        afterRestore: (newNotes: List<Note>, e: Exception?) -> Unit
+        afterRestore: (e: Exception?) -> Unit
     ) {
-        cloudDataSource.restoreAllNotes(
-            notes,
-            afterRestore
-        )
+        val localNotes = localDataSource.allNotes()
+        cloudDataSource.restoreAllNotes() { notes, e ->
+            if (e == null) {
+                notes.forEach { note ->
+                    val localNote = localNotes.firstOrNull {
+                        it.remoteId == note.remoteId
+                    }
+                    if (localNote != null) {
+                        note.id = localNote.id
+                    }
+                    localDataSource.createOrUpdateNote(
+                        note
+                    )
+                }
+            }
+            afterRestore(e)
+        }
     }
 
     fun delete(note: Note) {

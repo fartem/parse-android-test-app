@@ -15,13 +15,13 @@ import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudAuth
 
 class ParseAuth : CloudAuth {
 
-    private var googleAuthCallback: GoogleAuthCallback? = null
-
     companion object {
 
         const val googleAuthRequest = 101
 
     }
+
+    private var googleAuthCallback: GoogleAuthCallback? = null
 
     override fun isAuthorized(): Boolean {
         return ParseUser.getCurrentUser() != null
@@ -57,7 +57,6 @@ class ParseAuth : CloudAuth {
             .requestEmail()
             .build()
     }
-
 
     override fun logInWithFacebook(
         activity: Activity,

@@ -29,7 +29,7 @@ public class OrmLiteDatabaseConfigurator {
         method.setAccessible(true);
         method.invoke(
                 urlClassLoader,
-                new Object[]{
+                new Object[] {
                         url
                 }
         );

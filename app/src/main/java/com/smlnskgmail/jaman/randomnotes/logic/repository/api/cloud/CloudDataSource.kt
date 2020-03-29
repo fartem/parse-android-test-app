@@ -10,8 +10,7 @@ interface CloudDataSource {
     )
 
     fun restoreAllNotes(
-        notes: List<Note>,
-        afterRestore: (newNotes: List<Note>, e: Exception?) -> Unit
+        afterRestore: (notes: List<Note>, e: Exception?) -> Unit
     )
 
 }
