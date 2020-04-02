@@ -16,23 +16,22 @@ Test Android application for [Parse test server](https://github.com/fartem/parse
 
 __Features__
 
-* managing the simple entity (Note);
 * sync data with the server;
 * restore data from the server;
-* sign up from the application with email address, Google or Facebook account;
-* sign in to the server with email address, Google or Facebook account.
+* sign up from the application with email address, Google or Facebook;
+* sign in to the server with email address, Google or Facebook.
 
 __Not handling exceptions__
 
-* Internet connection unavailable status;
-* Parse Server connection unavailable status.
+* Internet disconnect;
+* Parse Server connection status.
 
 Google auth
 -------------
 
 __Resources__
 
-* [Official Guide](https://developers.google.com/identity/sign-in/android/start-integrating)
+* [Official Guide](https://developers.google.com/identity/sign-in/android/start-integrating).
 
 __Usage__
 
