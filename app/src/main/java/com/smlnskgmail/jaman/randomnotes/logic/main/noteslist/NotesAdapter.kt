@@ -9,10 +9,10 @@ import com.smlnskgmail.jaman.randomnotes.logic.repository.api.entities.Note
 class NotesAdapter(
     private val notes: MutableList<Note>,
     private val noteDeleteTarget: NoteDeleteTarget
-) : RecyclerView.Adapter<NotesHolder>() {
+) : RecyclerView.Adapter<NoteHolder>() {
 
     override fun onBindViewHolder(
-        holder: NotesHolder,
+        holder: NoteHolder,
         position: Int
     ) {
         val note = notes[position]
@@ -31,7 +31,7 @@ class NotesAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ) = NotesHolder(
+    ) = NoteHolder(
         LayoutInflater.from(parent.context).inflate(
             R.layout.item_note,
             parent,

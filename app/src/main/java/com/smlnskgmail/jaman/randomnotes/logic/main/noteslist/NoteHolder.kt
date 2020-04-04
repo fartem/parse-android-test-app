@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.smlnskgmail.jaman.randomnotes.logic.repository.api.entities.Note
 import kotlinx.android.synthetic.main.item_note.view.*
 
-class NotesHolder(
+class NoteHolder(
     itemView: View,
     private val noteDeleteTarget: NoteDeleteTarget
 ) : RecyclerView.ViewHolder(itemView) {

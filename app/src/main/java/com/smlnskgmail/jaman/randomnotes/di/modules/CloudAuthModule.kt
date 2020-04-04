@@ -6,7 +6,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class CloudAuthModule(
+open class CloudAuthModule(
     private val cloudAuth: CloudAuth
 ) {
 

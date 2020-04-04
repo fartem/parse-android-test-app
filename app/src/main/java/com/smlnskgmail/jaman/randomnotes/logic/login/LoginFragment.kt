@@ -3,7 +3,7 @@ package com.smlnskgmail.jaman.randomnotes.logic.login
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import com.smlnskgmail.jaman.randomnotes.Application
+import com.smlnskgmail.jaman.randomnotes.App
 import com.smlnskgmail.jaman.randomnotes.MainActivity
 import com.smlnskgmail.jaman.randomnotes.R
 import com.smlnskgmail.jaman.randomnotes.components.fragments.BaseFragment
@@ -24,7 +24,7 @@ class LoginFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ) {
         super.onViewCreated(view, savedInstanceState)
-        Application.applicationComponent.inject(this)
+        (context!!.applicationContext as App).appComponent.inject(this)
         register_account.setOnClickListener {
             register()
         }

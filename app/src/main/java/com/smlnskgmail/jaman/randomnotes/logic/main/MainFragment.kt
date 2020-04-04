@@ -3,8 +3,7 @@ package com.smlnskgmail.jaman.randomnotes.logic.main
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
-import com.parse.ParseUser
-import com.smlnskgmail.jaman.randomnotes.Application
+import com.smlnskgmail.jaman.randomnotes.App
 import com.smlnskgmail.jaman.randomnotes.MainActivity
 import com.smlnskgmail.jaman.randomnotes.R
 import com.smlnskgmail.jaman.randomnotes.components.fragments.BaseFragment
@@ -39,7 +38,7 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteUserTarget, NoteDelete
             view,
             savedInstanceState
         )
-        Application.applicationComponent.inject(this)
+        (context!!.applicationContext as App).appComponent.inject(this)
         addNotesToList()
         setupFabMenu()
     }
@@ -96,7 +95,7 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteUserTarget, NoteDelete
     private fun addNote() {
         val addNoteBottomSheet = AddNoteBottomSheet()
         addNoteBottomSheet.show(
-            activity!!.supportFragmentManager,
+            childFragmentManager,
             addNoteBottomSheet.javaClass.name
         )
     }
@@ -108,7 +107,7 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteUserTarget, NoteDelete
 
     private fun actionWithNotes(action: () -> Unit) {
         collapseMenuAndRun {
-            if (ParseUser.getCurrentUser() != null) {
+            if (cloudAuth.isAuthorized()) {
                 action()
             } else {
                 LongToast(

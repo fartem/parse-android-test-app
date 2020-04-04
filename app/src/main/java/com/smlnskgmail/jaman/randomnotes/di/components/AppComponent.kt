@@ -1,6 +1,6 @@
 package com.smlnskgmail.jaman.randomnotes.di.components
 
-import com.smlnskgmail.jaman.randomnotes.Application
+import com.smlnskgmail.jaman.randomnotes.App
 import com.smlnskgmail.jaman.randomnotes.di.modules.CloudAuthModule
 import com.smlnskgmail.jaman.randomnotes.di.modules.DataRepositoryModule
 import com.smlnskgmail.jaman.randomnotes.logic.login.LoginFragment
@@ -15,25 +15,10 @@ import javax.inject.Singleton
     ]
 )
 @Singleton
-interface ApplicationComponent {
+interface AppComponent {
 
-    fun inject(application: Application)
+    fun inject(app: App)
     fun inject(mainFragment: MainFragment)
     fun inject(loginFragment: LoginFragment)
-
-    @Component.Builder
-    interface Builder {
-
-        fun withDataRepository(
-            dataRepositoryModule: DataRepositoryModule
-        ): Builder
-
-        fun withCloudAuth(
-            cloudAuthModule: CloudAuthModule
-        ): Builder
-
-        fun build(): ApplicationComponent
-
-    }
 
 }

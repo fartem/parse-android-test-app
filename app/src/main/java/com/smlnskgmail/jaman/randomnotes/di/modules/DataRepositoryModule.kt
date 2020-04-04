@@ -8,7 +8,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class DataRepositoryModule(
+open class DataRepositoryModule(
     private val localDataSource: LocalDataSource,
     private val cloudDataSource: CloudDataSource
 ) {

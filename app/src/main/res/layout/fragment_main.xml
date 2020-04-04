@@ -11,7 +11,7 @@
         android:id="@+id/notes_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <com.smlnskgmail.jaman.adaptiverecyclerview.AdaptiveMessageView
         android:id="@+id/notes_list_empty_view"
@@ -45,7 +45,7 @@
                 fab:fab_title="@string/common_invite"
                 fab:backgroundTint="@color/colorMainFabShare"
                 fab:srcCompat="@drawable/ic_share"
-                fab:fabSize="mini"/>
+                fab:fabSize="mini" />
 
             <jahirfiquitiva.libs.fabsmenu.TitleFAB
                 android:id="@+id/restore_notes"
@@ -53,7 +53,7 @@
                 fab:fab_title="@string/action_restore"
                 fab:backgroundTint="@color/colorMainFabRestore"
                 fab:srcCompat="@drawable/ic_restore"
-                fab:fabSize="mini"/>
+                fab:fabSize="mini" />
 
             <jahirfiquitiva.libs.fabsmenu.TitleFAB
                 android:id="@+id/sync_notes"
@@ -61,7 +61,7 @@
                 fab:fab_title="@string/action_sync"
                 fab:backgroundTint="@color/colorMainFabSync"
                 fab:srcCompat="@drawable/ic_sync"
-                fab:fabSize="mini"/>
+                fab:fabSize="mini" />
 
             <jahirfiquitiva.libs.fabsmenu.TitleFAB
                 android:id="@+id/add_note"
@@ -69,7 +69,7 @@
                 fab:fab_title="@string/action_add_note"
                 fab:backgroundTint="@color/colorMainFabAddNote"
                 fab:srcCompat="@drawable/ic_note_add"
-                fab:fabSize="mini"/>
+                fab:fabSize="mini" />
 
         </jahirfiquitiva.libs.fabsmenu.FABsMenu>
 

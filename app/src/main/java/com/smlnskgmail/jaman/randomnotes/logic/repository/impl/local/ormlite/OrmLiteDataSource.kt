@@ -12,7 +12,7 @@ import com.smlnskgmail.jaman.randomnotes.logic.repository.api.local.LocalDataSou
 import com.smlnskgmail.jaman.randomnotes.logic.support.L
 import java.sql.SQLException
 
-class OrmLiteDataSource(
+open class OrmLiteDataSource(
     private var context: Context
 ) : OrmLiteSqliteOpenHelper(
     context,

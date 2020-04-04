@@ -3,7 +3,7 @@ package com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.fake
 import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudDataSource
 import com.smlnskgmail.jaman.randomnotes.logic.repository.api.entities.Note
 
-class FakeCloudDataSource : CloudDataSource {
+open class FakeCloudDataSource : CloudDataSource {
 
     private val storage = mutableListOf<Note>()
 
@@ -18,7 +18,10 @@ class FakeCloudDataSource : CloudDataSource {
     override fun restoreAllNotes(
         afterRestore: (notes: List<Note>, e: Exception?) -> Unit
     ) {
-        afterRestore(emptyList(), null)
+        afterRestore(
+            emptyList(),
+            null
+        )
     }
 
 }

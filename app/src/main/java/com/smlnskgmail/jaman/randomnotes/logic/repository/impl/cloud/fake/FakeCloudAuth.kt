@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudAuth
 
-class FakeCloudAuth : CloudAuth {
+open class FakeCloudAuth : CloudAuth {
 
     override fun isAuthorized(): Boolean {
         return true
