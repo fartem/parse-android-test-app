@@ -81,6 +81,7 @@ Read [Commit Convention](https://github.com/fartem/repository-rules/blob/master/
 ```shell
 gradlew clean
 gradlew build
+gradlew connectedFakeDebugAndroidTest
 ```
 
 If you don't see any error messages, submit your pull request.
