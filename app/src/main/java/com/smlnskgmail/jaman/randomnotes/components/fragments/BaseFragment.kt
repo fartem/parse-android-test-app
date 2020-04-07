@@ -17,7 +17,9 @@ abstract class BaseFragment : Fragment(), FragmentResume {
     }
 
     private fun setTitle() {
-        activity!!.setTitle(getTitleResId())
+        activity!!.setTitle(
+            getTitleResId()
+        )
     }
 
     override fun onFragmentResume() {
@@ -56,7 +58,9 @@ abstract class BaseFragment : Fragment(), FragmentResume {
         onPostMenuInflated()
     }
 
-    open fun onPostMenuInflated() {}
+    open fun onPostMenuInflated() {
+
+    }
 
     override fun onOptionsItemSelected(
         item: MenuItem

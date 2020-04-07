@@ -6,30 +6,30 @@ import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudAuth
 
 open class FakeCloudAuth : CloudAuth {
 
+    private var isAuth = false
+
     override fun isAuthorized(): Boolean {
-        return true
+        return isAuth
     }
 
     override fun logInWithFacebook(
         activity: Activity,
         afterFacebookLogin: (e: Exception?) -> Unit
     ) {
-        afterFacebookLogin(
-            IllegalStateException(
-                "Fake impl cannot support Facebook auth!"
-            )
-        )
+        handleAuth()
+        afterFacebookLogin(null)
+    }
+
+    private fun handleAuth() {
+        isAuth = true
     }
 
     override fun logInWithGoogle(
         activity: Activity,
         afterFacebookLogin: (e: Exception?) -> Unit
     ) {
-        afterFacebookLogin(
-            IllegalStateException(
-                "Fake impl cannot support Google auth!"
-            )
-        )
+        handleAuth()
+        afterFacebookLogin(null)
     }
 
     override fun signUpWithEmail(
@@ -38,11 +38,8 @@ open class FakeCloudAuth : CloudAuth {
         password: String,
         afterLogin: (e: Exception?) -> Unit
     ) {
-        afterLogin(
-            IllegalStateException(
-                "Fake impl cannot support email auth!"
-            )
-        )
+        handleAuth()
+        afterLogin(null)
     }
 
     override fun signInWithEmail(
@@ -50,11 +47,8 @@ open class FakeCloudAuth : CloudAuth {
         password: String,
         afterRegister: (e: Exception?) -> Unit
     ) {
-        afterRegister(
-            IllegalStateException(
-                "Fake impl cannot support email auth!"
-            )
-        )
+        handleAuth()
+        afterRegister(null)
     }
 
     override fun bindForAuth(
@@ -65,12 +59,11 @@ open class FakeCloudAuth : CloudAuth {
 
     }
 
-    override fun logOut(afterLogOut: (e: Exception?) -> Unit) {
-        afterLogOut(
-            IllegalStateException(
-                "Fake impl cannot support log out!"
-            )
-        )
+    override fun logOut(
+        afterLogOut: (e: Exception?) -> Unit
+    ) {
+        isAuth = false
+        afterLogOut(null)
     }
 
 }

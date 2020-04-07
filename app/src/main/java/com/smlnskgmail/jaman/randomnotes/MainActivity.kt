@@ -2,35 +2,22 @@ package com.smlnskgmail.jaman.randomnotes
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.smlnskgmail.jaman.randomnotes.components.fragments.BaseFragment
-import com.smlnskgmail.jaman.randomnotes.components.fragments.FragmentResume
 import com.smlnskgmail.jaman.randomnotes.logic.login.LoginFragment
 import com.smlnskgmail.jaman.randomnotes.logic.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
 
-    private val fragmentBackStackListener = FragmentManager.OnBackStackChangedListener {
-        val currentFragment = getCurrentFragment()
-        if (currentFragment is FragmentResume) {
-            currentFragment.onFragmentResume()
-        }
-    }
-
-    private fun getCurrentFragment(): Fragment? {
-        return supportFragmentManager.findFragmentById(R.id.container)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        supportFragmentManager.addOnBackStackChangedListener(
-            fragmentBackStackListener
-        )
+        showMainFragment()
+    }
+
+    private fun showMainFragment() {
         showBaseFragment(
             MainFragment(),
-            false
+            true
         )
     }
 
@@ -42,36 +29,34 @@ class MainActivity : AppCompatActivity() {
         showMainFragment()
     }
 
-    private fun showMainFragment() {
-        val mainFragment: MainFragment
-                = (supportFragmentManager.findFragmentByTag(MainFragment::class.java.name)
-            ?: MainFragment()) as MainFragment
-        showBaseFragment(mainFragment)
-    }
-
     fun showLoginFragment() {
-        showBaseFragment(LoginFragment())
+        showBaseFragment(
+            LoginFragment()
+        )
     }
 
     private fun showBaseFragment(
         baseFragment: BaseFragment,
-        inBackStack: Boolean = true
+        replace: Boolean = false
     ) {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.container, baseFragment)
-        if (inBackStack) {
-            fragmentTransaction.addToBackStack(
-                baseFragment::class.java.name
-            )
+        supportFragmentManager.beginTransaction().let {
+            if (replace) {
+                supportFragmentManager.popBackStack()
+                it.replace(
+                    R.id.container,
+                    baseFragment,
+                    baseFragment::class.java.name
+                )
+            } else {
+                it.add(
+                    R.id.container,
+                    baseFragment,
+                    baseFragment::class.java.name
+                )
+                it.addToBackStack(null)
+            }
+            it.commit()
         }
-        fragmentTransaction.commit()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        supportFragmentManager.removeOnBackStackChangedListener(
-            fragmentBackStackListener
-        )
     }
 
 }
