@@ -35,9 +35,12 @@
     <string name="message_sign_in">Please sign in to app and try again!</string>
     <string name="message_empty_notes_list">Notes list is empty!</string>
     <string name="message_invite_sent">Invite sent!</string>
+    <string name="message_incorrect_email_format">Incorrect password format!</string>
+    <string name="message_incorrect_password_length">Password length should be greater than %d and less than $d symbols!</string>
 
     <!-- Errors -->
     <string name="error_invite_sent">Cannot find user with entered email!</string>
     <string name="error_cannot_sync_notes">Cannot sync notes!</string>
     <string name="error_cannot_restore_notes">Cannot restore notes!</string>
+    <string name="error_auth">Auth error!</string>
 </resources>

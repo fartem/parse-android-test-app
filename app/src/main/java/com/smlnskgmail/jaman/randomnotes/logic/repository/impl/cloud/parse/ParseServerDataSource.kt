@@ -10,7 +10,7 @@ import com.smlnskgmail.jaman.randomnotes.logic.repository.api.entities.Note
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
 
-class ParseDataSource(
+class ParseServerDataSource(
     context: Context
 ) : CloudDataSource {
 

@@ -2,8 +2,7 @@ package com.smlnskgmail.jaman.randomnotes.note
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.runner.AndroidJUnit4
 import com.smlnskgmail.jaman.randomnotes.R
@@ -28,13 +27,13 @@ class NoteCreationTest : BaseNoteTest() {
         delay()
 
         onView(withId(R.id.edit_title)).perform(
-            ViewActions.typeText(note.title),
-            ViewActions.closeSoftKeyboard()
+            replaceText(note.title),
+            closeSoftKeyboard()
         )
         delay()
         onView(withId(R.id.edit_subtitle)).perform(
-            ViewActions.typeText(note.subtitle),
-            ViewActions.closeSoftKeyboard()
+            replaceText(note.subtitle),
+            closeSoftKeyboard()
         )
         delay()
 

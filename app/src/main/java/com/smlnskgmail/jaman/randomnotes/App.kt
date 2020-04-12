@@ -10,8 +10,8 @@ import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudAuth
 import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudDataSource
 import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.fake.FakeCloudAuth
 import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.fake.FakeCloudDataSource
-import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.parse.ParseAuth
-import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.parse.ParseDataSource
+import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.parse.ParseServerAuth
+import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.parse.ParseServerDataSource
 import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.local.ormlite.OrmLiteDataSource
 import javax.inject.Inject
 
@@ -32,8 +32,8 @@ class App : Application() {
         val cloudAuth: CloudAuth
         @Suppress("ConstantConditionIf")
         if (BuildConfig.CLOUD_REPOSITORY == "PARSE") {
-            cloudDataSource = ParseDataSource(this)
-            cloudAuth = ParseAuth()
+            cloudDataSource = ParseServerDataSource(this)
+            cloudAuth = ParseServerAuth()
         } else {
             cloudDataSource = FakeCloudDataSource()
             cloudAuth = FakeCloudAuth()
