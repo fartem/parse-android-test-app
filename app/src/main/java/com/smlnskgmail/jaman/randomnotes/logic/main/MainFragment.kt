@@ -7,7 +7,7 @@ import com.smlnskgmail.jaman.randomnotes.App
 import com.smlnskgmail.jaman.randomnotes.MainActivity
 import com.smlnskgmail.jaman.randomnotes.R
 import com.smlnskgmail.jaman.randomnotes.components.fragments.BaseFragment
-import com.smlnskgmail.jaman.randomnotes.components.views.LongToast
+import com.smlnskgmail.jaman.randomnotes.components.views.LongSnackbar
 import com.smlnskgmail.jaman.randomnotes.logic.invite.InviteDialog
 import com.smlnskgmail.jaman.randomnotes.logic.invite.InviteUserTarget
 import com.smlnskgmail.jaman.randomnotes.logic.main.noteslist.NoteDeleteTarget
@@ -61,8 +61,8 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteUserTarget, NoteDelete
                     if (e == null) {
                         refreshNotes()
                     } else {
-                        LongToast(
-                            context!!,
+                        LongSnackbar(
+                            notes_screen,
                             getString(R.string.error_cannot_restore_notes)
                         ).show()
                     }
@@ -72,8 +72,8 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteUserTarget, NoteDelete
         sync_notes.setOnClickListener {
             actionWithNotes {
                 dataRepository.syncNotes() {
-                    LongToast(
-                        context!!,
+                    LongSnackbar(
+                        notes_screen,
                         getString(R.string.error_cannot_sync_notes)
                     ).show()
                 }
@@ -110,8 +110,8 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteUserTarget, NoteDelete
             if (cloudAuth.isAuthorized()) {
                 action()
             } else {
-                LongToast(
-                    context!!,
+                LongSnackbar(
+                    notes_screen,
                     getString(R.string.message_sign_in)
                 ).show()
             }
@@ -131,17 +131,16 @@ class MainFragment : BaseFragment(), AddNoteTarget, InviteUserTarget, NoteDelete
     }
 
     override fun onInviteAction(success: Boolean) {
-        if (success) {
-            LongToast(
-                context!!,
-                getString(R.string.message_invite_sent)
-            ).show()
-        } else {
-            LongToast(
-                context!!,
-                getString(R.string.error_invite_sent)
-            ).show()
-        }
+        LongSnackbar(
+            notes_screen,
+            getString(
+                if (success) {
+                    R.string.message_invite_sent
+                } else {
+                    R.string.error_invite_sent
+                }
+            )
+        ).show()
     }
 
     override fun handleMenuItemClick(menuItemId: Int) {

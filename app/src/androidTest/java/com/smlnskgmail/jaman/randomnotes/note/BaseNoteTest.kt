@@ -9,8 +9,10 @@ import com.smlnskgmail.jaman.randomnotes.MainActivity
 import com.smlnskgmail.jaman.randomnotes.di.components.DaggerTestAppComponent
 import com.smlnskgmail.jaman.randomnotes.di.components.TestAppComponent
 import com.smlnskgmail.jaman.randomnotes.di.modules.CloudAuthModule
+import com.smlnskgmail.jaman.randomnotes.di.modules.CloudInviteModule
 import com.smlnskgmail.jaman.randomnotes.di.modules.DataRepositoryModule
 import com.smlnskgmail.jaman.randomnotes.logic.repository.DataRepository
+import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudInvite
 import com.smlnskgmail.jaman.randomnotes.logic.repository.api.entities.Note
 import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.fake.FakeCloudAuth
 import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.fake.FakeCloudDataSource
@@ -44,6 +46,9 @@ open class BaseNoteTest {
     @Mock
     lateinit var cloudAuth: FakeCloudAuth
 
+    @Mock
+    lateinit var cloudInvite: CloudInvite
+
     private val localTestNotes = arrayListOf<Note>()
     private val cloudTestNotes = arrayListOf<Note>()
 
@@ -60,6 +65,11 @@ open class BaseNoteTest {
             .cloudAuthModule(
                 CloudAuthModule(
                     cloudAuth
+                )
+            )
+            .cloudInviteModule(
+                CloudInviteModule(
+                    cloudInvite
                 )
             )
             .build()

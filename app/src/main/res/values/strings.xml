@@ -28,6 +28,7 @@
     <!-- Commons -->
     <string name="common_invite">Invite</string>
     <string name="common_cancel">Cancel</string>
+    <string name="common_ok">OK</string>
 
     <!-- Messages -->
     <string name="message_not_account">Not account yet? Create one</string>
@@ -35,8 +36,8 @@
     <string name="message_sign_in">Please sign in to app and try again!</string>
     <string name="message_empty_notes_list">Notes list is empty!</string>
     <string name="message_invite_sent">Invite sent!</string>
-    <string name="message_incorrect_email_format">Incorrect password format!</string>
-    <string name="message_incorrect_password_length">Password length should be greater than %d and less than $d symbols!</string>
+    <string name="message_incorrect_email_format">Incorrect email format!</string>
+    <string name="message_incorrect_password_length">Password length should be greater than %d and less than %d symbols!</string>
 
     <!-- Errors -->
     <string name="error_invite_sent">Cannot find user with entered email!</string>

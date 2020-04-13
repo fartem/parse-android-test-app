@@ -6,8 +6,8 @@ import android.view.View
 import com.smlnskgmail.jaman.randomnotes.App
 import com.smlnskgmail.jaman.randomnotes.MainActivity
 import com.smlnskgmail.jaman.randomnotes.R
-import com.smlnskgmail.jaman.randomnotes.components.LongSnackbar
 import com.smlnskgmail.jaman.randomnotes.components.fragments.BaseFragment
+import com.smlnskgmail.jaman.randomnotes.components.views.LongSnackbar
 import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudAuth
 import com.smlnskgmail.jaman.randomnotes.logic.support.L
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -66,7 +66,8 @@ class LoginFragment : BaseFragment() {
             LongSnackbar(
                 login_screen,
                 getString(R.string.message_incorrect_password_length).format(
-
+                    cloudAuth.passwordMinimumLength(),
+                    cloudAuth.passwordMaximumLength()
                 )
             ).show()
             return

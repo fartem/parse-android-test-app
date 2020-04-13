@@ -3,6 +3,7 @@ package com.smlnskgmail.jaman.randomnotes
 import com.smlnskgmail.jaman.randomnotes.auth.EmailAuthTest
 import com.smlnskgmail.jaman.randomnotes.auth.FacebookAuthTest
 import com.smlnskgmail.jaman.randomnotes.auth.GoogleAuthTest
+import com.smlnskgmail.jaman.randomnotes.invite.InviteTest
 import com.smlnskgmail.jaman.randomnotes.note.NoteCreationTest
 import com.smlnskgmail.jaman.randomnotes.note.NoteDeletionTest
 import com.smlnskgmail.jaman.randomnotes.note.NotesRestoreTest
@@ -18,6 +19,7 @@ import org.junit.runners.Suite
     NotesRestoreTest::class,
     EmailAuthTest::class,
     GoogleAuthTest::class,
-    FacebookAuthTest::class
+    FacebookAuthTest::class,
+    InviteTest::class
 )
 class AndroidTestSuite
