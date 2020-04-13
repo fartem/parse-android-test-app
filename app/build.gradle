@@ -15,7 +15,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
-        versionName '3.1.0'
+        versionName '3.2.1'
 
         testInstrumentationRunner 'com.smlnskgmail.jaman.randomnotes.runner.AndroidJacocoTestRunner'
 
@@ -70,7 +70,7 @@ dependencies {
     implementation 'com.github.parse-community:ParseFacebookUtils-Android:1.14.0'
 
     // Google
-    implementation 'com.google.android.gms:play-services-auth:17.0.0'
+    implementation 'com.google.android.gms:play-services-auth:18.0.0'
 
     // Facebook
     implementation 'com.facebook.android:facebook-login:5.1.0'

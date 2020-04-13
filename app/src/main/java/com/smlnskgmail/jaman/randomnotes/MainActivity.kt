@@ -3,6 +3,7 @@ package com.smlnskgmail.jaman.randomnotes
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.smlnskgmail.jaman.randomnotes.components.fragments.BaseFragment
+import com.smlnskgmail.jaman.randomnotes.components.views.LongSnackbar
 import com.smlnskgmail.jaman.randomnotes.logic.login.LoginFragment
 import com.smlnskgmail.jaman.randomnotes.logic.main.MainFragment
 
@@ -26,7 +27,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun loginError() {
-        showMainFragment()
+        LongSnackbar(
+            findViewById(android.R.id.content),
+            getString(R.string.error_auth)
+        ).show()
     }
 
     fun showLoginFragment() {

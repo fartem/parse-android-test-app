@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.smlnskgmail.jaman.randomnotes.R
 
 abstract class BaseBottomSheet : BottomSheetDialogFragment() {
 
@@ -18,5 +19,9 @@ abstract class BaseBottomSheet : BottomSheetDialogFragment() {
     )
 
     abstract fun layoutResId(): Int
+
+    override fun getTheme(): Int {
+        return R.style.AppBottomSheetStyle
+    }
 
 }

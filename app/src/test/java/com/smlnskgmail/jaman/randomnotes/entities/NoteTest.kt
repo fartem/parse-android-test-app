@@ -67,6 +67,10 @@ class NoteTest {
 
         assertEquals(
             firstNote,
+            firstNote
+        )
+        assertEquals(
+            firstNote,
             secondNote
         )
         assertNotEquals(
@@ -89,6 +93,11 @@ class NoteTest {
         assertNotEquals(
             secondNote.hashCode(),
             thirdNote.hashCode()
+        )
+
+        assertNotEquals(
+            firstNote,
+            "String"
         )
     }
 

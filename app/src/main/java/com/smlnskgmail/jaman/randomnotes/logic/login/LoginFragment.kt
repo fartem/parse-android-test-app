@@ -7,6 +7,7 @@ import com.smlnskgmail.jaman.randomnotes.App
 import com.smlnskgmail.jaman.randomnotes.MainActivity
 import com.smlnskgmail.jaman.randomnotes.R
 import com.smlnskgmail.jaman.randomnotes.components.fragments.BaseFragment
+import com.smlnskgmail.jaman.randomnotes.components.views.LongSnackbar
 import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudAuth
 import com.smlnskgmail.jaman.randomnotes.logic.support.L
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -25,11 +26,12 @@ class LoginFragment : BaseFragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
         (context!!.applicationContext as App).appComponent.inject(this)
+
         register_account.setOnClickListener {
-            register()
+            changeLoginMode()
         }
         login_action.setOnClickListener {
-            loginWithEmail()
+            actionWithEmail()
         }
         google_login.setOnClickListener {
             loginWithGoogle()
@@ -39,7 +41,7 @@ class LoginFragment : BaseFragment() {
         }
     }
 
-    private fun register() {
+    private fun changeLoginMode() {
         if (loginMode) {
             login_action.text = getString(R.string.action_sign_up)
             register_account.text = getString(R.string.message_have_account)
@@ -50,20 +52,37 @@ class LoginFragment : BaseFragment() {
         loginMode = !loginMode
     }
 
-    private fun loginWithEmail() {
-        val username = email.text.toString()
+    private fun actionWithEmail() {
+        val email = email.text.toString()
+        if (!cloudAuth.isValidEmail(email)) {
+            LongSnackbar(
+                login_screen,
+                getString(R.string.message_incorrect_email_format)
+            ).show()
+            return
+        }
         val password = password.text.toString()
+        if (!cloudAuth.isValidPassword(password)) {
+            LongSnackbar(
+                login_screen,
+                getString(R.string.message_incorrect_password_length).format(
+                    cloudAuth.passwordMinimumLength(),
+                    cloudAuth.passwordMaximumLength()
+                )
+            ).show()
+            return
+        }
         if (loginMode) {
             cloudAuth.signInWithEmail(
-                username,
+                email,
                 password
             ) {
                 handleLoginResult(it)
             }
         } else {
             cloudAuth.signUpWithEmail(
-                username,
-                username,
+                email,
+                email,
                 password
             ) {
                 handleLoginResult(it)

@@ -1,19 +1,23 @@
-package com.smlnskgmail.jaman.randomnotes.note
+package com.smlnskgmail.jaman.randomnotes.auth
 
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu
+import androidx.test.espresso.NoMatchingViewException
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.whenever
 import com.smlnskgmail.jaman.randomnotes.App
 import com.smlnskgmail.jaman.randomnotes.MainActivity
+import com.smlnskgmail.jaman.randomnotes.R
 import com.smlnskgmail.jaman.randomnotes.di.components.DaggerTestAppComponent
 import com.smlnskgmail.jaman.randomnotes.di.components.TestAppComponent
 import com.smlnskgmail.jaman.randomnotes.di.modules.CloudAuthModule
 import com.smlnskgmail.jaman.randomnotes.di.modules.CloudInviteModule
 import com.smlnskgmail.jaman.randomnotes.di.modules.DataRepositoryModule
-import com.smlnskgmail.jaman.randomnotes.logic.repository.DataRepository
 import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudInvite
-import com.smlnskgmail.jaman.randomnotes.logic.repository.api.entities.Note
 import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.fake.FakeCloudAuth
 import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.fake.FakeCloudDataSource
 import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.local.ormlite.OrmLiteDataSource
@@ -21,9 +25,9 @@ import org.junit.Before
 import org.junit.Rule
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
-import javax.inject.Inject
 
-open class BaseNoteTest {
+
+open class BaseAuthTest {
 
     @get:Rule
     val activityTestRule = ActivityTestRule(
@@ -33,9 +37,6 @@ open class BaseNoteTest {
     )
 
     lateinit var testAppComponent: TestAppComponent
-
-    @Inject
-    lateinit var dataRepository: DataRepository
 
     @Mock
     lateinit var localDataSource: OrmLiteDataSource
@@ -48,9 +49,6 @@ open class BaseNoteTest {
 
     @Mock
     lateinit var cloudInvite: CloudInvite
-
-    private val localTestNotes = arrayListOf<Note>()
-    private val cloudTestNotes = arrayListOf<Note>()
 
     @Before
     fun setup() {
@@ -79,40 +77,25 @@ open class BaseNoteTest {
             .targetContext.applicationContext as App
         app.appComponent = testAppComponent
 
-        whenever(localDataSource.allNotes()).thenReturn(localTestNotes)
-        whenever(localDataSource.createOrUpdateNote(any())).then {
-            localTestNotes.add(
-                testNote()
-            )
-        }
-        whenever(localDataSource.delete(any())).then {
-            localTestNotes.remove(
-                testNote()
-            )
-        }
-        whenever(cloudDataSource.saveAllNotes(any(), any())).then {
-            cloudTestNotes.add(
-                testNote()
-            )
-        }
-        whenever(cloudDataSource.restoreAllNotes(any())).thenAnswer {
-            val callback = it.getArgument(0) as ((notes: List<Note>, e: Exception?) -> Unit)
-            cloudTestNotes.add(
-                testNote()
-            )
+        whenever(cloudAuth.isAuthorized()).thenReturn(false)
+        whenever(cloudAuth.logOut(any())).thenAnswer {
+            val callback = it.getArgument(0) as ((e: Exception?) -> Unit)
             callback.invoke(
-                cloudTestNotes,
                 null
             )
         }
-        whenever(cloudAuth.isAuthorized()).thenReturn(true)
     }
 
-    fun testNote(): Note {
-        return Note(
-            "Title",
-            "Subtitle"
-        )
+    fun openAuthScreen() {
+        try {
+            onView(withId(R.id.menu_login_action)).perform(click())
+        } catch (e: NoMatchingViewException) {
+            openActionBarOverflowOrOptionsMenu(
+                activityTestRule.activity
+            )
+            onView(withId(R.id.menu_login_action)).perform(click())
+        }
+        delay()
     }
 
     fun delay() {

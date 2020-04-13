@@ -12,12 +12,16 @@ import com.parse.ParseUser
 import com.parse.facebook.ParseFacebookUtils
 import com.smlnskgmail.jaman.randomnotes.R
 import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudAuth
+import java.util.regex.Pattern
 
-class ParseAuth : CloudAuth {
+class ParseServerAuth : CloudAuth {
 
     companion object {
 
         const val googleAuthRequest = 101
+
+        private const val minimumPasswordLength = 8
+        private const val maximumPasswordLength = 32
 
     }
 
@@ -25,37 +29,6 @@ class ParseAuth : CloudAuth {
 
     override fun isAuthorized(): Boolean {
         return ParseUser.getCurrentUser() != null
-    }
-
-    override fun logInWithGoogle(
-        activity: Activity,
-        afterFacebookLogin: (e: Exception?) -> Unit
-    ) {
-        val signInOptions = getGoogleSignInOptions(activity)
-        val signInClient = GoogleSignIn.getClient(
-            activity,
-            signInOptions
-        )
-
-        googleAuthCallback = object : GoogleAuthCallback {
-            override fun sendResult(exception: Exception?) {
-                afterFacebookLogin(exception)
-            }
-        }
-
-        activity.startActivityForResult(
-            signInClient.signInIntent,
-            googleAuthRequest
-        )
-    }
-
-    private fun getGoogleSignInOptions(
-        context: Context
-    ): GoogleSignInOptions {
-        return GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(context.getString(R.string.google_web_app_token_id))
-            .requestEmail()
-            .build()
     }
 
     override fun logInWithFacebook(
@@ -91,6 +64,37 @@ class ParseAuth : CloudAuth {
         ParseUser.logInInBackground(username, password) { _, e ->
             afterRegister(e)
         }
+    }
+
+    override fun logInWithGoogle(
+        activity: Activity,
+        afterFacebookLogin: (e: Exception?) -> Unit
+    ) {
+        val signInOptions = getGoogleSignInOptions(activity)
+        val signInClient = GoogleSignIn.getClient(
+            activity,
+            signInOptions
+        )
+
+        googleAuthCallback = object : GoogleAuthCallback {
+            override fun sendResult(exception: Exception?) {
+                afterFacebookLogin(exception)
+            }
+        }
+
+        activity.startActivityForResult(
+            signInClient.signInIntent,
+            googleAuthRequest
+        )
+    }
+
+    private fun getGoogleSignInOptions(
+        context: Context
+    ): GoogleSignInOptions {
+        return GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(context.getString(R.string.google_web_app_token_id))
+            .requestEmail()
+            .build()
     }
 
     override fun bindForAuth(
@@ -153,6 +157,30 @@ class ParseAuth : CloudAuth {
         ParseUser.logOutInBackground {
             afterLogOut(it)
         }
+    }
+
+    override fun isValidEmail(email: String): Boolean {
+        val pattern = Pattern.compile(
+            "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
+            Pattern.CASE_INSENSITIVE
+        )
+        return pattern.matcher(email).find()
+
+    }
+
+    override fun isValidPassword(password: String): Boolean {
+        val length = password.length
+        return password.trim().length == length
+                && length >= minimumPasswordLength
+                && length <= maximumPasswordLength
+    }
+
+    override fun passwordMinimumLength(): Int {
+        return minimumPasswordLength
+    }
+
+    override fun passwordMaximumLength(): Int {
+        return maximumPasswordLength
     }
 
     private interface GoogleAuthCallback {
