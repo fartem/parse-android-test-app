@@ -30,10 +30,6 @@ class NotesRestoreTest : BaseNoteTest() {
         delay()
 
         assertEquals(
-            1,
-            dataRepository.allNotes().size
-        )
-        assertEquals(
             dataRepository.allNotes().size,
             (activityTestRule.activity.findViewById(
                 R.id.notes_list

@@ -2,40 +2,35 @@ package com.smlnskgmail.jaman.randomnotes
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.smlnskgmail.jaman.randomnotes.components.fragments.BaseFragment
-import com.smlnskgmail.jaman.randomnotes.components.views.LongSnackbar
-import com.smlnskgmail.jaman.randomnotes.logic.login.LoginFragment
-import com.smlnskgmail.jaman.randomnotes.logic.main.MainFragment
+import com.smlnskgmail.jaman.randomnotes.components.BaseFragment
+import com.smlnskgmail.jaman.randomnotes.view.auth.CloudAuthFragment
+import com.smlnskgmail.jaman.randomnotes.view.list.NotesListFragment
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        showMainFragment()
+        supportFragmentManager.addOnBackStackChangedListener {
+            val count = supportFragmentManager.fragments.size
+            val currentFragment = supportFragmentManager.fragments[count - 1]
+            if (currentFragment is BaseFragment) {
+                currentFragment.showed()
+            }
+        }
+        showNotesListFragment()
     }
 
-    private fun showMainFragment() {
+    fun showNotesListFragment() {
         showBaseFragment(
-            MainFragment(),
+            NotesListFragment(),
             true
         )
     }
 
-    fun loginComplete() {
-        showMainFragment()
-    }
-
-    fun loginError() {
-        LongSnackbar(
-            findViewById(android.R.id.content),
-            getString(R.string.error_auth)
-        ).show()
-    }
-
     fun showLoginFragment() {
         showBaseFragment(
-            LoginFragment()
+            CloudAuthFragment()
         )
     }
 

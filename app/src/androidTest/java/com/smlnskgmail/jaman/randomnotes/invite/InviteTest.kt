@@ -15,10 +15,10 @@ import com.smlnskgmail.jaman.randomnotes.di.components.DaggerTestAppComponent
 import com.smlnskgmail.jaman.randomnotes.di.modules.CloudAuthModule
 import com.smlnskgmail.jaman.randomnotes.di.modules.CloudInviteModule
 import com.smlnskgmail.jaman.randomnotes.di.modules.DataRepositoryModule
-import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudAuth
-import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudDataSource
-import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudInvite
-import com.smlnskgmail.jaman.randomnotes.logic.repository.api.local.LocalDataSource
+import com.smlnskgmail.jaman.randomnotes.model.api.cloud.CloudAuth
+import com.smlnskgmail.jaman.randomnotes.model.api.cloud.CloudDataSource
+import com.smlnskgmail.jaman.randomnotes.model.api.cloud.CloudInvite
+import com.smlnskgmail.jaman.randomnotes.model.api.local.LocalDataSource
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

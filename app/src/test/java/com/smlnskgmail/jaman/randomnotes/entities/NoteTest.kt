@@ -1,6 +1,6 @@
 package com.smlnskgmail.jaman.randomnotes.entities
 
-import com.smlnskgmail.jaman.randomnotes.logic.repository.api.entities.Note
+import com.smlnskgmail.jaman.randomnotes.model.api.entities.Note
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
 import org.junit.Test
@@ -17,8 +17,7 @@ class NoteTest {
         val note = Note(
             title,
             subtitle,
-            remoteId,
-            positionInList
+            remoteId
         )
 
         assertEquals(
@@ -33,10 +32,6 @@ class NoteTest {
             remoteId,
             note.remoteId
         )
-        assertEquals(
-            positionInList,
-            note.positionInList
-        )
     }
 
     @Test
@@ -49,20 +44,17 @@ class NoteTest {
         val firstNote = Note(
             title,
             subtitle,
-            remoteId,
-            positionInList
+            remoteId
         )
         val secondNote = Note(
             title,
             subtitle,
-            remoteId,
-            positionInList
+            remoteId
         )
         val thirdNote = Note(
             "Third note",
             "Subtitle",
-            "q31jkal",
-            2
+            "q31jkal"
         )
 
         assertEquals(

@@ -1,6 +1,6 @@
 package com.smlnskgmail.jaman.randomnotes.auth.verification
 
-import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudAuth
+import com.smlnskgmail.jaman.randomnotes.model.api.cloud.CloudAuth
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test

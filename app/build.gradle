@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'io.gitlab.arturbosch.detekt'
 apply plugin: 'kotlin-kapt'
+apply plugin: "kotlin-allopen"
 apply from: 'detekt.gradle'
 apply from: 'cpd.gradle'
 apply from: 'jacoco.gradle'
@@ -15,7 +16,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
-        versionName '3.2.1'
+        versionName '4.0.0'
 
         testInstrumentationRunner 'com.smlnskgmail.jaman.randomnotes.runner.AndroidJacocoTestRunner'
 
@@ -51,6 +52,10 @@ android {
             buildConfigField 'String', 'CLOUD_REPOSITORY', "\"FAKE\""
         }
     }
+}
+
+allOpen {
+    annotation('com.smlnskgmail.jaman.randomnotes.utils.OpenForTests')
 }
 
 dependencies {

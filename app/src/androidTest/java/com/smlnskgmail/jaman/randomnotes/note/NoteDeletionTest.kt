@@ -5,8 +5,8 @@ import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.runner.AndroidJUnit4
 import com.smlnskgmail.jaman.randomnotes.R
-import com.smlnskgmail.jaman.randomnotes.logic.main.noteslist.NoteHolder
 import com.smlnskgmail.jaman.randomnotes.utils.ViewChildClick.withChildId
+import com.smlnskgmail.jaman.randomnotes.view.list.recycler.NoteHolder
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith

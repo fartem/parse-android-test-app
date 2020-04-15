@@ -7,7 +7,6 @@
     <string name="default_note_subtitle">This is subtitle</string>
 
     <!-- Titles -->
-    <string name="title_main_fragment">Main</string>
     <string name="title_login_fragment">Auth</string>
 
     <!-- Hints -->

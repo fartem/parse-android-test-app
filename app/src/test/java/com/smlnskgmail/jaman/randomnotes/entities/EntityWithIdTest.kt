@@ -1,6 +1,6 @@
 package com.smlnskgmail.jaman.randomnotes.entities
 
-import com.smlnskgmail.jaman.randomnotes.logic.repository.api.entities.EntityWithId
+import com.smlnskgmail.jaman.randomnotes.model.api.entities.EntityWithId
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

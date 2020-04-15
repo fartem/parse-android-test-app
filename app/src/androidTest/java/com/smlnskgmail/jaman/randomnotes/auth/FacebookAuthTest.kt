@@ -8,8 +8,8 @@ import androidx.test.runner.AndroidJUnit4
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.whenever
 import com.smlnskgmail.jaman.randomnotes.R
-import com.smlnskgmail.jaman.randomnotes.logic.login.LoginFragment
-import com.smlnskgmail.jaman.randomnotes.logic.main.MainFragment
+import com.smlnskgmail.jaman.randomnotes.view.auth.CloudAuthFragment
+import com.smlnskgmail.jaman.randomnotes.view.list.NotesListFragment
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -39,7 +39,7 @@ class FacebookAuthTest : BaseAuthTest() {
             fragmentManager.fragments.size
         )
         assertEquals(
-            MainFragment::class.java.simpleName,
+            NotesListFragment::class.java.simpleName,
             fragmentManager.fragments[0].javaClass.simpleName
         )
     }
@@ -68,7 +68,7 @@ class FacebookAuthTest : BaseAuthTest() {
             fragmentManager.fragments.size
         )
         assertEquals(
-            LoginFragment::class.java.simpleName,
+            CloudAuthFragment::class.java.simpleName,
             fragmentManager.fragments[1].javaClass.simpleName
         )
     }

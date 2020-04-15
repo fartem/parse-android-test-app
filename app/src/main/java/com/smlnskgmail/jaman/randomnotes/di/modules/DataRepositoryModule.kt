@@ -1,14 +1,16 @@
 package com.smlnskgmail.jaman.randomnotes.di.modules
 
-import com.smlnskgmail.jaman.randomnotes.logic.repository.DataRepository
-import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudDataSource
-import com.smlnskgmail.jaman.randomnotes.logic.repository.api.local.LocalDataSource
+import com.smlnskgmail.jaman.randomnotes.model.DataRepository
+import com.smlnskgmail.jaman.randomnotes.model.api.cloud.CloudDataSource
+import com.smlnskgmail.jaman.randomnotes.model.api.local.LocalDataSource
+import com.smlnskgmail.jaman.randomnotes.utils.OpenForTests
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
+@OpenForTests
 @Module
-open class DataRepositoryModule(
+class DataRepositoryModule(
     private val localDataSource: LocalDataSource,
     private val cloudDataSource: CloudDataSource
 ) {

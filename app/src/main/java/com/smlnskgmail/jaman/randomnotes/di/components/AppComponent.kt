@@ -4,9 +4,9 @@ import com.smlnskgmail.jaman.randomnotes.App
 import com.smlnskgmail.jaman.randomnotes.di.modules.CloudAuthModule
 import com.smlnskgmail.jaman.randomnotes.di.modules.CloudInviteModule
 import com.smlnskgmail.jaman.randomnotes.di.modules.DataRepositoryModule
-import com.smlnskgmail.jaman.randomnotes.logic.invite.InviteDialog
-import com.smlnskgmail.jaman.randomnotes.logic.login.LoginFragment
-import com.smlnskgmail.jaman.randomnotes.logic.main.MainFragment
+import com.smlnskgmail.jaman.randomnotes.view.auth.CloudAuthFragment
+import com.smlnskgmail.jaman.randomnotes.view.invite.CloudInviteDialog
+import com.smlnskgmail.jaman.randomnotes.view.list.NotesListFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -21,8 +21,8 @@ import javax.inject.Singleton
 interface AppComponent {
 
     fun inject(app: App)
-    fun inject(mainFragment: MainFragment)
-    fun inject(loginFragment: LoginFragment)
-    fun inject(inviteDialog: InviteDialog)
+    fun inject(notesListFragment: NotesListFragment)
+    fun inject(cloudAuthFragment: CloudAuthFragment)
+    fun inject(cloudInviteDialog: CloudInviteDialog)
 
 }

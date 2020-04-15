@@ -17,15 +17,14 @@ import com.smlnskgmail.jaman.randomnotes.di.components.TestAppComponent
 import com.smlnskgmail.jaman.randomnotes.di.modules.CloudAuthModule
 import com.smlnskgmail.jaman.randomnotes.di.modules.CloudInviteModule
 import com.smlnskgmail.jaman.randomnotes.di.modules.DataRepositoryModule
-import com.smlnskgmail.jaman.randomnotes.logic.repository.api.cloud.CloudInvite
-import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.fake.FakeCloudAuth
-import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.cloud.fake.FakeCloudDataSource
-import com.smlnskgmail.jaman.randomnotes.logic.repository.impl.local.ormlite.OrmLiteDataSource
+import com.smlnskgmail.jaman.randomnotes.model.api.cloud.CloudInvite
+import com.smlnskgmail.jaman.randomnotes.model.impl.cloud.fake.FakeCloudAuth
+import com.smlnskgmail.jaman.randomnotes.model.impl.cloud.fake.FakeCloudDataSource
+import com.smlnskgmail.jaman.randomnotes.model.impl.ormlite.OrmLiteDataSource
 import org.junit.Before
 import org.junit.Rule
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
-
 
 open class BaseAuthTest {
 
