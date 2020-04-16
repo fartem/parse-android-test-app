@@ -40,15 +40,15 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="AppLoginButton">
+    <style name="AppSignInButton">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/button_auth_with_social_height</item>
         <item name="android:layout_gravity">center</item>
-        <item name="android:background">@drawable/ic_login_background</item>
+        <item name="android:background">@drawable/ic_sign_in_background</item>
         <item name="android:textColor">@color/colorWhite</item>
     </style>
 
-    <style name="AppGoogleLoginButton" parent="AppLoginButton">
+    <style name="AppGoogleSignInButton" parent="AppSignInButton">
         <item name="android:paddingStart">12dp</item>
         <item name="drawableStart">@drawable/ic_google_logo</item>
         <item name="android:backgroundTint">@color/colorGoogleAuth</item>
@@ -56,7 +56,7 @@
         <item name="android:textColor">@color/common_google_signin_btn_text_light_default</item>
     </style>
 
-    <style name="AppFacebookLoginButton" parent="AppLoginButton">
+    <style name="AppFacebookSignInButton" parent="AppSignInButton">
         <item name="android:paddingStart">12dp</item>
         <item name="drawableStart">@drawable/ic_facebook_logo</item>
         <item name="android:backgroundTint">@color/com_facebook_blue</item>

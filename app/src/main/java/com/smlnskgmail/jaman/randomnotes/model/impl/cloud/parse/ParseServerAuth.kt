@@ -31,44 +31,44 @@ class ParseServerAuth : CloudAuth {
         return ParseUser.getCurrentUser() != null
     }
 
-    override fun logInWithFacebook(
+    override fun signInWithFacebook(
         activity: Activity,
-        afterFacebookLogin: (e: Exception?) -> Unit
+        signInResult: (e: Exception?) -> Unit
     ) {
         ParseFacebookUtils.logInWithReadPermissionsInBackground(
             activity,
             listOf("public_profile")
-        ) { _, e -> afterFacebookLogin(e) }
+        ) { _, e -> signInResult(e) }
     }
 
     override fun signUpWithEmail(
         username: String,
         email: String,
         password: String,
-        afterLogin: (e: Exception?) -> Unit
+        signUpResult: (e: Exception?) -> Unit
     ) {
         val parseUser = ParseUser()
         parseUser.username = username
         parseUser.email = email
         parseUser.setPassword(password)
         parseUser.signUpInBackground {
-            afterLogin(it)
+            signUpResult(it)
         }
     }
 
     override fun signInWithEmail(
         username: String,
         password: String,
-        afterRegister: (e: Exception?) -> Unit
+        signInResult: (e: Exception?) -> Unit
     ) {
         ParseUser.logInInBackground(username, password) { _, e ->
-            afterRegister(e)
+            signInResult(e)
         }
     }
 
-    override fun logInWithGoogle(
+    override fun signInWithGoogle(
         activity: Activity,
-        afterFacebookLogin: (e: Exception?) -> Unit
+        signInResult: (e: Exception?) -> Unit
     ) {
         val signInOptions = getGoogleSignInOptions(activity)
         val signInClient = GoogleSignIn.getClient(
@@ -78,7 +78,7 @@ class ParseServerAuth : CloudAuth {
 
         googleAuthCallback = object : GoogleAuthCallback {
             override fun sendResult(exception: Exception?) {
-                afterFacebookLogin(exception)
+                signInResult(exception)
             }
         }
 

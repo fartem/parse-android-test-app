@@ -26,40 +26,40 @@ class FakeCloudAuth : CloudAuth {
         username: String,
         email: String,
         password: String,
-        afterLogin: (e: Exception?) -> Unit
+        signUpResult: (e: Exception?) -> Unit
     ) {
         handleAuth()
-        afterLogin(null)
+        signUpResult(null)
     }
 
     override fun signInWithEmail(
         username: String,
         password: String,
-        afterRegister: (e: Exception?) -> Unit
+        signInResult: (e: Exception?) -> Unit
     ) {
         handleAuth()
-        afterRegister(null)
+        signInResult(null)
     }
 
 
-    override fun logInWithFacebook(
+    override fun signInWithFacebook(
         activity: Activity,
-        afterFacebookLogin: (e: Exception?) -> Unit
+        signInResult: (e: Exception?) -> Unit
     ) {
         handleAuth()
-        afterFacebookLogin(null)
+        signInResult(null)
     }
 
     private fun handleAuth() {
         isAuth = true
     }
 
-    override fun logInWithGoogle(
+    override fun signInWithGoogle(
         activity: Activity,
-        afterFacebookLogin: (e: Exception?) -> Unit
+        signInResult: (e: Exception?) -> Unit
     ) {
         handleAuth()
-        afterFacebookLogin(null)
+        signInResult(null)
     }
 
     override fun bindForAuth(

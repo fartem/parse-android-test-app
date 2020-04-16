@@ -16,15 +16,15 @@ interface CloudAuthPresenter {
         email: String,
         password: String
     )
-    fun logInWithEmail(
+    fun signInWithEmail(
         email: String,
         password: String
     )
 
-    fun logInWithGoogle(
+    fun signInWithGoogle(
         activity: Activity
     )
-    fun logInWithFacebook(
+    fun signInWithFacebook(
         activity: Activity
     )
 

@@ -87,12 +87,12 @@ open class BaseAuthTest {
 
     fun openAuthScreen() {
         try {
-            onView(withId(R.id.menu_login_action)).perform(click())
+            onView(withId(R.id.menu_auth_action)).perform(click())
         } catch (e: NoMatchingViewException) {
             openActionBarOverflowOrOptionsMenu(
                 activityTestRule.activity
             )
-            onView(withId(R.id.menu_login_action)).perform(click())
+            onView(withId(R.id.menu_auth_action)).perform(click())
         }
         delay()
     }

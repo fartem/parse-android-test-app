@@ -136,18 +136,18 @@ class NotesListFragment : BaseFragment(),
     }
 
     override fun openAuthPage() {
-        (activity as MainActivity).showLoginFragment()
+        (activity as MainActivity).showAuthFragment()
     }
 
     override fun setAuthenticated() {
         if (getMenu() == null) {
             menuInitTasks.add(object : MenuTask {
                 override fun execute() {
-                    validateLoginMenuIcon(true)
+                    validateAuthMenuIcon(true)
                 }
             })
         } else {
-            validateLoginMenuIcon(true)
+            validateAuthMenuIcon(true)
         }
     }
 
@@ -155,11 +155,11 @@ class NotesListFragment : BaseFragment(),
         if (getMenu() == null) {
             menuInitTasks.add(object : MenuTask {
                 override fun execute() {
-                    validateLoginMenuIcon(false)
+                    validateAuthMenuIcon(false)
                 }
             })
         } else {
-            validateLoginMenuIcon(false)
+            validateAuthMenuIcon(false)
         }
     }
 
@@ -195,22 +195,22 @@ class NotesListFragment : BaseFragment(),
 
     override fun handleMenuItemClick(menuItemId: Int) {
         when (menuItemId) {
-            R.id.menu_login_action -> {
+            R.id.menu_auth_action -> {
                 notesListPresenter.handleAuthRequest()
             }
         }
     }
 
-    private fun validateLoginMenuIcon(
+    private fun validateAuthMenuIcon(
         isAuth: Boolean
     ) {
         val icon = if (isAuth) {
             R.drawable.ic_logout
         } else {
-            R.drawable.ic_login
+            R.drawable.ic_sign_in
         }
         getMenu()!!.findItem(
-            R.id.menu_login_action
+            R.id.menu_auth_action
         )!!.icon = ContextCompat.getDrawable(context!!, icon)
     }
 

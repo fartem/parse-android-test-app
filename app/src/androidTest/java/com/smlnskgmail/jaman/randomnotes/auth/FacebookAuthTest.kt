@@ -18,8 +18,8 @@ import org.junit.runner.RunWith
 class FacebookAuthTest : BaseAuthTest() {
 
     @Test
-    fun logInWithFacebook() {
-        whenever(cloudAuth.logInWithFacebook(any(), any())).thenAnswer {
+    fun signInWithFacebook() {
+        whenever(cloudAuth.signInWithFacebook(any(), any())).thenAnswer {
             val callback = it.getArgument(1) as ((e: Exception?) -> Unit)
             callback.invoke(
                 null
@@ -30,7 +30,7 @@ class FacebookAuthTest : BaseAuthTest() {
 
         openAuthScreen()
 
-        onView(withId(R.id.facebook_login)).perform(scrollTo()).perform(click())
+        onView(withId(R.id.facebook_sign_in)).perform(scrollTo()).perform(click())
         delay()
 
         val fragmentManager = activityTestRule.activity.supportFragmentManager
@@ -46,7 +46,7 @@ class FacebookAuthTest : BaseAuthTest() {
 
     @Test
     fun authWithError() {
-        whenever(cloudAuth.logInWithFacebook(any(), any())).thenAnswer {
+        whenever(cloudAuth.signInWithFacebook(any(), any())).thenAnswer {
             val callback = it.getArgument(1) as ((e: Exception?) -> Unit)
             callback.invoke(
                 RuntimeException(
@@ -59,7 +59,7 @@ class FacebookAuthTest : BaseAuthTest() {
 
         openAuthScreen()
 
-        onView(withId(R.id.facebook_login)).perform(scrollTo()).perform(click())
+        onView(withId(R.id.facebook_sign_in)).perform(scrollTo()).perform(click())
         delay()
 
         val fragmentManager = activityTestRule.activity.supportFragmentManager

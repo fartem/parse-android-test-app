@@ -39,7 +39,7 @@ class CloudAuthPresenterImpl : CloudAuthPresenter {
         }
     }
 
-    override fun logInWithEmail(
+    override fun signInWithEmail(
         email: String,
         password: String
     ) {
@@ -49,18 +49,18 @@ class CloudAuthPresenterImpl : CloudAuthPresenter {
         ) { handleAuthResult(it) }
     }
 
-    override fun logInWithGoogle(
+    override fun signInWithGoogle(
         activity: Activity
     ) {
-        cloudAuth.logInWithGoogle(
+        cloudAuth.signInWithGoogle(
             activity
         ) { handleAuthResult(it) }
     }
 
-    override fun logInWithFacebook(
+    override fun signInWithFacebook(
         activity: Activity
     ) {
-        cloudAuth.logInWithFacebook(
+        cloudAuth.signInWithFacebook(
             activity
         ) { handleAuthResult(it) }
     }

@@ -11,23 +11,23 @@ interface CloudAuth {
         username: String,
         email: String,
         password: String,
-        afterLogin: (e: Exception?) -> Unit
+        signUpResult: (e: Exception?) -> Unit
     )
 
     fun signInWithEmail(
         username: String,
         password: String,
-        afterRegister: (e: Exception?) -> Unit
+        signInResult: (e: Exception?) -> Unit
     )
 
-    fun logInWithGoogle(
+    fun signInWithGoogle(
         activity: Activity,
-        afterFacebookLogin: (e: Exception?) -> Unit
+        signInResult: (e: Exception?) -> Unit
     )
 
-    fun logInWithFacebook(
+    fun signInWithFacebook(
         activity: Activity,
-        afterFacebookLogin: (e: Exception?) -> Unit
+        signInResult: (e: Exception?) -> Unit
     )
 
     fun bindForAuth(

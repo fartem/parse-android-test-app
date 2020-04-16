@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    fun showLoginFragment() {
+    fun showAuthFragment() {
         showBaseFragment(
             CloudAuthFragment()
         )

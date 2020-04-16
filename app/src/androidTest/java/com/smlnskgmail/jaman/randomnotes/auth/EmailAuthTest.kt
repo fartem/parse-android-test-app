@@ -50,7 +50,7 @@ class EmailAuthTest : BaseAuthTest() {
         )
         delay()
 
-        onView(withId(R.id.login_action)).perform(click())
+        onView(withId(R.id.auth_action)).perform(click())
         delay()
     }
 
@@ -67,7 +67,7 @@ class EmailAuthTest : BaseAuthTest() {
     }
 
     @Test
-    fun logInWithEmail() {
+    fun signInWithEmail() {
         whenever(cloudAuth.isValidEmail(any())).thenReturn(true)
         whenever(cloudAuth.isValidPassword(any())).thenReturn(true)
         whenever(cloudAuth.signInWithEmail(any(), any(), any())).thenAnswer {

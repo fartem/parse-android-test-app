@@ -11,7 +11,7 @@ import com.smlnskgmail.jaman.randomnotes.components.LongSnackbar
 import com.smlnskgmail.jaman.randomnotes.model.api.cloud.CloudAuth
 import com.smlnskgmail.jaman.randomnotes.presenter.auth.CloudAuthPresenter
 import com.smlnskgmail.jaman.randomnotes.presenter.auth.CloudAuthPresenterImpl
-import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_auth.*
 import javax.inject.Inject
 
 class CloudAuthFragment : BaseFragment(), CloudAuthView {
@@ -21,7 +21,7 @@ class CloudAuthFragment : BaseFragment(), CloudAuthView {
 
     private lateinit var cloudAuthPresenter: CloudAuthPresenter
 
-    private var loginMode = true
+    private var isSignInMode = true
 
     override fun onViewCreated(
         view: View,
@@ -37,32 +37,32 @@ class CloudAuthFragment : BaseFragment(), CloudAuthView {
         )
 
         register_account.setOnClickListener {
-            changeLoginMode()
+            changeAuthMode()
         }
-        login_action.setOnClickListener {
+        auth_action.setOnClickListener {
             actionWithEmail()
         }
-        google_login.setOnClickListener {
-            cloudAuthPresenter.logInWithGoogle(
+        google_sign_in.setOnClickListener {
+            cloudAuthPresenter.signInWithGoogle(
                 activity!!
             )
         }
-        facebook_login.setOnClickListener {
-            cloudAuthPresenter.logInWithFacebook(
+        facebook_sign_in.setOnClickListener {
+            cloudAuthPresenter.signInWithFacebook(
                 activity!!
             )
         }
     }
 
-    private fun changeLoginMode() {
-        if (loginMode) {
-            login_action.text = getString(R.string.action_sign_up)
+    private fun changeAuthMode() {
+        if (isSignInMode) {
+            auth_action.text = getString(R.string.action_sign_up)
             register_account.text = getString(R.string.message_have_account)
         } else {
-            login_action.text = getString(R.string.action_login)
+            auth_action.text = getString(R.string.action_sign_in)
             register_account.text = getString(R.string.message_not_account)
         }
-        loginMode = !loginMode
+        isSignInMode = !isSignInMode
     }
 
     override fun authSuccess() {
@@ -71,7 +71,7 @@ class CloudAuthFragment : BaseFragment(), CloudAuthView {
 
     override fun authError() {
         LongSnackbar(
-            login_screen,
+            auth_screen,
             getString(R.string.error_auth)
         ).show()
     }
@@ -80,7 +80,7 @@ class CloudAuthFragment : BaseFragment(), CloudAuthView {
         val email = email.text.toString()
         if (!cloudAuth.isValidEmail(email)) {
             LongSnackbar(
-                login_screen,
+                auth_screen,
                 getString(R.string.message_incorrect_email_format)
             ).show()
             return
@@ -88,7 +88,7 @@ class CloudAuthFragment : BaseFragment(), CloudAuthView {
         val password = password.text.toString()
         if (!cloudAuth.isValidPassword(password)) {
             LongSnackbar(
-                login_screen,
+                auth_screen,
                 getString(R.string.message_incorrect_password_length).format(
                     cloudAuth.passwordMinimumLength(),
                     cloudAuth.passwordMaximumLength()
@@ -96,8 +96,8 @@ class CloudAuthFragment : BaseFragment(), CloudAuthView {
             ).show()
             return
         }
-        if (loginMode) {
-            cloudAuthPresenter.logInWithEmail(
+        if (isSignInMode) {
+            cloudAuthPresenter.signInWithEmail(
                 email,
                 password
             )
@@ -121,11 +121,11 @@ class CloudAuthFragment : BaseFragment(), CloudAuthView {
         )
     }
 
-    override fun getTitleResId() = R.string.title_login_fragment
+    override fun getTitleResId() = R.string.title_auth_fragment
 
     override fun showToolbarMenu() = false
 
-    override fun layoutResId() = R.layout.fragment_login
+    override fun layoutResId() = R.layout.fragment_auth
 
     override fun showMenuInToolbar() = false
 

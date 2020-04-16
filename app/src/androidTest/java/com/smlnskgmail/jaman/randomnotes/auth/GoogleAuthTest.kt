@@ -17,8 +17,8 @@ import org.junit.runner.RunWith
 class GoogleAuthTest : BaseAuthTest() {
 
     @Test
-    fun logInWithGoogle() {
-        whenever(cloudAuth.logInWithGoogle(any(), any())).thenAnswer {
+    fun signInWithGoogle() {
+        whenever(cloudAuth.signInWithGoogle(any(), any())).thenAnswer {
             val callback = it.getArgument(1) as ((e: Exception?) -> Unit)
             callback.invoke(
                 null
@@ -29,7 +29,7 @@ class GoogleAuthTest : BaseAuthTest() {
 
         openAuthScreen()
 
-        onView(withId(R.id.google_login)).perform(click())
+        onView(withId(R.id.google_sign_in)).perform(click())
         delay()
 
         val fragmentManager = activityTestRule.activity.supportFragmentManager
@@ -45,7 +45,7 @@ class GoogleAuthTest : BaseAuthTest() {
 
     @Test
     fun authWithError() {
-        whenever(cloudAuth.logInWithGoogle(any(), any())).thenAnswer {
+        whenever(cloudAuth.signInWithGoogle(any(), any())).thenAnswer {
             val callback = it.getArgument(1) as ((e: Exception?) -> Unit)
             callback.invoke(
                 RuntimeException(
@@ -58,7 +58,7 @@ class GoogleAuthTest : BaseAuthTest() {
 
         openAuthScreen()
 
-        onView(withId(R.id.google_login)).perform(click())
+        onView(withId(R.id.google_sign_in)).perform(click())
         delay()
 
         val fragmentManager = activityTestRule.activity.supportFragmentManager
