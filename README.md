@@ -14,18 +14,6 @@ About
 
 Test Android application for [Parse test server](https://github.com/fartem/parse-test-server).
 
-__Features__
-
-* sync data with the server;
-* restore data from the server;
-* sign up from the application with email address, Google or Facebook;
-* sign in to the server with email address, Google or Facebook.
-
-__Not handling exceptions__
-
-* Internet disconnect;
-* Parse Server connection status.
-
 Google auth
 -------------
 
