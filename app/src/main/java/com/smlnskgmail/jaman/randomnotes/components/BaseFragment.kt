@@ -2,6 +2,7 @@ package com.smlnskgmail.jaman.randomnotes.components
 
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 
 abstract class BaseFragment : Fragment() {
@@ -13,7 +14,16 @@ abstract class BaseFragment : Fragment() {
         savedInstanceState: Bundle?
     ) {
         setHasOptionsMenu(true)
+        resume()
     }
+
+    fun resume() {
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(
+            showHomeAsUpEnabled()
+        )
+    }
+
+    abstract fun showHomeAsUpEnabled(): Boolean
 
     fun showed() {
         activity!!.setTitle(

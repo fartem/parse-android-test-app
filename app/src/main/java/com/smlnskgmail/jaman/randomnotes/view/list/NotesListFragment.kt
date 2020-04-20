@@ -23,10 +23,8 @@ import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
 
 @Suppress("TooManyFunctions")
-class NotesListFragment : BaseFragment(),
-    NotesListView, NoteCreationTarget,
-    NoteDeleteTarget,
-    CloudInviteTarget {
+class NotesListFragment : BaseFragment(), NotesListView,
+    NoteCreationTarget, NoteDeleteTarget, CloudInviteTarget {
 
     @Inject
     lateinit var dataRepository: DataRepository
@@ -74,6 +72,10 @@ class NotesListFragment : BaseFragment(),
                 notesListPresenter.createNote()
             }
         }
+    }
+
+    override fun showHomeAsUpEnabled(): Boolean {
+        return false
     }
 
     override fun refreshNotesList(notes: MutableList<Note>) {
@@ -195,6 +197,9 @@ class NotesListFragment : BaseFragment(),
 
     override fun handleMenuItemClick(menuItemId: Int) {
         when (menuItemId) {
+            android.R.id.home -> {
+                activity?.onBackPressed()
+            }
             R.id.menu_auth_action -> {
                 notesListPresenter.handleAuthRequest()
             }

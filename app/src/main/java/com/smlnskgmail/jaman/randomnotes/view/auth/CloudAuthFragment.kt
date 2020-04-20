@@ -54,6 +54,10 @@ class CloudAuthFragment : BaseFragment(), CloudAuthView {
         }
     }
 
+    override fun showHomeAsUpEnabled(): Boolean {
+        return true
+    }
+
     private fun changeAuthMode() {
         if (isSignInMode) {
             auth_action.text = getString(R.string.action_sign_up)
