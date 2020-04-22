@@ -38,7 +38,7 @@ class App : Application() {
         @Suppress("ConstantConditionIf")
         if (BuildConfig.CLOUD_REPOSITORY == "PARSE") {
             cloudDataSource = ParseServerDataSource(this)
-            cloudAuth = ParseServerAuth()
+            cloudAuth = ParseServerAuth(this)
             cloudInvite = ParseServerInvite()
         } else {
             cloudDataSource = FakeCloudDataSource()

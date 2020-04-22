@@ -5,27 +5,24 @@ import android.content.Context
 import android.content.Intent
 import com.facebook.AccessToken
 import com.facebook.login.LoginManager
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
+import com.parse.LogInCallback
 import com.parse.ParseUser
 import com.parse.facebook.ParseFacebookUtils
+import com.parse.google.ParseGoogleUtils
 import com.smlnskgmail.jaman.randomnotes.R
 import com.smlnskgmail.jaman.randomnotes.model.api.cloud.CloudAuth
 import java.util.regex.Pattern
 
-class ParseServerAuth : CloudAuth {
+class ParseServerAuth(
+    private val context: Context
+) : CloudAuth {
 
     companion object {
-
-        const val googleAuthRequest = 101
 
         private const val minimumPasswordLength = 8
         private const val maximumPasswordLength = 32
 
     }
-
-    private var googleAuthCallback: GoogleAuthCallback? = null
 
     override fun isAuthorized(): Boolean {
         return ParseUser.getCurrentUser() != null
@@ -35,6 +32,9 @@ class ParseServerAuth : CloudAuth {
         activity: Activity,
         signInResult: (e: Exception?) -> Unit
     ) {
+        ParseFacebookUtils.initialize(
+            context
+        )
         ParseFacebookUtils.logInWithReadPermissionsInBackground(
             activity,
             listOf("public_profile")
@@ -70,31 +70,17 @@ class ParseServerAuth : CloudAuth {
         activity: Activity,
         signInResult: (e: Exception?) -> Unit
     ) {
-        val signInOptions = getGoogleSignInOptions(activity)
-        val signInClient = GoogleSignIn.getClient(
+        ParseGoogleUtils.initialize(
+            context.getString(
+                R.string.google_web_app_token_id
+            )
+        )
+        ParseGoogleUtils.logIn(
             activity,
-            signInOptions
-        )
-
-        googleAuthCallback = object : GoogleAuthCallback {
-            override fun sendResult(exception: Exception?) {
-                signInResult(exception)
+            LogInCallback { user, e ->
+                signInResult(e)
             }
-        }
-
-        activity.startActivityForResult(
-            signInClient.signInIntent,
-            googleAuthRequest
         )
-    }
-
-    private fun getGoogleSignInOptions(
-        context: Context
-    ): GoogleSignInOptions {
-        return GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(context.getString(R.string.google_web_app_token_id))
-            .requestEmail()
-            .build()
     }
 
     override fun bindForAuth(
@@ -102,48 +88,16 @@ class ParseServerAuth : CloudAuth {
         resultCode: Int,
         data: Intent?
     ) {
-        if (requestCode == googleAuthRequest) {
-            bindForGoogle(data)
-        } else {
-            ParseFacebookUtils.onActivityResult(
-                requestCode,
-                resultCode,
-                data
-            )
-        }
-    }
-
-    private fun bindForGoogle(data: Intent?) {
-        try {
-            val signInAccount = GoogleSignIn.getSignedInAccountFromIntent(data)
-                    .getResult(ApiException::class.java)
-            if (signInAccount != null) {
-                val authData: MutableMap<String, String?> = HashMap()
-                authData["id"] = signInAccount.id
-                authData["id_token"] = signInAccount.idToken
-                ParseUser.logInWithInBackground("google", authData)
-                    .continueWith<Any?> {
-                        if (it.result == null) {
-                            googleAuthCallback!!.sendResult(null)
-                        } else {
-                            googleAuthCallback!!.sendResult(
-                                IllegalStateException(
-                                    "Google auth error!"
-                                )
-                            )
-                        }
-                    }
-            } else {
-                googleAuthCallback!!.sendResult(
-                    NullPointerException(
-                        "Google account must not be null!"
-                    )
-                )
-            }
-        } catch (e: ApiException) {
-            googleAuthCallback!!.sendResult(e)
-        }
-
+        ParseGoogleUtils.onActivityResult(
+            requestCode,
+            resultCode,
+            data
+        )
+        ParseFacebookUtils.onActivityResult(
+            requestCode,
+            resultCode,
+            data
+        )
     }
 
     override fun logOut(afterLogOut: (e: Exception?) -> Unit) {
@@ -181,12 +135,6 @@ class ParseServerAuth : CloudAuth {
 
     override fun passwordMaximumLength(): Int {
         return maximumPasswordLength
-    }
-
-    private interface GoogleAuthCallback {
-
-        fun sendResult(exception: Exception?)
-
     }
 
 }
