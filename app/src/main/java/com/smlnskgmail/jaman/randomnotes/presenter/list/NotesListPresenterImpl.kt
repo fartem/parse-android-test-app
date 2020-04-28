@@ -25,11 +25,6 @@ class NotesListPresenterImpl : NotesListPresenter {
 
         notes.addAll(dataRepository.allNotes())
         this.notesListView.refreshNotesList(notes)
-        if (this.cloudAuth.isAuthorized()) {
-            this.notesListView.setAuthenticated()
-        } else {
-            this.notesListView.setUnauthenticated()
-        }
     }
 
     override fun shareNotes() {
@@ -89,6 +84,14 @@ class NotesListPresenterImpl : NotesListPresenter {
             notesListView.showShareSuccess()
         } else {
             notesListView.showShareError()
+        }
+    }
+
+    override fun authChanged() {
+        if (cloudAuth.isAuthorized()) {
+            notesListView.setAuthenticated()
+        } else {
+            notesListView.setUnauthenticated()
         }
     }
 

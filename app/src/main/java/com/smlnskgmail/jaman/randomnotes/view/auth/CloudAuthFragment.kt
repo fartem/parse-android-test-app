@@ -70,7 +70,7 @@ class CloudAuthFragment : BaseFragment(), CloudAuthView {
     }
 
     override fun authSuccess() {
-        (activity as MainActivity).showNotesListFragment()
+        (activity as MainActivity).authComplete()
     }
 
     override fun authError() {

@@ -74,6 +74,11 @@ class NotesListFragment : BaseFragment(), NotesListView,
         }
     }
 
+    override fun resume() {
+        super.resume()
+        notesListPresenter.authChanged()
+    }
+
     override fun showHomeAsUpEnabled(): Boolean {
         return false
     }
@@ -142,7 +147,7 @@ class NotesListFragment : BaseFragment(), NotesListView,
     }
 
     override fun setAuthenticated() {
-        if (getMenu() == null) {
+        if (getMenu()?.findItem(R.id.menu_auth_action) == null) {
             menuInitTasks.add(object : MenuTask {
                 override fun execute() {
                     validateAuthMenuIcon(true)
@@ -154,7 +159,7 @@ class NotesListFragment : BaseFragment(), NotesListView,
     }
 
     override fun setUnauthenticated() {
-        if (getMenu() == null) {
+        if (getMenu()?.findItem(R.id.menu_auth_action) == null) {
             menuInitTasks.add(object : MenuTask {
                 override fun execute() {
                     validateAuthMenuIcon(false)

@@ -22,13 +22,13 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.addOnBackStackChangedListener(
             fragmentsStack
         )
-        showNotesListFragment()
-    }
-
-    fun showNotesListFragment() {
         showBaseFragment(
             NotesListFragment()
         )
+    }
+
+    fun authComplete() {
+        onBackPressed()
     }
 
     fun showAuthFragment() {

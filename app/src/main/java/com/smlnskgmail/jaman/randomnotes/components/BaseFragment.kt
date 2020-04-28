@@ -16,7 +16,7 @@ abstract class BaseFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
-    fun resume() {
+    open fun resume() {
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(
             showHomeAsUpEnabled()
         )

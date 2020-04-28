@@ -28,6 +28,7 @@ interface NotesListPresenter {
         success: Boolean
     )
 
+    fun authChanged()
     fun handleAuthRequest()
 
 }
