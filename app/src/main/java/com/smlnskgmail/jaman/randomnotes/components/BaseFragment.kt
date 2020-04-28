@@ -14,22 +14,18 @@ abstract class BaseFragment : Fragment() {
         savedInstanceState: Bundle?
     ) {
         setHasOptionsMenu(true)
-        resume()
     }
 
     fun resume() {
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(
             showHomeAsUpEnabled()
         )
-    }
-
-    abstract fun showHomeAsUpEnabled(): Boolean
-
-    fun showed() {
         activity!!.setTitle(
             getTitleResId()
         )
     }
+
+    abstract fun showHomeAsUpEnabled(): Boolean
 
     abstract fun getTitleResId(): Int
 
