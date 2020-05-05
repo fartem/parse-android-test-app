@@ -4,27 +4,36 @@ import com.smlnskgmail.jaman.randomnotes.model.api.entities.EntityWithId
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class EntityWithIdTest {
-    
-    @Test
-    fun validateFields() {
-        var entityWithId: EntityWithId = object : EntityWithId() {}
+class EntityWithIdTest : BaseEntityTest() {
+
+    private val entityWithId = object : EntityWithId() {}
+
+    override fun `Validate fields`() {
         assertEquals(
             -1,
             entityWithId.id
         )
 
-        entityWithId.id = 1
+        val id = 1L
+        entityWithId.id = id
         assertEquals(
-            1,
-            entityWithId.id
-        )
-
-        entityWithId = object : EntityWithId(1) {}
-        assertEquals(
-            1,
+            id,
             entityWithId.id
         )
     }
-    
+
+    override fun `Validate equals()`() {
+        assertEquals(
+            entityWithId,
+            entityWithId
+        )
+    }
+
+    override fun `Validate hashCode()`() {
+        assertEquals(
+            entityWithId.hashCode(),
+            entityWithId.hashCode()
+        )
+    }
+
 }

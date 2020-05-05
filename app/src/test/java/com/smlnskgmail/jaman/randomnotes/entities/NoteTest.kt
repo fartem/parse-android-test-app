@@ -5,21 +5,19 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
 import org.junit.Test
 
-class NoteTest {
+class NoteTest : BaseEntityTest() {
 
-    @Test
-    fun validateFields() {
-        val title = "First note"
-        val subtitle = "None"
-        val remoteId = "309wds1"
-        val positionInList = 1
+    private val title = "First note"
+    private val subtitle = "None"
+    private val remoteId = "309wds1"
 
-        val note = Note(
-            title,
-            subtitle,
-            remoteId
-        )
+    private val note = Note(
+        title,
+        subtitle,
+        remoteId
+    )
 
+    override fun `Validate fields`() {
         assertEquals(
             title,
             note.title
@@ -34,62 +32,75 @@ class NoteTest {
         )
     }
 
-    @Test
-    fun validateEquals() {
-        val title = "Title"
-        val subtitle = "Subtitle"
-        val remoteId = "sak1Olav"
-        val positionInList = 1
-
-        val firstNote = Note(
-            title,
-            subtitle,
-            remoteId
-        )
-        val secondNote = Note(
-            title,
-            subtitle,
-            remoteId
-        )
-        val thirdNote = Note(
-            "Third note",
-            "Subtitle",
-            "q31jkal"
-        )
-
+    override fun `Validate equals()`() {
         assertEquals(
-            firstNote,
-            firstNote
+            note,
+            note
         )
         assertEquals(
-            firstNote,
-            secondNote
-        )
-        assertNotEquals(
-            firstNote,
-            thirdNote
-        )
-        assertNotEquals(
-            secondNote,
-            thirdNote
-        )
-
-        assertEquals(
-            firstNote.hashCode(),
-            secondNote.hashCode()
-        )
-        assertNotEquals(
-            firstNote.hashCode(),
-            thirdNote.hashCode()
-        )
-        assertNotEquals(
-            secondNote.hashCode(),
-            thirdNote.hashCode()
+            Note(
+                title,
+                subtitle,
+                remoteId
+            ),
+            note
         )
 
         assertNotEquals(
-            firstNote,
+            Note(
+                "Another title",
+                subtitle,
+                remoteId
+            ),
+            note
+        )
+        assertNotEquals(
+            Note(
+                title,
+                "Another subtitle",
+                remoteId
+            ),
+            note
+        )
+        assertNotEquals(
+            Note(
+                title,
+                subtitle,
+                "e5j1iv"
+            ),
+            note
+        )
+        assertNotEquals(
+            note,
+            null
+        )
+        assertNotEquals(
+            note,
             "String"
+        )
+    }
+
+    override fun `Validate hashCode()`() {
+        assertEquals(
+            note.hashCode(),
+            note.hashCode()
+        )
+        assertEquals(
+            Note(
+                title,
+                subtitle,
+                remoteId
+            ).hashCode(),
+            note.hashCode()
+        )
+
+        assertNotEquals(
+            Note(
+                "Another title",
+                subtitle,
+                remoteId
+            ).hashCode(),
+            note.hashCode()
         )
     }
 
