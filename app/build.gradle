@@ -52,10 +52,13 @@ android {
             buildConfigField 'String', 'CLOUD_REPOSITORY', "\"FAKE\""
         }
     }
+
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
             def versionName = android.defaultConfig.versionName
-            output.outputFileName = "parse-android-test-app_${versionName}"
+            def productFlavorName = variant.flavorName
+            def buildVersionName = variant.buildType.name
+            output.outputFileName = "parse-android-test-app-${productFlavorName}-${buildVersionName}_${versionName}"
         }
     }
 }
