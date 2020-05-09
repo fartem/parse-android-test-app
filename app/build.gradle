@@ -58,7 +58,7 @@ android {
             def versionName = android.defaultConfig.versionName
             def productFlavorName = variant.flavorName
             def buildVersionName = variant.buildType.name
-            output.outputFileName = "parse-android-test-app-${productFlavorName}-${buildVersionName}_${versionName}"
+            output.outputFileName = "parse-android-test-app-${productFlavorName}-${buildVersionName}_${versionName}.apk"
         }
     }
 }
