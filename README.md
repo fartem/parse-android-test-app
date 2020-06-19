@@ -45,7 +45,7 @@ In `preferences.xml` replace this values to own analogues:
 <string name="fb_login_protocol_scheme">fb[APP_ID]</string>
 ```
 
-Downloads
+Download
 ---------
 
 <img src="media/qrcodes/github_download.png" height="150px" />
