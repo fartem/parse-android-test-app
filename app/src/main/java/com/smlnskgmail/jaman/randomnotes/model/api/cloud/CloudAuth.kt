@@ -36,6 +36,8 @@ interface CloudAuth {
         data: Intent?
     )
 
+    fun deleteAccount(afterDelete: (e: Exception?) -> Unit)
+
     fun logOut(afterLogOut: (e: Exception?) -> Unit)
 
     fun isValidEmail(email: String): Boolean

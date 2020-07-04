@@ -20,6 +20,7 @@
     <string name="action_restore">Restore</string>
     <string name="action_sync">Sync</string>
     <string name="action_add_note">Add note</string>
+    <string name="action_delete_account">Delete account</string>
     <string name="action_sign_in">Sign in</string>
     <string name="action_sign_up">Sign up</string>
     <string name="action_continue_with_google">Continue with Google</string>

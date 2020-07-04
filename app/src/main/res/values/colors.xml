@@ -18,6 +18,7 @@
     <color name="colorMainFabShare">#7E57C2</color>
     <color name="colorMainFabSync">#66BB6A</color>
     <color name="colorMainFabAddNote">#03A9F4</color>
+    <color name="colorMainFabDeleteAccount">#009688</color>
 
     <!-- Custom -->
     <color name="colorWhite">#FFF</color>

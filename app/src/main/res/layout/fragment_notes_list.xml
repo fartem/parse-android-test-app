@@ -69,7 +69,15 @@
                 style="@style/AppFAB"
                 fab:fab_title="@string/action_add_note"
                 fab:backgroundTint="@color/colorMainFabAddNote"
-                fab:srcCompat="@drawable/ic_note_add"
+                fab:srcCompat="@drawable/ic_add"
+                fab:fabSize="mini" />
+
+            <jahirfiquitiva.libs.fabsmenu.TitleFAB
+                android:id="@+id/delete_account"
+                style="@style/AppFAB"
+                fab:fab_title="@string/action_delete_account"
+                fab:backgroundTint="@color/colorMainFabDeleteAccount"
+                fab:srcCompat="@drawable/ic_account"
                 fab:fabSize="mini" />
 
         </jahirfiquitiva.libs.fabsmenu.FABsMenu>

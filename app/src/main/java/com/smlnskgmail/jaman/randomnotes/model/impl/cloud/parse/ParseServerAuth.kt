@@ -100,6 +100,14 @@ class ParseServerAuth(
         )
     }
 
+    override fun deleteAccount(
+        afterDelete: (e: Exception?) -> Unit
+    ) {
+        ParseUser.getCurrentUser()?.deleteInBackground {
+            afterDelete(it)
+        }
+    }
+
     override fun logOut(afterLogOut: (e: Exception?) -> Unit) {
         val parseUser = ParseUser.getCurrentUser()
         if (ParseFacebookUtils.isLinked(parseUser)) {

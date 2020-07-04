@@ -109,4 +109,14 @@ class NotesListPresenterImpl : NotesListPresenter {
         }
     }
 
+    override fun deleteAccount() {
+        cloudAuth.deleteAccount {
+            if (it == null) {
+                notesListView.setUnauthenticated()
+            } else {
+                notesListView.showAuthError()
+            }
+        }
+    }
+
 }

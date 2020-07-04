@@ -19,12 +19,12 @@ import com.smlnskgmail.jaman.randomnotes.view.invite.CloudInviteDialog
 import com.smlnskgmail.jaman.randomnotes.view.invite.CloudInviteTarget
 import com.smlnskgmail.jaman.randomnotes.view.list.recycler.NoteDeleteTarget
 import com.smlnskgmail.jaman.randomnotes.view.list.recycler.NotesAdapter
-import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.fragment_notes_list.*
 import javax.inject.Inject
 
 @Suppress("TooManyFunctions")
-class NotesListFragment : BaseFragment(), NotesListView,
-    NoteCreationTarget, NoteDeleteTarget, CloudInviteTarget {
+class NotesListFragment : BaseFragment(),
+    NotesListView, NoteCreationTarget, NoteDeleteTarget, CloudInviteTarget {
 
     @Inject
     lateinit var dataRepository: DataRepository
@@ -44,7 +44,7 @@ class NotesListFragment : BaseFragment(), NotesListView,
             view,
             savedInstanceState
         )
-        (context!!.applicationContext as App).appComponent.inject(this)
+        (requireContext().applicationContext as App).appComponent.inject(this)
         notesListPresenter = NotesListPresenterImpl()
         notesListPresenter.init(
             dataRepository,
@@ -70,6 +70,11 @@ class NotesListFragment : BaseFragment(), NotesListView,
         add_note.setOnClickListener {
             actionWithNotes {
                 notesListPresenter.createNote()
+            }
+        }
+        delete_account.setOnClickListener {
+            actionWithNotes {
+                notesListPresenter.deleteAccount()
             }
         }
     }
@@ -137,7 +142,9 @@ class NotesListFragment : BaseFragment(), NotesListView,
     }
 
     override fun openShareSender() {
-        val inviteDialog = CloudInviteDialog(context!!)
+        val inviteDialog = CloudInviteDialog(
+            requireContext()
+        )
         inviteDialog.setInviteCallback(this)
         inviteDialog.show()
     }
@@ -221,7 +228,7 @@ class NotesListFragment : BaseFragment(), NotesListView,
         }
         getMenu()!!.findItem(
             R.id.menu_auth_action
-        )!!.icon = ContextCompat.getDrawable(context!!, icon)
+        )!!.icon = ContextCompat.getDrawable(requireContext(), icon)
     }
 
     override fun onNoteDelete(note: Note) {
@@ -234,7 +241,7 @@ class NotesListFragment : BaseFragment(), NotesListView,
 
     override fun showToolbarMenu() = true
 
-    override fun layoutResId() = R.layout.fragment_main
+    override fun layoutResId() = R.layout.fragment_notes_list
 
     override fun showMenuInToolbar() = true
 

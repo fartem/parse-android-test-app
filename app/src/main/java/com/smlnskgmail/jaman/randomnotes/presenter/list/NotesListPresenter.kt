@@ -30,5 +30,6 @@ interface NotesListPresenter {
 
     fun authChanged()
     fun handleAuthRequest()
+    fun deleteAccount()
 
 }

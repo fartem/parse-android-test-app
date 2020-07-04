@@ -70,6 +70,13 @@ class FakeCloudAuth : CloudAuth {
 
     }
 
+    override fun deleteAccount(
+        afterDelete: (e: Exception?) -> Unit
+    ) {
+        isAuth = false
+        afterDelete(null)
+    }
+
     override fun logOut(
         afterLogOut: (e: Exception?) -> Unit
     ) {
