@@ -1,20 +1,17 @@
 <img src="media/logo/ic_app.png" height="100px" />
 
-Random Notes
-=============
+# Random Notes
 
 [![Travis CI](https://img.shields.io/travis/fartem/parse-android-test-app)](https://travis-ci.org/fartem/parse-android-test-app)
 [![Codebeat](https://codebeat.co/badges/674dcb3e-246b-4790-9a63-32f1c1c28371)](https://codebeat.co/projects/github-com-fartem-parse-android-test-app-master)
 [![Codecov](https://codecov.io/gh/fartem/parse-android-test-app/branch/master/graph/badge.svg)](https://codecov.io/gh/fartem/parse-android-test-app)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android%20Parse%20Server%20Client-brightgreen.svg?style=flat)](https://android-arsenal.com/details/3/7906)
 
-About
--------------
+## About
 
 Test Android application for [Parse test server](https://github.com/fartem/parse-test-server).
 
-Google auth
--------------
+## Google auth
 
 __Resources__
 
@@ -28,8 +25,7 @@ In `preferences.xml` replace this value to own analogue:
 <string name="google_web_app_token_id">[APP_ID]</string>
 ```
 
-Facebook auth
--------------
+## Facebook auth
 
 __Resources__
 
@@ -45,13 +41,11 @@ In `preferences.xml` replace this values to own analogues:
 <string name="fb_login_protocol_scheme">fb[APP_ID]</string>
 ```
 
-Download
----------
+## Download
 
 <img src="media/qrcodes/github_download.png" height="150px" />
 
-Screenshots
--------------
+## Screenshots
 
 <p align="center">
   <img src="media/screenshots/screenshot_01.png" width="200" />
@@ -60,8 +54,7 @@ Screenshots
   <img src="media/screenshots/screenshot_04.png" width="200" />
 </p>
 
-How to contribute
--------------
+## How to contribute
 
 Read [Commit Convention](https://github.com/fartem/repository-rules/blob/master/commit-convention/COMMIT_CONVENTION.md). Make sure your build is green before you contribute your pull request. Then:
 
@@ -73,7 +66,6 @@ $ ./gradlew connectedCheck
 
 If you don't see any error messages, submit your pull request.
 
-Contributors
--------------------
+## Contributors
 
 * [@fartem](https://github.com/fartem) as Artem Fomchenkov
