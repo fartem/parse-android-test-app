@@ -43,7 +43,7 @@ class ParseServerDataSource(
 
     override fun saveAllNotes(
         notes: List<Note>,
-        errorOnSave: (e: Exception?) -> Unit
+        result: (success: Boolean) -> Unit
     ) {
         val objectsToSave = mutableListOf<ParseObject>()
         for (note in notes) {
@@ -61,7 +61,7 @@ class ParseServerDataSource(
                     }
                 }
             }
-            errorOnSave(it)
+            result(it == null)
         }
     }
 
@@ -74,9 +74,11 @@ class ParseServerDataSource(
     }
 
     override fun restoreAllNotes(
-        afterRestore: (notes: List<Note>, e: Exception?) -> Unit
+        afterRestore: (notes: List<Note>, success: Boolean) -> Unit
     ) {
-        val parseQuery: ParseQuery<ParseObject> = ParseQuery.getQuery(tableNote)
+        val parseQuery: ParseQuery<ParseObject> = ParseQuery.getQuery(
+            tableNote
+        )
         parseQuery.findInBackground { objects, e ->
             if (objects.isNotEmpty()) {
                 val notes = mutableListOf<Note>()
@@ -87,9 +89,9 @@ class ParseServerDataSource(
                         )
                     )
                 }
-                afterRestore(notes, null)
+                afterRestore(notes, true)
             } else if (e != null) {
-                afterRestore(emptyList(), e)
+                afterRestore(emptyList(), false)
             }
         }
     }

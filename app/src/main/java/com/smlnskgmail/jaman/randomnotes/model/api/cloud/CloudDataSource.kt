@@ -6,11 +6,11 @@ interface CloudDataSource {
 
     fun saveAllNotes(
         notes: List<Note>,
-        errorOnSave: (e: Exception?) -> Unit
+        result: (success: Boolean) -> Unit
     )
 
     fun restoreAllNotes(
-        afterRestore: (notes: List<Note>, e: Exception?) -> Unit
+        afterRestore: (notes: List<Note>, success: Boolean) -> Unit
     )
 
 }

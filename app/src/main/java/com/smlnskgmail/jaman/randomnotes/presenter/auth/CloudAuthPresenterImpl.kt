@@ -26,13 +26,13 @@ class CloudAuthPresenterImpl : CloudAuthPresenter {
             email,
             email,
             password
-        ) { handleAuthResult(it) }
+        ) { success -> handleAuthResult(success) }
     }
 
     private fun handleAuthResult(
-        e: Exception?
+        success: Boolean
     ) {
-        if (e == null) {
+        if (success) {
             cloudAuthView.authSuccess()
         } else {
             cloudAuthView.authError()
@@ -46,7 +46,7 @@ class CloudAuthPresenterImpl : CloudAuthPresenter {
         cloudAuth.signInWithEmail(
             email,
             password
-        ) { handleAuthResult(it) }
+        ) { success -> handleAuthResult(success) }
     }
 
     override fun signInWithGoogle(
@@ -54,7 +54,7 @@ class CloudAuthPresenterImpl : CloudAuthPresenter {
     ) {
         cloudAuth.signInWithGoogle(
             activity
-        ) { handleAuthResult(it) }
+        ) { success -> handleAuthResult(success) }
     }
 
     override fun signInWithFacebook(
@@ -62,7 +62,7 @@ class CloudAuthPresenterImpl : CloudAuthPresenter {
     ) {
         cloudAuth.signInWithFacebook(
             activity
-        ) { handleAuthResult(it) }
+        ) { success -> handleAuthResult(success) }
     }
 
     override fun handleSocialAuthRequest(

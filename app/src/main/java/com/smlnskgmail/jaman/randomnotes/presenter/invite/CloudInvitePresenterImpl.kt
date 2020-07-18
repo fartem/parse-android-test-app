@@ -17,8 +17,8 @@ class CloudInvitePresenterImpl : CloudInvitePresenter {
     }
 
     override fun invite(email: String) {
-        cloudInvite.invite(email) {
-            if (it == null) {
+        cloudInvite.invite(email) { success ->
+            if (success) {
                 cloudInviteView.inviteSuccess()
             } else {
                 cloudInviteView.inviteError()

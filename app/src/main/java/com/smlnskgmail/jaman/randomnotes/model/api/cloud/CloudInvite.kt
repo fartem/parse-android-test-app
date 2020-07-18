@@ -4,7 +4,7 @@ interface CloudInvite {
 
     fun invite(
         email: String,
-        inviteResult: (e: Exception?) -> Unit
+        inviteResult: (success: Boolean) -> Unit
     )
 
 }

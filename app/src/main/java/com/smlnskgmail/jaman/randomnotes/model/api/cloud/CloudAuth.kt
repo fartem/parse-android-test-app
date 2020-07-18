@@ -11,23 +11,23 @@ interface CloudAuth {
         username: String,
         email: String,
         password: String,
-        signUpResult: (e: Exception?) -> Unit
+        signUpResult: (success: Boolean) -> Unit
     )
 
     fun signInWithEmail(
         username: String,
         password: String,
-        signInResult: (e: Exception?) -> Unit
+        signInResult: (success: Boolean)-> Unit
     )
 
     fun signInWithGoogle(
         activity: Activity,
-        signInResult: (e: Exception?) -> Unit
+        signInResult: (success: Boolean) -> Unit
     )
 
     fun signInWithFacebook(
         activity: Activity,
-        signInResult: (e: Exception?) -> Unit
+        signInResult: (success: Boolean) -> Unit
     )
 
     fun bindForAuth(
@@ -36,9 +36,9 @@ interface CloudAuth {
         data: Intent?
     )
 
-    fun deleteAccount(afterDelete: (e: Exception?) -> Unit)
+    fun deleteAccount(afterDelete: (success: Boolean) -> Unit)
 
-    fun logOut(afterLogOut: (e: Exception?) -> Unit)
+    fun logOut(afterLogOut: (success: Boolean) -> Unit)
 
     fun isValidEmail(email: String): Boolean
 

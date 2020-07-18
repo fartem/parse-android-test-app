@@ -6,9 +6,9 @@ class FakeCloudInvite : CloudInvite {
 
     override fun invite(
         email: String,
-        inviteResult: (e: Exception?) -> Unit
+        inviteResult: (success: Boolean) -> Unit
     ) {
-        inviteResult(null)
+        inviteResult(true)
     }
 
 }

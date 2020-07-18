@@ -26,28 +26,28 @@ class FakeCloudAuth : CloudAuth {
         username: String,
         email: String,
         password: String,
-        signUpResult: (e: Exception?) -> Unit
+        signUpResult: (success: Boolean) -> Unit
     ) {
         handleAuth()
-        signUpResult(null)
+        signUpResult(true)
     }
 
     override fun signInWithEmail(
         username: String,
         password: String,
-        signInResult: (e: Exception?) -> Unit
+        signInResult: (success: Boolean) -> Unit
     ) {
         handleAuth()
-        signInResult(null)
+        signInResult(true)
     }
 
 
     override fun signInWithFacebook(
         activity: Activity,
-        signInResult: (e: Exception?) -> Unit
+        signInResult: (success: Boolean) -> Unit
     ) {
         handleAuth()
-        signInResult(null)
+        signInResult(true)
     }
 
     private fun handleAuth() {
@@ -56,10 +56,10 @@ class FakeCloudAuth : CloudAuth {
 
     override fun signInWithGoogle(
         activity: Activity,
-        signInResult: (e: Exception?) -> Unit
+        signInResult: (success: Boolean) -> Unit
     ) {
         handleAuth()
-        signInResult(null)
+        signInResult(true)
     }
 
     override fun bindForAuth(
@@ -71,17 +71,17 @@ class FakeCloudAuth : CloudAuth {
     }
 
     override fun deleteAccount(
-        afterDelete: (e: Exception?) -> Unit
+        afterDelete: (success: Boolean) -> Unit
     ) {
         isAuth = false
-        afterDelete(null)
+        afterDelete(true)
     }
 
     override fun logOut(
-        afterLogOut: (e: Exception?) -> Unit
+        afterLogOut: (success: Boolean) -> Unit
     ) {
         isAuth = false
-        afterLogOut(null)
+        afterLogOut(true)
     }
 
     // CPD-OFF

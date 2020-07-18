@@ -30,7 +30,7 @@ class ParseServerAuth(
 
     override fun signInWithFacebook(
         activity: Activity,
-        signInResult: (e: Exception?) -> Unit
+        signInResult: (success: Boolean) -> Unit
     ) {
         ParseFacebookUtils.initialize(
             context
@@ -38,37 +38,37 @@ class ParseServerAuth(
         ParseFacebookUtils.logInWithReadPermissionsInBackground(
             activity,
             listOf("public_profile")
-        ) { _, e -> signInResult(e) }
+        ) { _, e -> signInResult(e == null) }
     }
 
     override fun signUpWithEmail(
         username: String,
         email: String,
         password: String,
-        signUpResult: (e: Exception?) -> Unit
+        signUpResult: (success: Boolean) -> Unit
     ) {
         val parseUser = ParseUser()
         parseUser.username = username
         parseUser.email = email
         parseUser.setPassword(password)
         parseUser.signUpInBackground {
-            signUpResult(it)
+            signUpResult(it == null)
         }
     }
 
     override fun signInWithEmail(
         username: String,
         password: String,
-        signInResult: (e: Exception?) -> Unit
+        signInResult: (success: Boolean) -> Unit
     ) {
         ParseUser.logInInBackground(username, password) { _, e ->
-            signInResult(e)
+            signInResult(e == null)
         }
     }
 
     override fun signInWithGoogle(
         activity: Activity,
-        signInResult: (e: Exception?) -> Unit
+        signInResult: (success: Boolean) -> Unit
     ) {
         ParseGoogleUtils.initialize(
             context.getString(
@@ -77,8 +77,8 @@ class ParseServerAuth(
         )
         ParseGoogleUtils.logIn(
             activity,
-            LogInCallback { user, e ->
-                signInResult(e)
+            LogInCallback { _, e ->
+                signInResult(e == null)
             }
         )
     }
@@ -101,14 +101,14 @@ class ParseServerAuth(
     }
 
     override fun deleteAccount(
-        afterDelete: (e: Exception?) -> Unit
+        afterDelete: (success: Boolean) -> Unit
     ) {
         ParseUser.getCurrentUser()?.deleteInBackground {
-            afterDelete(it)
+            afterDelete(it == null)
         }
     }
 
-    override fun logOut(afterLogOut: (e: Exception?) -> Unit) {
+    override fun logOut(afterLogOut: (success: Boolean) -> Unit) {
         val parseUser = ParseUser.getCurrentUser()
         if (ParseFacebookUtils.isLinked(parseUser)) {
             AccessToken.setCurrentAccessToken(null)
@@ -117,7 +117,7 @@ class ParseServerAuth(
             }
         }
         ParseUser.logOutInBackground {
-            afterLogOut(it)
+            afterLogOut(it == null)
         }
     }
 
@@ -127,7 +127,6 @@ class ParseServerAuth(
             Pattern.CASE_INSENSITIVE
         )
         return pattern.matcher(email).find()
-
     }
 
     override fun isValidPassword(password: String): Boolean {

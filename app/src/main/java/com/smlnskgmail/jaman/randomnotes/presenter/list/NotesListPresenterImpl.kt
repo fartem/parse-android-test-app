@@ -33,8 +33,8 @@ class NotesListPresenterImpl : NotesListPresenter {
 
     override fun restoreNotes() {
         if (cloudAuth.isAuthorized()) {
-            dataRepository.restoreAllNotes {
-                if (it == null) {
+            dataRepository.restoreAllNotes { success ->
+                if (success) {
                     notesListView.refreshNotesList(
                         dataRepository.allNotes()
                     )
@@ -49,8 +49,8 @@ class NotesListPresenterImpl : NotesListPresenter {
 
     override fun syncNotes() {
         if (cloudAuth.isAuthorized()) {
-            dataRepository.syncNotes {
-                if (it != null) {
+            dataRepository.syncNotes { success ->
+                if (success) {
                     notesListView.showSyncError()
                 }
             }
@@ -97,8 +97,8 @@ class NotesListPresenterImpl : NotesListPresenter {
 
     override fun handleAuthRequest() {
         if (cloudAuth.isAuthorized()) {
-            cloudAuth.logOut {
-                if (it == null) {
+            cloudAuth.logOut { success ->
+                if (success) {
                     notesListView.setUnauthenticated()
                 } else {
                     notesListView.showAuthError()
@@ -110,8 +110,8 @@ class NotesListPresenterImpl : NotesListPresenter {
     }
 
     override fun deleteAccount() {
-        cloudAuth.deleteAccount {
-            if (it == null) {
+        cloudAuth.deleteAccount { success ->
+            if (success) {
                 notesListView.setUnauthenticated()
             } else {
                 notesListView.showAuthError()

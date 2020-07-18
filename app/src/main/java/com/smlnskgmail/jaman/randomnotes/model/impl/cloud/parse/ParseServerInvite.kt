@@ -8,13 +8,13 @@ class ParseServerInvite : CloudInvite {
 
     override fun invite(
         email: String,
-        inviteResult: (e: Exception?) -> Unit
+        inviteResult: (success: Boolean) -> Unit
     ) {
         ParseCloud.callFunctionInBackground(
             "invite",
             hashMapOf("email" to email),
             FunctionCallback<Boolean> { _, e ->
-                inviteResult(e)
+                inviteResult(e == null)
             }
         )
     }

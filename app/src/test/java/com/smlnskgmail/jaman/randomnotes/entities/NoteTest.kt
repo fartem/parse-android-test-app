@@ -3,7 +3,6 @@ package com.smlnskgmail.jaman.randomnotes.entities
 import com.smlnskgmail.jaman.randomnotes.model.api.entities.Note
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
-import org.junit.Test
 
 class NoteTest : BaseEntityTest() {
 
