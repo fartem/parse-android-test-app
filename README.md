@@ -41,10 +41,6 @@ In `preferences.xml` replace this values to own analogues:
 <string name="fb_login_protocol_scheme">fb[APP_ID]</string>
 ```
 
-## Download
-
-<img src="media/qrcodes/github_download.png" height="150px" />
-
 ## Screenshots
 
 <p align="center">
@@ -53,6 +49,10 @@ In `preferences.xml` replace this values to own analogues:
   <img src="media/screenshots/screenshot_03.png" width="200" />
   <img src="media/screenshots/screenshot_04.png" width="200" />
 </p>
+
+## Download
+
+<img src="media/qrcodes/github_download.png" height="150px" />
 
 ## How to contribute
 
