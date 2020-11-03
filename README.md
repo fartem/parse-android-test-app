@@ -9,7 +9,7 @@
 
 ## About
 
-Test Android application for [Parse test server](https://github.com/fartem/parse-test-server).
+Demo Android application for [Parse test server](https://github.com/fartem/parse-test-server).
 
 ## Google auth
 
