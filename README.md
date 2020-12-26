@@ -2,7 +2,7 @@
 
 # Random Notes
 
-[![Travis CI](https://img.shields.io/travis/fartem/parse-android-test-app?branch=master)](https://travis-ci.org/fartem/parse-android-test-app)
+[![GitHubActions](https://github.com/fartem/parse-android-test-app/workflows/Build/badge.svg)](https://github.com/fartem/parse-android-test-app/actions?query=workflow%3ABuild)
 [![Codebeat](https://codebeat.co/badges/674dcb3e-246b-4790-9a63-32f1c1c28371)](https://codebeat.co/projects/github-com-fartem-parse-android-test-app-master)
 [![Codecov](https://codecov.io/gh/fartem/parse-android-test-app/branch/master/graph/badge.svg)](https://codecov.io/gh/fartem/parse-android-test-app)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android%20Parse%20Server%20Client-brightgreen.svg?style=flat)](https://android-arsenal.com/details/3/7906)
